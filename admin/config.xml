@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<params>
+		<param name="default_id" type="menuitem" default="" label="Select A Menu Item" description="The selection will determine what menu item is associated with this component by default. As a result, this will determine the default modules to be loaded on the page." />
+		<param name="api_key" type="text" default="" size="90" label="Google Maps API Key" description="In order for the Google Maps to function you must obtain an API Key. You can sign up for a key at http://code.google.com/apis/maps/signup.html" />
+	</params>
+</root>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<form>
+	<name>Map Edit Form</name>
+	<params>
+		<param name="published" type="radio" default="1" label="Published" description="Choose whether or not to publish the attorneys information.">
+			<option value="1">Yes</option>
+			<option value="0">No</option>
+		</param>
+		<param name="access" type="list" size="20" default="0" label="Access Level" description="Set the frontend access level of the attorney information.">
+			<option value="0">Public</option>
+			<option value="1">Registered</option>
+			<option value="2">Special</option>
+		</param>
+	</params>
+	<params group="params">
+		<param name="show_title" type="radio" default="0" label="Show Title" description="Choose whether or not to display the title above the map.">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		<param name="show_description" type="radio" default="0" label="Show Description" description="Choose whether or not to display the description under the map.">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		<param name="map_width" type="text" default="640" label="Map Width" description="The width of the map." />
+		<param name="map_height" type="text" default="260" label="Map Height" description="The height of the map." />
+		<param name="center_lat" type="text" default="20.008834970581525" label="Center Latitude" description="The latitude coordinate for the center of the map." />
+		<param name="center_lng" type="text" default="-35.67246318304168" label="Center Longitude" description="The longitude coordinate for the center of the map." />
+		<param name="zoom" type="text" default="2" label="Zoom Level" description="The default zoom level for the lap when initially displayed. This should be an integer between 1 and 20. The lower the number, the further the view is zoomed out." />
+	</params>
+	<params group="metadata">
+		<param name="meta_description" type="textarea" rows="5" cols="30" default="" label="Description" description="METADESC" />
+		<param name="meta_keywords" type="textarea" rows="5" cols="30" default="" label="Keywords" description="METAKEYS" />
+	</params>
+</form>

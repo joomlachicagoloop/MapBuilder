@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Google Maps" hidden="true">
+		<message>
+			Displays the Google Maps hub page.
+		</message>
+	</layout>
+	<state>
+		<name>
+			Google Maps
+		</name>
+		<description>
+			The "Google Maps" layout displays all published social maps profiles and a selected feature story.
+		</description>
+		<url>
+			<param name="id" type="sql" query="SELECT `maps_id`, `maps_name` FROM `#__maps` ORDER BY `ordering`" key_field="maps_id" value_field="maps_name" />
+		</url>
+		<params>
+		</params>
+	</state>
+</metadata>

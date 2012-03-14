@@ -41,7 +41,7 @@ class MapsModelMarkers extends JModel
     {
 		$array 	= JRequest::getVar('cid',  0, '', 'array');
 		$row 	=& $this->getTable();
-		$sql	= "SELECT m.*, map.*, map.`attribs` AS `maps` FROM `{$row->_tbl}` m ".
+		$sql	= "SELECT m.*, map.*, map.`attribs` AS `maps` FROM `{$row->getTableName()}` m ".
 		"LEFT JOIN `#__maps` map USING(`maps_id`) ".
 		"WHERE `marker_id` = {$array[0]} LIMIT 1";
 		$this->_db->setQuery($sql);
@@ -71,7 +71,7 @@ class MapsModelMarkers extends JModel
 		$sql = "SELECT ".
 		"SQL_CALC_FOUND_ROWS m.*, map.*, ".
 		"g.`name` AS `groupname` ".
-		"FROM `{$row->_tbl}` m LEFT JOIN `#__maps` map USING(`maps_id`) ".
+		"FROM `{$row->getTableName()}` m LEFT JOIN `#__maps` map USING(`maps_id`) ".
 		"LEFT JOIN `#__groups` g ON m.`access` = g.`id`";
 		if(count($filter)){
 			$sql .= " WHERE " . implode(" AND ", $filter);

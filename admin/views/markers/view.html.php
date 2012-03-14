@@ -28,12 +28,9 @@ class MapsViewMarkers extends JView
 			JToolBarHelper::editListX();
 			JToolBarHelper::deleteList();
 			// GET DATA FROM THE MODEL
-			$filter =& $this->get('Filter');
-			$this->assignRef('filter', $filter);
-			$items =& $this->get('List');
-			$this->assignRef('items', $items);
-			$page =& $this->get('Pagination');
-			$this->assignRef('page', $page);
+			$this->filter = $this->get('Filter');
+			$this->items = $this->get('List');
+			$this->page = $this->get('Pagination');
 			break;
 		default:
 			$component = JComponentHelper::getParams('com_maps');
@@ -46,18 +43,19 @@ class MapsViewMarkers extends JView
 			JToolBarHelper::apply();
 			JToolBarHelper::cancel();
 			JRequest::setVar('hidemainmenu', 1);
-			$data = & $this->get('Data');
-			$this->assignRef('data', $data);
+			$this->data = $this->get('Data');
 			$paramsdefs = JPATH_COMPONENT.DS."models".DS."markers.xml";
-			$params = new JParameter($data->attribs, $paramsdefs);
-			$maps = new JParameter($data->maps);
+			$params = new JRegistry();
+			$params->loadJSON($data->attribs);
+			$maps = new JRegistry();
+			$maps->loadJSON($data->maps);
 			$params->merge($maps);
 			$params->set('published', $data->published);
 			$params->set('access', $data->access);
 			$params->set('maps_id', $data->maps_id);
 			$params->set('marker_lat', $data->marker_lat);
 			$params->set('marker_lng', $data->marker_lng);
-			$this->assignRef('params', $params);
+			$this->params = $params;
 			break;
 		}
 		parent::display($tpl);

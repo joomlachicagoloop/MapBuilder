@@ -29,12 +29,9 @@ class MapsViewMaps extends JView
 			JToolBarHelper::deleteList();
 			JToolBarHelper::preferences('com_maps', '500');
 			// GET DATA FROM THE MODEL
-			$filter =& $this->get('Filter');
-			$this->assignRef('filter', $filter);
-			$items =& $this->get('List');
-			$this->assignRef('items', $items);
-			$page =& $this->get('Pagination');
-			$this->assignRef('page', $page);
+			$this->filter = $this->get('Filter');
+			$this->items = $this->get('List');
+			$this->page = $this->get('Pagination');
 			break;
 		default:
 			$component = JComponentHelper::getParams('com_maps');
@@ -48,12 +45,11 @@ class MapsViewMaps extends JView
 			JToolBarHelper::apply();
 			JToolBarHelper::cancel();
 			JRequest::setVar('hidemainmenu', 1);
-			$data = & $this->get('Data');
-			$this->assignRef('data', $data);
-			$contact =& $this->get('Contact');
-			$this->assignRef('contact', $contact);
+			$this->data = $this->get('Data');
+			$this->contact = $this->get('Contact');
 			$paramsdefs = JPATH_COMPONENT.DS."models".DS."maps.xml";
-			$params = new JParameter($data->attribs, $paramsdefs);
+			$params = new JRegistry();
+			$params->loadJSON($data->attribs);
 			$params->set('published', $data->published);
 			$params->set('access', $data->access);
 			$params->set('meta_keywords', $data->meta_keywords);

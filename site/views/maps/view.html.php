@@ -19,16 +19,15 @@ class MapsViewMaps extends JView
 		$layout		= JRequest::getVar('layout', 'default', 'method', 'word');
 		switch($layout){
 		case "ajax":
-			$markers = $this->get('Markers');
-			$this->assignRef('markers', $markers);
+			$this->markers = $this->get('Markers');
 			break;
 		default:
 			$document->addScript($uri->root()."components/com_maps/javascript/maps.js");
 			$paramsdef = JPATH_COMPONENT_ADMINISTRATOR.DS."models".DS."maps.xml";
-			$map = $this->get('Map');
-			$this->assignRef('map', $map);
-			$params = new JParameter($map->attribs, $paramsdef);
-			$this->assignRef('params', $params);
+			$this->map = $this->get('Map');
+			$params = new JRegistry();
+			$params->loadJSON($map->attribs);
+			$this->params = $params;
 			if(trim($map->meta_keywords)){
 				$document->setMetaData('keywords', $map->meta_keywords);
 			}

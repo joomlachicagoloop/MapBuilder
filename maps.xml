@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="1.7" method="update">
+	<name>Maps</name>
+	<creationDate>2010-11-01</creationDate>
+	<author>Alonzo Turner</author>
+	<authorEmail>alonzo.turner@subtextproductions.com</authorEmail>
+	<authorUrl>http://www.subtextproductions.com</authorUrl>
+	<copyright>Copyright 2007 - 2012 Subtext Productions</copyright>
+	<license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
+	<version>1.7</version>
+	<description><![CDATA[COM_MAPS_COMPONENT_DESCRIPTION]]></description>
+	<files folder="site">
+		<filename>controller.php</filename>
+		<filename>index.html</filename>
+		<folder>javascript</folder>
+		<folder>language</folder>
+		<filename>maps.php</filename>
+		<folder>models</folder>
+		<filename>router.php</filename>
+		<folder>views</folder>
+	</files>
+	<install>
+		<sql>
+			<file charset="utf8" driver="mysqli">sql/install.mysqli.utf8.sql</file>
+		</sql>
+	</install>
+	<uninstall>
+		<sql>
+			<file charset="utf8" driver="mysqli">sql/uninstall.mysqli.utf8.sql</file>
+		</sql>
+	</uninstall>
+	<update>
+		<schemas>
+			<schemapath type="mysqli">sql/updates/mysqli</schemapath>
+		</schemas>
+	</update>
+	<languages folder="site">
+		<language tag="en-GB">language/en-GB/en-GB.com_maps.ini</language>
+		<language tag="en-US">language/en-US/en-US.com_maps.ini</language>
+	</languages>
+	<administration>
+		<menu>COM_MAPS_MENU_ROOT_NAME</menu>
+		<submenu>
+			<menu>COM_MAPS_SUBMENU_MAPS</menu>
+			<menu controller="markers" view="markers" layout="list">COM_MAPS_SUBMENU_MARKERS</menu>
+		</submenu>
+		<languages folder="admin/language">
+			<language tag="en-US">en-US/en-US.com_maps.ini</language>
+			<language tag="en-US">en-US/en-US.com_maps.sys.ini</language>
+			<language tag="en-GB">en-GB/en-GB.com_maps.ini</language>
+			<language tag="en-GB">en-GB/en-GB.com_maps.sys.ini</language>
+		</languages>
+		<files folder="admin">
+			<filename>config.xml</filename>
+			<filename>controller.php</filename>
+			<folder>controllers</folder>
+			<folder>elements</folder>
+			<filename>index.html</filename>
+			<folder>javascript</folder>
+			<folder>language</folder>
+			<filename>maps.php</filename>
+			<folder>models</folder>
+			<folder>sql</folder>
+			<folder>tables</folder>
+			<folder>views</folder>
+		</files>		
+	</administration>
+</extension>

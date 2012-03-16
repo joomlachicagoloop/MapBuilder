@@ -52,7 +52,8 @@ class MapsModelMaps extends JModel
      */
     function getList()
     {
-    	global $mainframe, $option;
+    	$mainframe =& JFactory::getApplication();
+    	$option = JRequest::getCmd('option', 'com_maps');
     	$scope = $this->getName();
     	$filter = array();
     	if($search = addslashes($mainframe->getUserState($option.'.'.$scope.'.filter_search'))){
@@ -84,7 +85,8 @@ class MapsModelMaps extends JModel
      */
     function getFilter()
     {
-    	global $mainframe, $option;
+    	$mainframe =& JFactory::getApplication();
+    	$option = JRequest::getCmd('option', 'com_maps');
     	$scope = $this->getName();
     	$obj = new stdClass();
     	

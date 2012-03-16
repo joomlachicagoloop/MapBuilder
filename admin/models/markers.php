@@ -71,9 +71,9 @@ class MapsModelMarkers extends JModel
     	$row =& $this->getTable();
 		$sql = "SELECT ".
 		"SQL_CALC_FOUND_ROWS m.*, map.*, ".
-		"g.`name` AS `groupname` ".
+		"v.`title` AS `groupname` ".
 		"FROM `{$row->getTableName()}` m LEFT JOIN `#__maps` map USING(`maps_id`) ".
-		"LEFT JOIN `#__groups` g ON m.`access` = g.`id`";
+		"LEFT JOIN `#__viewlevels` v ON m.`access` = v.`id`";
 		if(count($filter)){
 			$sql .= " WHERE " . implode(" AND ", $filter);
 		}

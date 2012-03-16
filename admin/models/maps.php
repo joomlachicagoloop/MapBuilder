@@ -68,9 +68,9 @@ class MapsModelMaps extends JModel
     	$row =& $this->getTable();
 		$sql = "SELECT ".
 		"SQL_CALC_FOUND_ROWS a.*, ".
-		"g.`name` AS `groupname` ".
+		"v.`title` AS `groupname` ".
 		"FROM `{$row->getTableName()}` a ".
-		"LEFT JOIN `#__groups` g ON a.`access` = g.`id`";
+		"LEFT JOIN `#__viewlevels` v ON a.`access` = v.`id`";
 		if(count($filter)){
 			$sql .= " WHERE " . implode(" AND ", $filter);
 		}

@@ -36,11 +36,11 @@ class TableMarkers extends JTable
 	}
 	
 	function bind($array, $ignore=''){
-		if(key_exists('options', $array)){
-			if(is_array($array['options'])){
-				if(!parent::bind($array['options'], $ignore)){
-					return false;
-				}
+		if(key_exists('params', $array)){
+			if(is_array($array['params'])){
+				$registry = new JRegistry();
+				$registry->loadArray($array['params']);
+				$array['attribs'] = $registry->toString('INI');
 			}
 		}
 		return parent::bind($array, $ignore);

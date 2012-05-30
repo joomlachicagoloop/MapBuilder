@@ -10,9 +10,9 @@
 // CHECK TO ENSURE THIS FILE IS INCLUDED IN JOOMLA!
 defined('_JEXEC') or die();
  
-jimport( 'joomla.application.component.model' );
+jimport( 'joomla.application.component.modelform' );
  
-class MapsModelMaps extends JModel
+class MapsModelMaps extends JModelForm
 {
     /**
      * Products data array
@@ -37,7 +37,7 @@ class MapsModelMaps extends JModel
      * Retrieves the Maps data
      * @return object A stdClass object containing the data for a single record.
      */
-    function getData()
+    public function getData()
     {
 		$array 	= JRequest::getVar('cid',  0, '', 'array');
 		$row 	=& $this->getTable();
@@ -46,11 +46,49 @@ class MapsModelMaps extends JModel
 
         return $this->_data;
     }
+	/**
+	 * Method for getting the form from the model.
+	 * @param   array    $data      Data for the form.
+	 * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not.
+	 * @return  mixed  A JForm object on success, false on failure
+	 */
+	public function getForm($data = array(), $loadData = true)
+	{
+		if($form = $this->loadForm('com_maps.maps', 'maps', array('control'=>'', 'load_data'=>$loadData))){
+			return $form;
+		}
+		JError::raiseError(0, JText::sprintf('JLIB_FORM_INVALID_FORM_OBJECT', 'maps'));
+		return null;
+	}
+	/**
+	 * Method to get the data that should be injected in the form.
+	 * @return  array    The default data is an empty array.
+	 */
+	protected function loadFormData()
+	{
+		$array 	= JRequest::getVar('cid',  0, '', 'array');
+		
+		$db		= JFactory::getDbo();
+		$query 	= $db->getQuery(true);
+		$row 	=& $this->getTable();
+		
+		$query->select("*");
+		$query->from($row->getTableName());
+		$query->where("maps_id = {$array[0]}");
+		
+		$db->setQuery($query);
+		$data = $db->loadAssoc();
+		$ini = new JRegistry();
+		$ini->loadINI($data['attribs']);
+		$data['params'] = $ini->toArray();
+
+		return $data;
+	}
     /**
      * Retrieves the Products data
      * @return array Array of objects containing the data from the database.
      */
-    function getList()
+    public function getList()
     {
     	$mainframe =& JFactory::getApplication();
     	$option = JRequest::getCmd('option', 'com_maps');
@@ -68,7 +106,7 @@ class MapsModelMaps extends JModel
     	$row =& $this->getTable();
 		$sql = "SELECT ".
 		"SQL_CALC_FOUND_ROWS a.*, ".
-		"v.`title` AS `groupname` ".
+		"v.`title` AS `access` ".
 		"FROM `{$row->getTableName()}` a ".
 		"LEFT JOIN `#__viewlevels` v ON a.`access` = v.`id`";
 		if(count($filter)){
@@ -83,7 +121,7 @@ class MapsModelMaps extends JModel
      * Retrieve filter variables from User State
      * @return object
      */
-    function getFilter()
+    public function getFilter()
     {
     	$mainframe =& JFactory::getApplication();
     	$option = JRequest::getCmd('option', 'com_maps');
@@ -105,7 +143,7 @@ class MapsModelMaps extends JModel
      * Retrieves a JPagination object
      * @return object
      */
-    function getPagination()
+    public function getPagination()
     {
     	$this->_db->setQuery("SELECT FOUND_ROWS()");
     	jimport('joomla.html.pagination');

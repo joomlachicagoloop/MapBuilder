@@ -1,40 +1,43 @@
 <?php
 	defined('_JEXEC') or die('Restricted access');
-	jimport('joomla.html.pane');
-	$pane	=& JPane::getInstance('sliders');
 	$uri	=& JURI::getInstance();
 	$base	= $uri->root();
+	JHtml::_('behavior.keepalive');
+	$document =& JFactory::getDocument();
+	$document->addScript("http://maps.google.com/maps/api/js?sensor=false&amp;key={$api_key}");
+	$document->addScript("components".DS."com_maps".DS."javascript".DS."markers.js", "text/javascript", true);
 ?>
 
 <script type="text/javascript">
 //<![CDATA[
-	function submitbutton(sometask){
+	Joomla.submitbutton = function(sometask){
 		var someForm = document.forms.adminForm;
 		var re_empty = /(\w+)/;
 		var re_slug = /^([\w-]+)$/;
 		var re_blank = /^(\W*)$/;
 		var re_coord = /\d+$/;
 		if(sometask != 'cancel'){
-			if(!re_empty.test($('marker-name_').value)){
-				$('marker-name_').focus();
+			if(!re_empty.test($('marker_name').value)){
+				$('marker_name').focus();
 				alert("Marker Name is a required field");
 				return false;
 			}
-			if(!re_slug.test($('marker-alias_').value)){
-				if(re_blank.test($('marker-alias_').value)){
-					$('marker-alias_').value = $('marker-name_').value.replace(/\W/g, '-').toLowerCase();
+			if(!re_slug.test($('marker_alias').value)){
+				if(re_blank.test($('marker_alias').value)){
+					$('marker_alias').value = $('marker_name').value.replace(/\W/g, '-').toLowerCase();
 				}else{
-					$('marker-alias_').focus();
+					$('marker_alias').focus();
 					alert('The Alias is required for proper operation. It cannot be left blank. It must contain only letters, numbers, underscores, or dashes');
 					return false;
 				}
 			}
-			if(!re_coord.test($('optionsmarker_lat').getValue())){
-				$('optionsmarker_lat').focus();
+			if(!re_coord.test($('marker_lat').value)){
+				$('marker_lat').focus();
 				alert("Latitude must not be blank. Click the map to drop a marker and drag to adjust coordinates.");
 				return false;
 			}
 		}
+		<?php echo $this->form->getField('marker_description')->save(); ?>
 		someForm.task.value = sometask;
 		someForm.submit();
 	}
@@ -50,53 +53,38 @@
 	<input type="hidden" name="ordering" value="<? echo $this->data->ordering; ?>" />
 	<? echo JHTML::_('form.token')."\n"; ?>
 	<div id="editcell">
-		<table class="admintable">
-			<tr>
-				<td valign="top">
-					<fieldset class="adminform">
-						<legend>Map Marker</legend>
-						<table class="admintable">
-							<tr>
-								<td class="key">
-									<label for="marker-name_">Marker Name</label>
-								</td>
-								<td>
-									<input type="text" class="inputbox" name="marker_name" id="marker-name_" value="<? echo $this->data->marker_name; ?>" size="64" maxlength="64" />
-								</td>
-							</tr>
-							<tr>
-								<td class="key">
-									<label for="marker-alias_">Alias</label>
-								</td>
-								<td>
-									<input type="text" class="inputbox" name="marker_alias" id="marker-alias_" value="<? echo $this->data->marker_alias; ?>" size="64" maxlength="96" />
-								</td>
-							</tr>
-							<tr>
-								<td class="key">
-									<label for="marker-description_">Description</label>
-								</td>
-								<td>
-									<textarea name="marker_description" id="marker-description_" cols="55" rows="10"><? echo $this->data->marker_description; ?></textarea>
-								</td>
-							</tr>
-						</table>
-					</fieldset>
-					<fieldset class="adminform">
-						<legend>Map Preview</legend>
-						<div id="map-preview_"></div>
-					</fieldset>
-				</td>
-				<td valign="top">
-<?
-	echo $pane->startPane('params-pane');
-	echo $pane->startPanel(JText::_('Marker Options'), 'marker-options_');
-	echo $this->params->render('options');
-	echo $pane->endPanel();
-	echo $pane->endPane();
-?>
-				</td>
-			</tr>
-		</table>
+		<div class="width-60 fltlft">
+			<fieldset class="adminform">
+				<legend><?php echo JText::_('COM_MAPS_FORM_LEGEND_BASIC'); ?></legend>
+				<dl>
+				<?php foreach($this->form->getFieldset('base') as $field){ ?>
+					<dt><?php echo $field->label; ?></dt>
+					<dd><?php echo $field->input; ?></dd>
+				<?php } ?>
+				</dl>
+				<div class="clr"></div>
+				<?php echo $this->form->getLabel('marker_description'); ?>
+				<div class="clr"></div>
+				<?php echo $this->form->getInput('marker_description'); ?>
+			</fieldset>
+			<fieldset>
+				<legend><?php echo JText::_('COM_MAPS_FORM_LEGEND_PREVIEW'); ?></legend>
+				<div id="map-preview_"></div>
+			</fieldset>
+		</div>
+		<div class="width-40 fltlft">
+			<fieldset class="adminform">
+				<legend><?php echo JText::_('COM_MAPS_FORM_LEGEND_OPTIONS'); ?></legend>
+				<dl>
+				<?php foreach($this->form->getFieldset('options') as $field){ ?>
+					<dt><?php echo $field->label; ?></dt>
+					<dd><?php echo $field->input; ?></dd>
+				<?php } ?>
+				</dl>
+				<?php foreach($this->form->getFieldset('params') as $field){
+					echo $field->input;
+				} ?>
+			</fieldset>
+		</div>
 	</div>
 </form>

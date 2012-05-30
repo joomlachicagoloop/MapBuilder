@@ -45,14 +45,14 @@
 				<th class="title">
 					<? echo JHTML::_('grid.sort', JText::_('Map Name'), 'maps_name', $this->filter->filter_order_Dir, $this->filter->filter_order, 'filter'); ?>
 				</th>
-				<th width="70" nowrap="nowrap">
+				<th width="5%" nowrap="nowrap">
 					<? echo JHTML::_('grid.sort', JText::_('Published'), 'published', $this->filter->filter_order_Dir, $this->filter->filter_order, 'filter'); ?>
 				</th>
-				<th width="75" nowrap="nowrap">
+				<th width="10%" nowrap="nowrap">
 					<? echo JHTML::_('grid.sort', JText::_('Order'), 'ordering', $this->filter->filter_order_Dir, $this->filter->filter_order, 'filter');?>
 					<? echo JHTML::_('grid.order', $this->items); ?>
 				</th>
-				<th width="120" nowrap="nowrap">
+				<th nowrap="nowrap">
 					<? echo JHTML::_('grid.sort', JText::_('Access'), 'access', $this->filter->filter_order_Dir, $this->filter->filter_order, 'filter'); ?>
 				</th>
 				<th>
@@ -68,16 +68,8 @@
 		$k = 0;
 		for($i=0; $i < count($this->items); $i++){
 			$row		= $this->items[$i];
-			$access		= JHTML::_('grid.access', $row, $i);
-			$checked	= JHTML::_('grid.checkedout', $row, $i, 'maps_id');
+			$checked	= JHTML::_('grid.id', $i, $row->maps_id );
 			$link		= JRoute::_( 'index.php?option=com_maps&task=edit&cid[]='. $row->maps_id.'&'.JUtility::getToken().'=1');
-			if($row->published){
-				$publish_img = "publish_g.png";
-				$publish_alt = "Published";
-			}else{
-				$publish_img = "publish_x.png";
-				$publish_alt = "Unpublished";
-			}
 			?>
 			<tr class="row<? echo $k; ?>">
 				<td>
@@ -96,7 +88,7 @@
 					?>
 				</td>
 				<td align="center">
-					<a href="javascript:void(0);" onclick="return listItemTask('cb<? echo $i; ?>', '<? echo $row->published ? 'unpublish' : 'publish'; ?>')"><img src="images/<? echo $publish_img; ?>" width="16" height="16" border="0" alt="<? echo $publish_alt; ?>" /></a>
+					<?php echo JHtml::_('jgrid.published', $row->published, $i, '', true, 'cb'); ?>
 				</td>
 				<td class="order">
 					<span><? echo $this->page->orderUpIcon( $i, ($i > 0), 'orderup', 'Move Up'); ?></span>
@@ -104,7 +96,7 @@
 					<input type="text" name="order[]" size="5" value="<? echo $row->ordering; ?>" class="text_area" style="text-align: center" />
 				</td>
 				<td align="center">
-					<? echo $access; ?>
+					<? echo $row->access; ?>
 				</td>
 				<td>
 					<? echo $row->maps_description; ?>

@@ -97,13 +97,18 @@ class MapsControllerMarkers extends JController
 		if(!JRequest::checkToken('method')){
 			die("SECURITY BREACH");
 		}
-		$user		=& JFactory::getUser();
-		$model 		=& $this->getModel('Markers');
-		$row 		=& $model->getTable();
-		$id			= JRequest::getInt('country_id', 0, 'post');
+		$user		= JFactory::getUser();
+		$model 		= $this->getModel('Markers');
+		$form		= $model->getForm(null, false);
+		$row 		= $model->getTable();
+		$id			= JRequest::getInt('marker_id', 0, 'post');
 		$task		= JRequest::getCmd('task', 'save', 'post');
-		$options	= JRequest::getVar('options', array(), 'post', 'array');
-		$data 		= JRequest::get('post');
+		
+		// VALIDATE AND FILTER SUBMITTED DATA
+		if($form->validate($_POST) === false){
+			$errors = JForm::getErrors();
+		}
+		$data = $form->filter($_POST);
 
 		// LOAD DEFAULT DATA FROM THE DATABASE
 		$row->load($id);

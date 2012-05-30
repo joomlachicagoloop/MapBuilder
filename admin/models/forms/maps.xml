@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<form>
+	<fields>
+		<fieldset name="base">
+			<field name="maps_id" type="hidden" class="validate-numeric" />
+			<field name="ordering" type="hidden" class="validate-numeric" />
+			<field name="maps_name" type="text" class="inputbox" required="true" label="COM_MAPS_FIELD_MAPS_NAME_LABEL" description="COM_MAPS_FIELD_MAPS_NAME_DESC" />
+			<field name="maps_alias" type="text" class="inputbox" required="true" label="COM_MAPS_FIELD_MAPS_ALIAS_LABEL" description="COM_MAPS_FIELD_MAPS_ALIAS_DESC" />
+			<field name="maps_description" type="textarea" cols="30" rows="10" class="inputbox" label="COM_MAPS_FIELD_MAPS_DESCRIPTION_LABEL" description="COM_MAPS_FIELD_MAPS_DESCRIPTION_DESC" />
+		</fieldset>
+		<fieldset name="options">
+			<field name="published" type="radio" default="1" label="COM_MAPS_FIELD_PUBLISHED_LABEL" description="COM_MAPS_FIELD_PUBLISHED_DESC">
+				<option value="1">COM_MAPS_OPTION_VALUE_BOOLEAN_TRUE</option>
+				<option value="2">COM_MAPS_OPTION_VALUE_BOOLEAN_FALSE</option>
+			</field>
+			<field name="access" type="accesslevel" default="1" label="COM_MAPS_FIELD_ACCESS_LABEL" description="COM_MAPS_FIELD_ACCESS_DESC" />
+		</fieldset>
+	</fields>
+	<fields name="params">
+		<fieldset name="params">
+			<field name="show_title" type="radio" default="0" label="Show Title" description="Choose whether or not to display the title above the map.">
+				<option value="0">COM_MAPS_OPTION_VALUE_BOOLEAN_FALSE</option>
+				<option value="1">COM_MAPS_OPTION_VALUE_BOOLEAN_TRUE</option>
+			</field>
+			<field name="show_description" type="radio" default="0" label="Show Description" description="Choose whether or not to display the description under the map.">
+				<option value="0">COM_MAPS_OPTION_VALUE_BOOLEAN_FALSE</option>
+				<option value="1">COM_MAPS_OPTION_VALUE_BOOLEAN_TRUE</option>
+			</field>
+			<field name="map_width" type="text" default="640" required="true" label="Map Width" description="The width of the map." />
+			<field name="map_height" type="text" default="260" required="true" label="Map Height" description="The height of the map." />
+			<field name="center_lat" type="text" default="20.008834970581525" required="true" label="Center Latitude" description="The latitude coordinate for the center of the map." />
+			<field name="center_lng" type="text" default="-35.67246318304168" required="true" label="Center Longitude" description="The longitude coordinate for the center of the map." />
+			<field name="zoom" type="text" default="2" required="true" label="Zoom Level" description="The default zoom level for the lap when initially displayed. This should be an integer between 1 and 20. The lower the number, the further the view is zoomed out." />
+		</fieldset>
+	</fields>
+</form>

@@ -36,9 +36,6 @@ class MapsViewMaps extends JView
 		default:
 			$component = JComponentHelper::getParams('com_maps');
 			$api_key = $component->get('api_key');
-			$document =& JFactory::getDocument();
-			$document->addScript("http://maps.google.com/maps/api/js?sensor=false&amp;key={$api_key}");
-			$document->addScript("components".DS."com_maps".DS."javascript".DS."maps.js");
 			$bar =& JToolBar::getInstance('toolbar');
 			JToolBarHelper::title(JText::_('Edit Google Maps Details'), 'generic.png');
 			JToolBarHelper::save();
@@ -46,15 +43,7 @@ class MapsViewMaps extends JView
 			JToolBarHelper::cancel();
 			JRequest::setVar('hidemainmenu', 1);
 			$this->data = $this->get('Data');
-			$this->contact = $this->get('Contact');
-			$paramsdefs = JPATH_COMPONENT.DS."models".DS."maps.xml";
-			$params = new JRegistry();
-			$params->loadJSON($data->attribs);
-			$params->set('published', $data->published);
-			$params->set('access', $data->access);
-			$params->set('meta_keywords', $data->meta_keywords);
-			$params->set('meta_description', $data->meta_description);
-			$this->assignRef('params', $params);
+			$this->form = $this->get('Form');
 			break;
 		}
 		parent::display($tpl);

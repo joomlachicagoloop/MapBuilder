@@ -1,7 +1,11 @@
 var GMaps = new Class({
 	initialize: function(){
-		this.origin = new google.maps.LatLng($('paramscenter_lat').getValue(), $('paramscenter_lng').getValue());
-		this.options = { zoom: parseInt($('paramszoom').getValue()), center: this.origin, mapTypeId: google.maps.MapTypeId.ROADMAP };
+		window.console.log();
+		this.lat = $('params_center_lat').value;
+		this.lng = $('params_center_lng').value;
+		this.zoom = $('params_zoom').value;
+		this.origin = new google.maps.LatLng(this.lat, this.lng);
+		this.options = { zoom: parseInt(this.zoom), center: this.origin, mapTypeId: google.maps.MapTypeId.ROADMAP };
 		this.map = new google.maps.Map($("map-preview_"), this.options);
 		//google.maps.event.addListener(this.map, "click", this.mapsDropMarker.bindWithEvent(this));
 		this.marker = new google.maps.Marker({ position: this.origin, map: this.map, draggable: true });
@@ -11,13 +15,13 @@ var GMaps = new Class({
 
 	mapsDragMarker: function(mapEvent){
 		window.console.log(mapEvent);
-		$('paramscenter_lat').value = mapEvent.latLng.lat();
-		$('paramscenter_lng').value = mapEvent.latLng.lng();
+		$('params_center_lat').value = mapEvent.latLng.lat();
+		$('params_center_lng').value = mapEvent.latLng.lng();
 	},
 	
 	mapsChangeZoom: function(){
 		try{
-			$('paramszoom').value = myMaps.map.getZoom();
+			$('params_zoom').value = myMaps.map.getZoom();
 		}catch(e){
 			myMaps.debug(e.message);
 		}

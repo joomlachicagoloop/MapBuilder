@@ -1,63 +1,67 @@
 <?php
 	defined('_JEXEC') or die('Restricted access');
-	jimport('joomla.html.pane');
-	$pane	=& JPane::getInstance('sliders');
+	$document =& JFactory::getDocument();
+	$document->addScript("http://maps.google.com/maps/api/js?sensor=false&amp;key={$api_key}");
+	$document->addScript("components".DS."com_maps".DS."javascript".DS."maps.js", "text/javascript", true);
+	JHtml::_('behavior.modal');
+	JHtml::_('behavior.tooltip');
+	JHtml::_('behavior.formvalidation');
 	$uri	=& JURI::getInstance();
 	$base	= $uri->root();
 	$style	= "";
-	if($width = $this->params->get('map_width', 0)){
+	if($width = $this->form->getValue('map_width', 'params', 0)){
 		$style .= "width: {$width}px;";
 	}
-	if($height = $this->params->get('map_height', 0)){
+	if($height = $this->form->getValue('map_height', 'params', 0)){
 		$style .= "height: {$height}px;";
 	}
 ?>
 
 <script type="text/javascript">
 //<![CDATA[
-	function submitbutton(sometask){
+	Joomla.submitbutton = function(sometask){
 		var someForm = document.forms.adminForm;
 		var re_empty = /(\w+)/;
 		var re_slug = /^([\w-]+)$/;
 		var re_blank = /^(\W*)$/;
 		var re_float = /\d+$/;
 		if(sometask != 'cancel'){
-			if(!re_empty.test($('maps-name_').value)){
-				$('maps-name_').focus();
+			if(!re_empty.test($('maps_name').value)){
+				$('maps_name').focus();
 				alert("Map Title is a required field");
 				return false;
 			}
-			if(!re_slug.test($('maps-alias_').value)){
-				if(re_blank.test($('maps-alias_').value)){
-					$('maps-alias_').value = $('maps-name_').value.replace(/\W/g, '-').toLowerCase();
+			if(!re_slug.test($('maps_alias').value)){
+				if(re_blank.test($('maps_alias').value)){
+					$('maps_alias').value = $('maps_name').value.replace(/\W/g, '-').toLowerCase();
 				}else{
-					$('maps-alias_').focus();
+					$('maps_alias').focus();
 					alert('The Alias is required for proper operation. It cannot be left blank. It must contain only letters, numbers, underscores, or dashes');
 					return false;
 				}
 			}
-			if(!re_float.test($('paramsmap_width').value)){
-				$('paramsmap_width').focus();
+			if(!re_float.test($('params_map_width').value)){
+				$('params_map_width').focus();
 				alert("Map Width is a required field");
 				return false;
 			}
-			if(!re_float.test($('paramsmap_height').value)){
-				$('paramsmap_height').focus();
+			if(!re_float.test($('params_map_height').value)){
+				$('params_map_height').focus();
 				alert("Map Height is a required field");
 				return false;
 			}
-			if(!re_float.test($('paramscenter_lat').value)){
-				$('paramscenter_lat').focus();
+			if(!re_float.test($('params_center_lat').value)){
+				$('params_center_lat').focus();
 				alert("Center Latitude is a required field");
 				return false;
 			}
-			if(!re_float.test($('paramscenter_lng').value)){
-				$('paramscenter_lng').focus();
+			if(!re_float.test($('params_center_lng').value)){
+				$('params_center_lng').focus();
 				alert("Center Longitude is a required field");
 				return false;
 			}
-			if(!re_float.test($('paramszoom').value)){
-				$('paramszoom').focus();
+			if(!re_float.test($('params_zoom').value)){
+				$('params_zoom').focus();
 				alert("Zoom Level is a required field");
 				return false;
 			}
@@ -68,67 +72,48 @@
 	}
 //]]>
 </script>
-<form action="index.php" method="post" name="adminForm" enctype="multipart/form-data">
+<form action="<?php echo JRoute::_('index.php'); ?>" method="post" name="adminForm" enctype="multipart/form-data">
 	<input type="hidden" name="option" value="com_maps" />
 	<input type="hidden" name="task" value="" />
 	<input type="hidden" name="hidemainmenu" value="0" />
-	<input type="hidden" name="maps_id" value="<? echo $this->data->maps_id; ?>" />
-	<input type="hidden" name="ordering" value="<? echo $this->data->ordering; ?>" />
+	<input type="hidden" name="maps_id" value="<? echo $this->form->getValue('maps_id'); ?>" />
+	<input type="hidden" name="ordering" value="<? echo $this->form->getValue('ordering'); ?>" />
 	<? echo JHTML::_('form.token')."\n"; ?>
 	<div id="editcell">
-		<table class="admintable">
-			<tr>
-				<td valign="top">
-					<fieldset class="adminform">
-						<legend>Map Information</legend>
-						<table class="admintable">
-							<tr>
-								<td class="key">
-									<label for="maps-name_">Map Title</label>
-								</td>
-								<td>
-									<input type="text" class="inputbox" name="maps_name" id="maps-name_" value="<? echo $this->data->maps_name; ?>" size="64" maxlength="96" />
-								</td>
-							</tr>
-							<tr>
-								<td class="key">
-									<label for="maps-alias_">Alias</label>
-								</td>
-								<td>
-									<input type="text" class="inputbox" name="maps_alias" id="maps-alias_" value="<? echo $this->data->maps_alias; ?>" size="64" maxlength="64" />
-								</td>
-							</tr>
-							<tr>
-								<td class="key">
-									<label for="maps-description">Description</label>
-								</td>
-								<td>
-									<textarea class="inputbox" name="maps_description" id="maps-description_" cols="45" rows="8"><? echo $this->data->maps_description; ?></textarea>
-								</td>
-							</tr>
-						</table>
-					</fieldset>
-					<fieldset class="adminform">
-						<legend>Map Preview</legend>
-						<div id="map-preview_" style="<?php echo $style; ?>"></div>
-					</fieldset>
-				</td>
-				<td valign="top">
-<?
-	echo $pane->startPane('params-pane');
-	echo $pane->startPanel(JText::_('Map Options'), 'maps-options_');
-	echo $this->params->render('options');
-	echo $pane->endPanel();
-	echo $pane->startPanel(JText::_('Map Settings'), 'social-options_');
-	echo $this->params->render('params', 'params');
-	echo $pane->endPanel();
-	echo $pane->startPanel(JText::_('Meta Data'), 'meta-data_');
-	echo $this->params->render('meta', 'metadata');
-	echo $pane->endPanel();
-	echo $pane->endPane();
-?>
-				</td>
-			</tr>
-		</table>
+		<div class="width-60 fltlft">
+			<fieldset class="adminform">
+				<legend><?php echo JText::_('COM_MAPS_FORM_LEGEND_BASIC'); ?></legend>
+				<dl>
+				<?php foreach($this->form->getFieldset('base') as $field){ ?>
+					<dt><?php echo $field->label; ?></dt>
+					<dd><?php echo $field->input; ?></dd>
+				<?php } ?>
+				</dl>
+			</fieldset>
+			<fieldset>
+				<legend><?php echo JText::_('COM_MAPS_FORM_LEGEND_PREVIEW'); ?></legend>
+				<div id="map-preview_" style="<?php echo $style; ?>"></div>
+			</fieldset>
+		</div>
+		<div class="width-40 fltlft">
+			<fieldset class="adminform">
+				<legend><?php echo JText::_('COM_MAPS_FORM_LEGEND_OPTIONS'); ?></legend>
+				<dl>
+				<?php foreach($this->form->getFieldset('options') as $field){ ?>
+					<dt><?php echo $field->label; ?></dt>
+					<dd><?php echo $field->input; ?></dd>
+				<?php } ?>
+				</dl>
+			</fieldset>
+			<fieldset class="adminform">
+				<legend><?php echo JText::_('COM_MAPS_FORM_LEGEND_PARAMS'); ?></legend>
+				<dl>
+				<?php foreach($this->form->getFieldset('params') as $field){ ?>
+					<dt><?php echo $field->label; ?></dt>
+					<dd><?php echo $field->input; ?></dd>
+				<?php } ?>
+				</dl>
+			</fieldset>
+		</div>
 	</div>
 </form>

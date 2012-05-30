@@ -61,14 +61,14 @@
 					<? echo JHTML::_('grid.sort', JText::_('Map Name'), 'maps_name', $this->filter->filter_order_Dir, $this->filter->filter_order, 'filter'); ?>
 				</th>
 				<th width="5%" nowrap="nowrap">
-					<? echo JHTML::_('grid.sort', JText::_('Published'), 'published', $this->filter->filter_order_Dir, $this->filter->filter_order, 'filter'); ?>
+					<? echo JHTML::_('grid.sort', JText::_('Published'), 'm.published', $this->filter->filter_order_Dir, $this->filter->filter_order, 'filter'); ?>
 				</th>
 				<th width="10%" nowrap="nowrap">
 					<? echo JHTML::_('grid.sort', JText::_('Order'), 'ordering', $this->filter->filter_order_Dir, $this->filter->filter_order, 'filter');?>
 					<? echo JHTML::_('grid.order', $this->items); ?>
 				</th>
 				<th nowrap="nowrap">
-					<? echo JHTML::_('grid.sort', JText::_('Access'), 'access', $this->filter->filter_order_Dir, $this->filter->filter_order, 'filter'); ?>
+					<? echo JHTML::_('grid.sort', JText::_('Access'), 'm.access', $this->filter->filter_order_Dir, $this->filter->filter_order, 'filter'); ?>
 				</th>
 				<th>
 					<? echo JText::_('Description'); ?>

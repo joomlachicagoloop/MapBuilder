@@ -111,7 +111,7 @@ class MapsModelMarkers extends JModelForm
     		$filter[] = "`marker_name` LIKE '%{$search}%'";
     	}
     	$map = $mainframe->getUserState($option.'.'.$scope.'.filter_map');
-    	if($map != -1){
+    	if($map != -1 && $map){
     		$filter[] = "m.`maps_id` = {$map}";
     	}
     	if(!$order_dir = $mainframe->getUserState($option.'.'.$scope.'.filter_order_Dir')){

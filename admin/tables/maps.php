@@ -34,20 +34,6 @@ class TableMaps extends JTable
 	}
 	
 	function bind($array, $ignore=''){
-		if(key_exists('options', $array)){
-			if(is_array($array['options'])){
-				if(!parent::bind($array['options'], $ignore)){
-					return false;
-				}
-			}
-		}
-		if(key_exists('meta', $array)){
-			if(is_array($array['meta'])){
-				if(!parent::bind($array['meta'], $ignore)){
-					return false;
-				}
-			}
-		}
 		if(key_exists('params', $array)){
 			if(is_array($array['params'])){
 				$registry = new JRegistry();

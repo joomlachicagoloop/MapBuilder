@@ -104,7 +104,7 @@ class MapsController extends JController
 		$row->load($id);
 		// BIND THE FORM FIELDS TO THE SLIDESHOW TABLE
 		if (!$row->bind($data)) {
-			$this->setError($row->_db->getErrorMsg());
+			$this->setError($row->getDbo()->getErrorMsg());
 			return false;
 		}
 		// ASSIGN ORDERING IF NECESSARY
@@ -113,17 +113,17 @@ class MapsController extends JController
 		}
 		// MAKE SURE THE SLIDESHOW RECORD IS VALID
 		if (!$row->check()) {
-			$this->setError($row->_db->getErrorMsg());
+			$this->setError($row->getDbo()->getErrorMsg());
 			return false;
 		}
 		// SAVE THE RECORD TO THE DATABASE
 		if (!$row->store()) {
-			$this->setError($model->_db->getErrorMsg());
+			$this->setError($model->getDbo()->getErrorMsg());
 			return false;
 		}
 		// COMPACT THE ORDERING SEQUENCE
 		if (!$row->reorder()) {
-			$this->setError($model->_db->getErrorMsg());
+			$this->setError($model->getDbo()->getErrorMsg());
 			return false;
 		}
 		switch($task){
@@ -250,19 +250,19 @@ class MapsController extends JController
 		$row		=& $model->getTable();
 		for($i=0; $i < count($cid); $i++){
 			if(!$row->load($cid[$i])){
-				$this->setError($model->_db->getErrorMsg());
+				$this->setError($model->getDbo()->getErrorMsg());
 				return false;
 			}
 			$row->ordering = $ordering[$i];
 			// SAVE THE RECORD TO THE DATABASE
 			if(!$row->store()){
-				$this->setError($model->_db->getErrorMsg());
+				$this->setError($model->getDbo()->getErrorMsg());
 				return false;
 			}
 		}
 		// COMPACT THE ORDERING SEQUENCE
 		if (!$row->reorder()) {
-			$this->setError($model->_db->getErrorMsg());
+			$this->setError($model->getDbo()->getErrorMsg());
 			return false;
 		}
 		$this->setRedirect("index.php?option=com_maps");

@@ -109,7 +109,7 @@ class MapsControllerMarkers extends JController
 		$row->load($id);
 		// BIND THE FORM FIELDS TO THE MARKERS TABLE
 		if (!$row->bind($data)) {
-			$this->setError($model->_db->getErrorMsg());
+			$this->setError($model->getDbo()->getErrorMsg());
 			return false;
 		}
 		// ASSIGN ORDERING IF NECESSARY
@@ -118,17 +118,17 @@ class MapsControllerMarkers extends JController
 		}
 		// MAKE SURE THE COMPONENT RECORD IS VALID
 		if (!$row->check()) {
-			$this->setError($model->_db->getErrorMsg());
+			$this->setError($model->getDbo()->getErrorMsg());
 			return false;
 		}
 		// SAVE THE RECORD TO THE DATABASE
 		if(!$row->store()){
-			$this->setError($model->_db->getErrorMsg());
+			$this->setError($model->getDbo()->getErrorMsg());
 			return false;
 		}
 		// COMPACT THE ORDERING SEQUENCE FOR THE CATEGORY LISTING
 		if (!$row->reorder("`maps_id` = {$row->maps_id}")) {
-			$this->setError( $row->_db->getErrorMsg() );
+			$this->setError( $row->getDbo()->getErrorMsg() );
 			return false;
 		}
 		switch($task){
@@ -234,7 +234,7 @@ class MapsControllerMarkers extends JController
 		$model =& $this->getModel('Markers');
 		$row =& $model->getTable();
 		$row->load($this->_getCid());
-		$row->move($direction, "`marker_parent` = {$row->marker_parent}");
+		$row->move($direction, "`maps_id` = {$row->maps_id}");
 
 		$this->setRedirect("index.php?option=com_maps&controller=markers&view=markers&layout=list");
 	}
@@ -254,13 +254,13 @@ class MapsControllerMarkers extends JController
 		$row =& $model->getTable();
 		for($i=0; $i < count($cid); $i++){
 			if(!$row->load($cid[$i])){
-				$this->setError($row->_db->getErrorMsg());
+				$this->setError($row->getDbo()->getErrorMsg());
 				return false;
 			}
 			$row->ordering = $ordering[$i];
 			// Save the record to the database
 			if(!$row->store()){
-				$this->setError($row->_db->getErrorMsg());
+				$this->setError($row->getDbo()->getErrorMsg());
 				return false;
 			}
 			if(!in_array($row->marker_parent, $catid)){
@@ -270,7 +270,7 @@ class MapsControllerMarkers extends JController
 		foreach($catid as $subcatid){
 			// COMPACT THE ORDERING SEQUENCE FOR THE CATEGORY LISTING
 			if (!$row->reorder("`marker_parent` = $subcatid")) {
-				$this->setError( $row->_db->getErrorMsg() );
+				$this->setError( $row->getDbo()->getErrorMsg() );
 				return false;
 			}
 		}

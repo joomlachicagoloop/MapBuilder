@@ -263,13 +263,13 @@ class MapsControllerMarkers extends JController
 				$this->setError($row->getDbo()->getErrorMsg());
 				return false;
 			}
-			if(!in_array($row->marker_parent, $catid)){
-				$catid[] = $row->marker_parent;
+			if(!in_array($row->maps_id, $catid)){
+				$catid[] = $row->maps_id;
 			}
 		}
 		foreach($catid as $subcatid){
 			// COMPACT THE ORDERING SEQUENCE FOR THE CATEGORY LISTING
-			if (!$row->reorder("`marker_parent` = $subcatid")) {
+			if (!$row->reorder("`maps_id` = $subcatid")) {
 				$this->setError( $row->getDbo()->getErrorMsg() );
 				return false;
 			}

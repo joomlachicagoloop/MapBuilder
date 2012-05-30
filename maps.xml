@@ -51,6 +51,7 @@
 			<language tag="en-GB">en-GB/en-GB.com_maps.sys.ini</language>
 		</languages>
 		<files folder="admin">
+			<filename>access.xml</filename>
 			<filename>config.xml</filename>
 			<filename>controller.php</filename>
 			<folder>controllers</folder>

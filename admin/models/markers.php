@@ -157,7 +157,7 @@ class MapsModelMarkers extends JModelForm
     	
     	$obj->filter_search			= $mainframe->getUserStateFromRequest($option.'.'.$scope.'.filter_search', 'filter_search', '', 'string');
     	$obj->filter_map			= $mainframe->getUserStateFromRequest($option.'.'.$scope.'.filter_map', 'filter_map', '-1', '-1', 'int');
-    	$obj->filter_order			= $mainframe->getUserStateFromRequest($option.'.'.$scope.'.filter_order', 'filter_order', 'b.ordering', 'cmd');
+    	$obj->filter_order			= $mainframe->getUserStateFromRequest($option.'.'.$scope.'.filter_order', 'filter_order', 'ordering', 'cmd');
     	$obj->filter_order_Dir		= $mainframe->getUserStateFromRequest($option.'.'.$scope.'.filter_order_Dir', 'filter_order_Dir', 'asc', 'string');
     	return $obj;
     }

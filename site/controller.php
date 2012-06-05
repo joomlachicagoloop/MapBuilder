@@ -37,11 +37,6 @@ class MapsController extends JController
 		$view_name		= JRequest::getCmd('view', $this->getName());
 		$view_layout	= JRequest::getCmd('layout', 'default');
 		$user			= JFactory::getUser();
-
-		// ASSIGN THE DEFAULT MODEL TO ALL VIEWS
-		$view =& $this->getView($view_name, $view_type, '', array('base_path'=>$this->_basePath));
-		$model =& $this->getModel();
-		$view->setModel($model, true);
 		
 		parent::display();
 	}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="1.7" method="update">
-	<name>Maps</name>
+	<name>COM_MAPS</name>
 	<creationDate>2010-11-01</creationDate>
 	<author>Alonzo Turner</author>
 	<authorEmail>alonzo.turner@subtextproductions.com</authorEmail>

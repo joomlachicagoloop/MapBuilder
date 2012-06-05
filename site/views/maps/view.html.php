@@ -23,16 +23,15 @@ class MapsViewMaps extends JView
 			break;
 		default:
 			$document->addScript($uri->root()."components/com_maps/javascript/maps.js");
-			$paramsdef = JPATH_COMPONENT_ADMINISTRATOR.DS."models".DS."maps.xml";
 			$this->map = $this->get('Map');
 			$params = new JRegistry();
-			$params->loadJSON($map->attribs);
+			$params->loadINI($this->map->attribs);
 			$this->params = $params;
-			if(trim($map->meta_keywords)){
-				$document->setMetaData('keywords', $map->meta_keywords);
+			if(trim($this->map->meta_keywords)){
+				$document->setMetaData('keywords', $this->map->meta_keywords);
 			}
-			if(trim($map->meta_description)){
-				$document->setMetaData('description', $map->meta_description);
+			if(trim($this->map->meta_description)){
+				$document->setMetaData('description', $this->map->meta_description);
 			}
 		}
 		parent::display($tpl);

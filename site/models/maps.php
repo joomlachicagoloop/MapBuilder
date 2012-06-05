@@ -27,11 +27,12 @@ class MapsModelMaps extends JModel
 	 */
 	function getMarkers(){
 		$user	= $this->getState('user');
+		$levels = implode(",", array_unique($user->getAuthorisedViewLevels()));
 		$id		= JRequest::getInt('id', 0, 'get');
 		$table	=& $this->getTable('Markers');
 		$sql 	= "SELECT `marker_id` ".
 		"FROM `#__maps_marker` ".
-		"WHERE `maps_id` = {$id} AND `published` = 1 AND `access` <= {$user->aid} ".
+		"WHERE `maps_id` = {$id} AND `published` = 1 AND `access` IN ({$levels}) ".
 		"ORDER BY `ordering`";
 		$this->_db->setQuery($sql);
 		if($result = $this->_db->loadResultArray()){

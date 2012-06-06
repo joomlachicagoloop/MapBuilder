@@ -1,6 +1,15 @@
 <?php
 	// NO DIRECT ACCESS
 	defined( '_JEXEC' ) or die( 'Restricted access' );
+	// SET DOCUMENT HEAD FOR PAGE
+	$document = JFactory::getDocument();
+	$document->addScript("components/com_maps/javascript/maps.js", "text/javascript", true);
+	if(trim($this->map->meta_keywords)){
+		$document->setMetaData('keywords', $this->map->meta_keywords);
+	}
+	if(trim($this->map->meta_description)){
+		$document->setMetaData('description', $this->map->meta_description);
+	}
 	$style = "";
 	if($width = $this->params->get('map_width', 0)){
 		$style .= "width: {$width}px;";

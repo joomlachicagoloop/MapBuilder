@@ -41,7 +41,6 @@ var Maps = Class.create({
 				description: someRecord.marker_description[0].Text,
 				maps_id: someId
 			};
-			window.console.log(someRecord.marker_name[0].Text);
 			var coords = new google.maps.LatLng(markerData.lat, markerData.lng);
 			var someMarker = new google.maps.Marker({ position: coords, map: someMap, title: markerData.alias });
 			google.maps.event.addListener(someMarker, "click", function(){

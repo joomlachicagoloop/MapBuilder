@@ -22,6 +22,9 @@ if($controller = JRequest::getVar('controller')) {
 	}
 }
 
+// REQUIRE HELPER FILE
+JLoader::register('MapsHelper', dirname(__FILE__).DS.'helpers'.DS.'maps.php');
+
 // CREATE THE CONTROLLER
 $classname	= 'MapsController'.$controller;
 $controller	= new $classname( );

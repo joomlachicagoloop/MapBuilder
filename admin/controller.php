@@ -45,6 +45,8 @@ class MapsController extends JController
 	function display()
 	{
 		parent::display();
+		$view = JRequest::getCmd('view', 'maps');
+		MapsHelper::addSubmenu(JRequest::getCmd('view', 'maps'));
 	}
 	/**
 	 * Method for processing selection filter data

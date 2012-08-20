@@ -40,7 +40,7 @@ class MapsModelMarkers extends JModelForm
     public function getData()
     {
 		$array 	= JRequest::getVar('cid',  0, '', 'array');
-		$row 	=& $this->getTable();
+		$row 	= $this->getTable();
 		$sql	= "SELECT m.*, map.*, map.`attribs` AS `maps` FROM `{$row->getTableName()}` m ".
 		"LEFT JOIN `#__maps` map USING(`maps_id`) ".
 		"WHERE `marker_id` = {$array[0]} LIMIT 1";
@@ -72,7 +72,7 @@ class MapsModelMarkers extends JModelForm
 		$db		= $this->getDbo();
 		$array 	= JRequest::getVar('cid',  0, '', 'array');
 		$id		= (int)$array[0];
-		$row 	=& $this->getTable();
+		$row 	= $this->getTable();
 		$sql	= "SELECT m.*, map.*, map.`attribs` AS `maps` FROM `{$row->getTableName()}` m ".
 		"LEFT JOIN `#__maps` map USING(`maps_id`) ".
 		"WHERE `marker_id` = {$id} LIMIT 1";
@@ -103,7 +103,7 @@ class MapsModelMarkers extends JModelForm
      */
     public function getList()
     {
-    	$mainframe =& JFactory::getApplication();
+    	$mainframe = JFactory::getApplication();
     	$option = JRequest::getCmd('option', 'com_maps');
     	$scope = $this->getName();
     	$filter = array();
@@ -124,7 +124,7 @@ class MapsModelMarkers extends JModelForm
     	}else{
     		$ordering = $ordering." ".$order_dir;
     	}
-    	$row =& $this->getTable();
+    	$row = $this->getTable();
 		$sql = "SELECT ".
 		"SQL_CALC_FOUND_ROWS m.*, map.*, m.ordering AS ordervalue, ".
 		"v.`title` AS `access` ".
@@ -144,7 +144,7 @@ class MapsModelMarkers extends JModelForm
      */
     public function getFilter()
     {
-    	$mainframe =& JFactory::getApplication();
+    	$mainframe = JFactory::getApplication();
     	$option = JRequest::getCmd('option', 'com_maps');
     	$scope = $this->getName();
     	$obj = new stdClass();

@@ -57,7 +57,7 @@ class MapsController extends JController
 		if(!JRequest::checkToken('method')){
 			die("SECURITY BREACH");
 		}
-		$model =& $this->getModel();
+		$model = $this->getModel();
 		$model->getFilter();
 		$this->setRedirect("index.php?option=com_maps");
 	}
@@ -70,10 +70,10 @@ class MapsController extends JController
 		if(!JRequest::checkToken('method')){
 			die("SECURITY BREACH");
 		}
-		$user		=& JFactory::getUser();
+		$user		= JFactory::getUser();
 		$user_id	= $user->get('id');
-		$model		=& $this->getModel();
-		$row		=& $model->getTable();
+		$model		= $this->getModel();
+		$row		= $model->getTable();
 		$task		= JRequest::getVar('task', '', 'post');
 		$cid		= $this->_getCid();
 		// LOAD THE CURRENT DATA
@@ -97,8 +97,8 @@ class MapsController extends JController
 		if(!JRequest::checkToken('method')){
 			die("SECURITY BREACH");
 		}
-		$model	=& $this->getModel();
-		$row 	=& $model->getTable();
+		$model	= $this->getModel();
+		$row 	= $model->getTable();
 		$data 	= JRequest::get('post');
 		$task	= JRequest::getCmd('task', 'save', 'post');
 		$id 	= JRequest::getInt('maps_id', 0);
@@ -148,8 +148,8 @@ class MapsController extends JController
 			die("SECURITY BREACH");
 		}
 		$cids 	= JRequest::getVar('cid', 0, 'post', 'array');
-		$model 	=& $this->getModel();
-		$row 	=& $model->getTable();
+		$model 	= $this->getModel();
+		$row 	= $model->getTable();
 		$msg 	= "The selected items were successfully deleted.";
 		foreach($cids as $cid){
 			$row->load($cid);
@@ -168,8 +168,8 @@ class MapsController extends JController
 			die("SECURITY BREACH");
 		}
 	 	$id 	= $this->_getCid();
-		$model 	=& $this->getModel();
-		$row 	=& $model->getTable();
+		$model 	= $this->getModel();
+		$row 	= $model->getTable();
 		$row->load($id);
 		if($row->published){
 			$row->published = 0;
@@ -188,8 +188,8 @@ class MapsController extends JController
 		if(!JRequest::checkToken('method')){
 			die("SECURITY BREACH");
 		}
-		$model	=& $this->getModel();
-		$row	=& $model->getTable();
+		$model	= $this->getModel();
+		$row	= $model->getTable();
 		$task	= JRequest::getCmd('task', '', 'post');
 		$id		= $this->_getCid();
 		
@@ -230,8 +230,8 @@ class MapsController extends JController
 			$direction = 0;
 			break;
 		}
-		$model =& $this->getModel();
-		$row =& $model->getTable();
+		$model = $this->getModel();
+		$row = $model->getTable();
 		$row->load($this->_getCid());
 		$row->move($direction);
 		
@@ -248,8 +248,8 @@ class MapsController extends JController
 		}
 		$cid		= JRequest::getVar('cid',  0, '', 'array');
 		$ordering	= JRequest::getVar('order', 0, '', 'array');
-		$model 		=& $this->getModel();
-		$row		=& $model->getTable();
+		$model 		= $this->getModel();
+		$row		= $model->getTable();
 		for($i=0; $i < count($cid); $i++){
 			if(!$row->load($cid[$i])){
 				$this->setError($model->getDbo()->getErrorMsg());
@@ -278,8 +278,8 @@ class MapsController extends JController
 		if(!JRequest::checkToken('method')){
 			die("SECURITY BREACH");
 		}
-		$model	=& $this->getModel();
-		$row	=& $model->getTable();
+		$model	= $this->getModel();
+		$row	= $model->getTable();
 		$id		= JRequest::getInt('maps_id', 0, 'post');
 		
 		$row->load($id);

@@ -15,7 +15,7 @@ jimport( 'joomla.application.component.model' );
 class MapsModelMaps extends JModel
 {
 	function __construct(){
-		$user	=& JFactory::getUser();
+		$user	= JFactory::getUser();
 		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS."tables");
 		parent::__construct();
 		$this->setState('user', $user);
@@ -29,7 +29,7 @@ class MapsModelMaps extends JModel
 		$user	= $this->getState('user');
 		$levels = implode(",", array_unique($user->getAuthorisedViewLevels()));
 		$id		= JRequest::getInt('id', 0, 'get');
-		$table	=& $this->getTable('Markers');
+		$table	= $this->getTable('Markers');
 		$sql 	= "SELECT `marker_id` ".
 		"FROM `#__maps_marker` ".
 		"WHERE `maps_id` = {$id} AND `published` = 1 AND `access` IN ({$levels}) ".
@@ -54,7 +54,7 @@ class MapsModelMaps extends JModel
 	function getMap(){
 		$user	= $this->getState('user');
 		$id		= JRequest::getInt('id', 0);
-		$table  =& $this->getTable();
+		$table  = $this->getTable();
 		$table->load($id);
 		return $table;
 	}

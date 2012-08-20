@@ -17,7 +17,7 @@
 	if($height = $this->params->get('map_height', 0)){
 		$style .= "height: {$height}px;";
 	}
-	$uri		=& JURI::getInstance();
+	$uri		= JURI::getInstance();
 	$base		= $uri->root();
 	if($this->params->get('show_title')){
 ?>

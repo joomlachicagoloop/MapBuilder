@@ -11,8 +11,8 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 function MapsBuildRoute(&$query){
-	$mainframe =& JFactory::getApplication();
-	$menu =& $mainframe->getMenu();
+	$mainframe = JFactory::getApplication();
+	$menu = $mainframe->getMenu();
 	$link = "index.php?option=com_maps&id={$query['id']}";
 	$segments	= array();
 	$segments[] = $query['id'];

@@ -54,7 +54,7 @@ class MapsControllerMarkers extends JController
 		if(!JRequest::checkToken('method')){
 			die("SECURITY BREACH");
 		}
-		$model =& $this->getModel('Markers');
+		$model = $this->getModel('Markers');
 		$model->getFilter();
 		$this->setRedirect("index.php?option=com_maps&controller=markers&view=markers&layout=list");
 	}
@@ -68,10 +68,10 @@ class MapsControllerMarkers extends JController
 		if(!JRequest::checkToken('method')){
 			die("SECURITY BREACH");
 		}
-		$user		=& JFactory::getUser();
+		$user		= JFactory::getUser();
 		$user_id	= $user->get('id');
-		$model 		=& $this->getModel('Markers');
-		$row		=& $model->getTable();
+		$model 		= $this->getModel('Markers');
+		$row		= $model->getTable();
 		$task		= JRequest::getVar('task', '', 'post');
 		$cid 		= $this->_getCid();
 		
@@ -156,8 +156,8 @@ class MapsControllerMarkers extends JController
 			die("SECURITY BREACH");
 		}
 		$cids = JRequest::getVar('cid', 0, 'request', 'array');
-		$model =& $this->getModel('Markers');
-		$table =& $model->getTable();
+		$model = $this->getModel('Markers');
+		$table = $model->getTable();
 		foreach($cids as $cid){
 			$table->load($cid);
 			$table->delete();
@@ -174,8 +174,8 @@ class MapsControllerMarkers extends JController
 			die("SECURITY BREACH");
 		}
 	 	$id 	= $this->_getCid();
-		$model 	=& $this->getModel('Markers');
-		$row 	=& $model->getTable();
+		$model 	= $this->getModel('Markers');
+		$row 	= $model->getTable();
 		$row->load($id);
 		if($row->published){
 			$row->published = 0;
@@ -194,8 +194,8 @@ class MapsControllerMarkers extends JController
 		if(!JRequest::checkToken('method')){
 			die("SECURITY BREACH");
 		}
-		$model	=& $this->getModel('Markers');
-		$row	=& $model->getTable();
+		$model	= $this->getModel('Markers');
+		$row	= $model->getTable();
 		$task	= JRequest::getCmd('task', '', 'post');
 		$id		= $this->_getCid();
 		
@@ -236,8 +236,8 @@ class MapsControllerMarkers extends JController
 			$direction = 0;
 			break;
 		}
-		$model =& $this->getModel('Markers');
-		$row =& $model->getTable();
+		$model = $this->getModel('Markers');
+		$row = $model->getTable();
 		$row->load($this->_getCid());
 		$row->move($direction, "`maps_id` = {$row->maps_id}");
 
@@ -255,8 +255,8 @@ class MapsControllerMarkers extends JController
 		$cid = JRequest::getVar('cid',  0, '', 'array');
 		$ordering = JRequest::getVar('order', 0, '', 'array');
 		$catid = array();
-		$model =& $this->getModel('Markers');
-		$row =& $model->getTable();
+		$model = $this->getModel('Markers');
+		$row = $model->getTable();
 		for($i=0; $i < count($cid); $i++){
 			if(!$row->load($cid[$i])){
 				$this->setError($row->getDbo()->getErrorMsg());
@@ -287,8 +287,8 @@ class MapsControllerMarkers extends JController
 		if(!JRequest::checkToken('method')){
 			die("SECURITY BREACH");
 		}
-		$model	=& $this->getModel('Markers');
-		$row	=& $model->getTable();
+		$model	= $this->getModel('Markers');
+		$row	= $model->getTable();
 		$id		= JRequest::getInt('country_id', 0, 'post');
 		
 		$row->load($id);

@@ -40,7 +40,7 @@ class MapsModelMaps extends JModelForm
     public function getData()
     {
 		$array 	= JRequest::getVar('cid',  0, '', 'array');
-		$row 	=& $this->getTable();
+		$row 	= $this->getTable();
 		$row->load($array[0]);
 		$this->_data = $row;
 
@@ -70,7 +70,7 @@ class MapsModelMaps extends JModelForm
 		
 		$db		= JFactory::getDbo();
 		$query 	= $db->getQuery(true);
-		$row 	=& $this->getTable();
+		$row 	= $this->getTable();
 		
 		$query->select("*");
 		$query->from($row->getTableName());
@@ -90,7 +90,7 @@ class MapsModelMaps extends JModelForm
      */
     public function getList()
     {
-    	$mainframe =& JFactory::getApplication();
+    	$mainframe = JFactory::getApplication();
     	$option = JRequest::getCmd('option', 'com_maps');
     	$scope = $this->getName();
     	$filter = array();
@@ -103,7 +103,7 @@ class MapsModelMaps extends JModelForm
     	if(!$order_dir = $mainframe->getUserState($option.'.'.$scope.'.filter_order_Dir')){
     		$order_dir = "ASC";
     	}
-    	$row =& $this->getTable();
+    	$row = $this->getTable();
 		$sql = "SELECT ".
 		"SQL_CALC_FOUND_ROWS a.*, ".
 		"v.`title` AS `access` ".
@@ -123,7 +123,7 @@ class MapsModelMaps extends JModelForm
      */
     public function getFilter()
     {
-    	$mainframe =& JFactory::getApplication();
+    	$mainframe = JFactory::getApplication();
     	$option = JRequest::getCmd('option', 'com_maps');
     	$scope = $this->getName();
     	$obj = new stdClass();

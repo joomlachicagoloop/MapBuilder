@@ -1,9 +1,9 @@
 <?php
 	defined('_JEXEC') or die('Restricted access');
-	$uri	=& JURI::getInstance();
+	$uri	= JURI::getInstance();
 	$base	= $uri->root();
 	JHtml::_('behavior.keepalive');
-	$document =& JFactory::getDocument();
+	$document = JFactory::getDocument();
 	$document->addScript("http://maps.google.com/maps/api/js?sensor=false&amp;key={$api_key}");
 	$document->addScript("components".DS."com_maps".DS."javascript".DS."markers.js", "text/javascript", true);
 ?>

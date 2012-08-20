@@ -36,7 +36,7 @@ class MapsViewMaps extends JView
 		default:
 			$component = JComponentHelper::getParams('com_maps');
 			$api_key = $component->get('api_key');
-			$bar =& JToolBar::getInstance('toolbar');
+			$bar = JToolBar::getInstance('toolbar');
 			JToolBarHelper::title(JText::_('Edit Google Maps Details'), 'generic.png');
 			JToolBarHelper::save();
 			JToolBarHelper::apply();

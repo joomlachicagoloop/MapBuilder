@@ -1,7 +1,7 @@
 <?php
 	defined('_JEXEC') or die('Restricted access');
-	$user	=& JFactory::getUser();
-	$uri	=& JURI::getInstance();
+	$user	= JFactory::getUser();
+	$uri	= JURI::getInstance();
 	$base	= $uri->root();
 	JHtml::_('behavior.tooltip');
 ?>

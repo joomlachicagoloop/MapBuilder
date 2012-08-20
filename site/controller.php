@@ -32,7 +32,7 @@ class MapsController extends JController
 	 */
 	function display()
 	{
-		$document		=& JFactory::getDocument();
+		$document		= JFactory::getDocument();
 		$view_type		= $document->getType();
 		$view_name		= JRequest::getCmd('view', $this->getName());
 		$view_layout	= JRequest::getCmd('layout', 'default');

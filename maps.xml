@@ -7,7 +7,7 @@
 	<authorUrl>http://www.subtextproductions.com</authorUrl>
 	<copyright>Copyright 2007 - 2012 Subtext Productions</copyright>
 	<license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
-	<version>1.7</version>
+	<version>0.5</version>
 	<description><![CDATA[COM_MAPS_COMPONENT_DESCRIPTION]]></description>
 	<files folder="site">
 		<filename>controller.php</filename>
@@ -21,17 +21,17 @@
 	</files>
 	<install>
 		<sql>
-			<file charset="utf8" driver="mysqli">sql/install.mysqli.utf8.sql</file>
+			<file charset="utf8" driver="mysql">sql/install.mysqli.utf8.sql</file>
 		</sql>
 	</install>
 	<uninstall>
 		<sql>
-			<file charset="utf8" driver="mysqli">sql/uninstall.mysqli.utf8.sql</file>
+			<file charset="utf8" driver="mysql">sql/uninstall.mysqli.utf8.sql</file>
 		</sql>
 	</uninstall>
 	<update>
 		<schemas>
-			<schemapath type="mysqli">sql/updates/mysqli</schemapath>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
 		</schemas>
 	</update>
 	<languages folder="site">
@@ -67,4 +67,7 @@
 			<folder>views</folder>
 		</files>		
 	</administration>
+	<updateservers>
+		<server type="extension" priority="1" name="Subtext Productions Stable Release">https://www.subtextproductions.com/updates/joomla/maps/xml/extension.xml</server>
+	</updateservers>
 </extension>

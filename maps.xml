@@ -21,12 +21,12 @@
 	</files>
 	<install>
 		<sql>
-			<file charset="utf8" driver="mysql">sql/install.mysqli.utf8.sql</file>
+			<file charset="utf8" driver="mysql">sql/install.mysql.utf8.sql</file>
 		</sql>
 	</install>
 	<uninstall>
 		<sql>
-			<file charset="utf8" driver="mysql">sql/uninstall.mysqli.utf8.sql</file>
+			<file charset="utf8" driver="mysql">sql/uninstall.mysql.utf8.sql</file>
 		</sql>
 	</uninstall>
 	<update>

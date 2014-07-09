@@ -15,7 +15,7 @@
 		</fieldset>
 		<fieldset name="options">
 			<field name="maps_id" type="sql" default="0" label="Map" description="The map on which you want to place the marker." query="SELECT `maps_id`, `maps_name` FROM `#__maps` ORDER BY `ordering`" key_field="maps_id" value_field="maps_name" />
-			<field name="published" type="radio" default="1" label="COM_MAPS_FIELD_PUBLISHED_LABEL" description="COM_MAPS_FIELD_PUBLISHED_DESC">
+			<field name="published" type="radio" class="btn-group radio" default="1" label="COM_MAPS_FIELD_PUBLISHED_LABEL" description="COM_MAPS_FIELD_PUBLISHED_DESC">
 				<option value="1">COM_MAPS_OPTION_VALUE_BOOLEAN_TRUE</option>
 				<option value="2">COM_MAPS_OPTION_VALUE_BOOLEAN_FALSE</option>
 			</field>
@@ -24,10 +24,10 @@
 	</fields>
 	<fields name="params">
 		<fieldset name="params">
-			<field name="map_width" type="hidden" default="640" label="" description="" />
-			<field name="map_height" type="hidden" default="260" label="" description="" />
-			<field name="center_lat" type="hidden" default="20.008834970581525" label="" description=""  />
-			<field name="center_lng" type="hidden" default="-35.67246318304168" label="" description=""  />
+			<field name="map_width" type="hidden" default="640" />
+			<field name="map_height" type="hidden" default="260" />
+			<field name="center_lat" type="hidden" default="20.008834970581525"  />
+			<field name="center_lng" type="hidden" default="-35.67246318304168"  />
 			<field name="zoom" type="hidden" default="2"  />
 		</fieldset>
 	</fields>

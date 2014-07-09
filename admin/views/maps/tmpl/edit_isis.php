@@ -3,11 +3,9 @@
 	$document = JFactory::getDocument();
 	$document->addScript("http://maps.google.com/maps/api/js?sensor=false");
 	$document->addScript("components/com_maps/javascript/maps.js", "text/javascript", true);
-	JHtml::_('behavior.modal');
-	JHtml::_('behavior.tooltip');
+	JHtml::_('behavior.keepalive');
+	JHtml::_('bootstrap.tooltip');
 	JHtml::_('behavior.formvalidation');
-	$uri	= JURI::getInstance();
-	$base	= $uri->root();
 	$style	= "";
 	if($width = $this->form->getValue('map_width', 'params', 0)){
 		$style .= "width: {$width}px;";
@@ -74,17 +72,13 @@
 	<div id="editcell">
 		<div class="span9 pull-left">
 			<fieldset class="adminform">
-				<legend><?php echo JText::_('COM_SUBTEXT_FORM_LEGEND_BASIC'); ?></legend>
+				<legend><?php echo JText::_('COM_MAPS_FORM_LEGEND_BASIC'); ?></legend>
 				<?php foreach($this->form->getFieldset('base') as $field){ ?>
 					<div class="control-group">
 						<?php echo $field->label; ?>
 						<div class="controls"><?php echo $field->input; ?></div>
 					</div>
 				<?php } ?>
-				<div class="clr"></div>
-				<?php echo $this->form->getLabel('subtext_description'); ?>
-				<div class="clr"></div>
-				<?php echo $this->form->getInput('subtext_description'); ?>
 			</fieldset>
 			<fieldset>
 				<legend><?php echo JText::_('COM_MAPS_FORM_LEGEND_PREVIEW'); ?></legend>
@@ -93,7 +87,7 @@
 		</div>
 		<div class="span3 pull-left">
 			<fieldset class="adminform">
-				<legend><?php echo JText::_('COM_SUBTEXT_FORM_LEGEND_OPTIONS'); ?></legend>
+				<legend><?php echo JText::_('COM_MAPS_FORM_LEGEND_OPTIONS'); ?></legend>
 				<?php foreach($this->form->getFieldset('options') as $field){ ?>
 					<div class="control-group">
 						<?php echo $field->label; ?>
@@ -102,7 +96,7 @@
 				<?php } ?>
 			</fieldset>
 			<fieldset class="adminform">
-				<legend><?php echo JText::_('COM_SUBTEXT_FORM_LEGEND_PARAMS'); ?></legend>
+				<legend><?php echo JText::_('COM_MAPS_FORM_LEGEND_PARAMS'); ?></legend>
 				<?php foreach($this->form->getFieldset('params') as $field){ ?>
 					<div class="control-group">
 						<?php echo $field->label; ?>
@@ -111,7 +105,7 @@
 				<?php } ?>
 			</fieldset>
 			<fieldset class="adminform">
-				<legend><?php echo JText::_('COM_SUBTEXT_FORM_LEGEND_METADATA'); ?></legend>
+				<legend><?php echo JText::_('COM_MAPS_FORM_LEGEND_METADATA'); ?></legend>
 				<?php foreach($this->form->getFieldset('metadata') as $field){ ?>
 					<div class="control-group">
 						<?php echo $field->label; ?>

@@ -1,67 +1,74 @@
 <?php
 	defined('_JEXEC') or die('Restricted access');
-	$uri	= JURI::getInstance();
-	$base	= $uri->root();
-	JHtml::_('behavior.keepalive');
 	$document = JFactory::getDocument();
 	$document->addScript("http://maps.google.com/maps/api/js?sensor=false");
 	$document->addScript("components".DS."com_maps".DS."javascript".DS."markers.js", "text/javascript", true);
+	JHtml::_('behavior.keepalive');
+	JHtml::_('bootstrap.tooltip');
+	JHtml::_('behavior.formvalidation');
 ?>
 
 <script type="text/javascript">
 //<![CDATA[
-	Joomla.submitbutton = function(sometask){
-		var someForm = document.forms.adminForm;
-		var re_empty = /(\w+)/;
-		var re_slug = /^([\w-]+)$/;
-		var re_blank = /^(\W*)$/;
-		var re_coord = /\d+$/;
-		if(sometask != 'cancel'){
-			if(!re_empty.test($('marker_name').value)){
-				$('marker_name').focus();
-				alert("Marker Name is a required field");
-				return false;
-			}
-			if(!re_slug.test($('marker_alias').value)){
-				if(re_blank.test($('marker_alias').value)){
-					$('marker_alias').value = $('marker_name').value.replace(/\W/g, '-').toLowerCase();
-				}else{
-					$('marker_alias').focus();
-					alert('The Alias is required for proper operation. It cannot be left blank. It must contain only letters, numbers, underscores, or dashes');
-					return false;
+	(function() {
+		var $, UIView;
+		$ = jQuery;
+		UIView = (function() {
+			function UIView() {
+				// CONSTRUCTOR METHOD
+				document.formvalidator.setHandler('uint', function(value){
+					re_uint = /^\d+$/;
+					return re_uint.test(value);
+				});
+				document.formvalidator.setHandler('string', function(value){
+					re_string = /^([\w\d\s-_\.,&'#\u00E0-\u00FC]+)?$/;
+					return re_string.test(value);
+				});
+				document.formvalidator.setHandler('cmd', function(value){
+					re_cmd = /^([\w-_]+)$/;
+					return re_cmd.test(value);
+				});
+				Joomla.submitbutton = function (sometask){
+					var someForm = document.forms.adminForm;
+					if(sometask != 'markers.cancel'){
+						if(!document.formvalidator.isValid(someForm)){
+							return false;
+						}
+					}
+					<?php echo $this->form->getField('marker_description')->save(); ?>
+					someForm.task.value = sometask;
+					someForm.submit();
 				}
 			}
-			if(!re_coord.test($('marker_lat').value)){
-				$('marker_lat').focus();
-				alert("Latitude must not be blank. Click the map to drop a marker and drag to adjust coordinates.");
-				return false;
-			}
-		}
-		<?php echo $this->form->getField('marker_description')->save(); ?>
-		someForm.task.value = sometask;
-		someForm.submit();
-	}
+		
+			return UIView;
+		})();
+	
+		$(function() {
+			return new UIView();
+		});
+	}).call(this);
+
 //]]>
 </script>
-<form action="index.php" method="post" name="adminForm" enctype="multipart/form-data">
+<form action="index.php" method="post" name="adminForm" id="adminForm" enctype="multipart/form-data">
 	<input type="hidden" name="option" value="com_maps" />
-	<input type="hidden" name="controller" value="markers" />
-	<input type="hidden" name="view" value="markers" />
 	<input type="hidden" name="task" value="" />
+	<input type="hidden" name="chosen" value="" />
+	<input type="hidden" name="boxchecked" value="0" />
 	<input type="hidden" name="hidemainmenu" value="0" />
-	<input type="hidden" name="marker_id" value="<? echo $this->data->marker_id; ?>" />
-	<input type="hidden" name="ordering" value="<? echo $this->data->ordering; ?>" />
+	<input type="hidden" name="marker_id" value="<? echo $this->form->getValue('marker_id'); ?>" />
 	<? echo JHTML::_('form.token')."\n"; ?>
 	<div id="editcell">
-		<div class="width-60 fltlft">
+		<div class="span9 pull-left">
 			<fieldset class="adminform">
 				<legend><?php echo JText::_('COM_MAPS_FORM_LEGEND_BASIC'); ?></legend>
-				<dl>
 				<?php foreach($this->form->getFieldset('base') as $field){ ?>
-					<dt><?php echo $field->label; ?></dt>
-					<dd><?php echo $field->input; ?></dd>
+					<div class="control-group">
+						<?php echo $field->label; ?>
+						<div class="controls"><?php echo $field->input; ?></div>
+					</div>
 				<?php } ?>
-				</dl>
 				<div class="clr"></div>
 				<?php echo $this->form->getLabel('marker_description'); ?>
 				<div class="clr"></div>
@@ -72,18 +79,21 @@
 				<div id="map-preview_"></div>
 			</fieldset>
 		</div>
-		<div class="width-40 fltlft">
+		<div class="span3 pull-left">
 			<fieldset class="adminform">
 				<legend><?php echo JText::_('COM_MAPS_FORM_LEGEND_OPTIONS'); ?></legend>
-				<dl>
 				<?php foreach($this->form->getFieldset('options') as $field){ ?>
-					<dt><?php echo $field->label; ?></dt>
-					<dd><?php echo $field->input; ?></dd>
+					<div class="control-group">
+						<?php echo $field->label; ?>
+						<div class="controls"><?php echo $field->input; ?></div>
+					</div>
 				<?php } ?>
-				</dl>
-				<?php foreach($this->form->getFieldset('params') as $field){
-					echo $field->input;
-				} ?>
+				<?php foreach($this->form->getFieldset('params') as $field){ ?>
+					<div class="control-group">
+						<?php echo $field->label; ?>
+						<div class="controls"><?php echo $field->input; ?></div>
+					</div>
+				<?php } ?>
 			</fieldset>
 		</div>
 	</div>

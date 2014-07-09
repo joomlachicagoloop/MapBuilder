@@ -25,7 +25,8 @@ class MapsViewMaps extends JViewLegacy
 		$this->setLayout($layout);
 		switch($layout){
 		case "list":
-			JToolBarHelper::title(JText::_('COM_MAPS_VIEW_SUBTEXT_LIST_TITLE'), 'generic.png');
+		    MapsHelper::addSubmenu('maps');
+			JToolBarHelper::title(JText::_('COM_MAPS_VIEW_MAPS_LIST_TITLE'), 'generic.png');
 			JToolBarHelper::addNew('maps.add', 'JTOOLBAR_NEW');
 			JToolBarHelper::editList('maps.edit', 'JTOOLBAR_EDIT', true);
 			JToolBarHelper::deleteList(JText::_('COM_MAPS_MSG_DELETE_CONFIRM'), 'maps.delete', 'JTOOLBAR_DELETE', true);
@@ -37,7 +38,7 @@ class MapsViewMaps extends JViewLegacy
 			break;
 		default:
 			$input->set('hidemainmenu', 1);
-			JToolBarHelper::title(JText::_('COM_MAPS_VIEW_SUBTEXT_EDIT_TITLE'), 'generic.png');
+			JToolBarHelper::title(JText::_('COM_MAPS_VIEW_MAPS_EDIT_TITLE'), 'generic.png');
 			JToolBarHelper::apply('maps.apply');
 			JToolBarHelper::save('maps.save');
 			JToolBarHelper::save2new('maps.save2new');

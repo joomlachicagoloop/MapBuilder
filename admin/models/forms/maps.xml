@@ -9,7 +9,7 @@
 			<field name="maps_description" type="textarea" cols="30" rows="10" class="" label="COM_MAPS_FIELD_MAPS_DESCRIPTION_LABEL" description="COM_MAPS_FIELD_MAPS_DESCRIPTION_DESC" />
 		</fieldset>
 		<fieldset name="options">
-			<field name="published" type="radio" default="1" label="COM_MAPS_FIELD_PUBLISHED_LABEL" description="COM_MAPS_FIELD_PUBLISHED_DESC">
+			<field name="published" type="radio" class="btn-group radio" default="1" label="COM_MAPS_FIELD_PUBLISHED_LABEL" description="COM_MAPS_FIELD_PUBLISHED_DESC">
 				<option value="1">COM_MAPS_OPTION_VALUE_BOOLEAN_TRUE</option>
 				<option value="2">COM_MAPS_OPTION_VALUE_BOOLEAN_FALSE</option>
 			</field>
@@ -22,11 +22,11 @@
 	</fields>
 	<fields name="params">
 		<fieldset name="params">
-			<field name="show_title" type="radio" default="0" label="Show Title" description="Choose whether or not to display the title above the map.">
+			<field name="show_title" type="radio" class="btn-group radio" default="0" label="Show Title" description="Choose whether or not to display the title above the map.">
 				<option value="0">COM_MAPS_OPTION_VALUE_BOOLEAN_FALSE</option>
 				<option value="1">COM_MAPS_OPTION_VALUE_BOOLEAN_TRUE</option>
 			</field>
-			<field name="show_description" type="radio" default="0" label="Show Description" description="Choose whether or not to display the description under the map.">
+			<field name="show_description" type="radio" class="btn-group radio" default="0" label="Show Description" description="Choose whether or not to display the description under the map.">
 				<option value="0">COM_MAPS_OPTION_VALUE_BOOLEAN_FALSE</option>
 				<option value="1">COM_MAPS_OPTION_VALUE_BOOLEAN_TRUE</option>
 			</field>

@@ -1,7 +1,8 @@
 <?php
+	defined('_JEXEC') or die('Restricted access');
+	JHtml::_('bootstrap.tooltip');
 	JHtml::_('behavior.multiselect');
 	JHtml::_('formbehavior.chosen', 'select');
-	JHtml::_('bootstrap.tooltip');
 	$user = JFactory::getUser();
 	$user_id = $user->get('id');
 	$sortFields = array();
@@ -38,7 +39,6 @@
 </script>
 <form action="index.php" method="post" name="adminForm" id="adminForm">
 	<input type="hidden" name="option" value="com_maps" />
-	<input type="hidden" name="scope" value="" />
 	<input type="hidden" name="task" value="maps.filter" />
 	<input type="hidden" name="chosen" value="" />
 	<input type="hidden" name="boxchecked" value="0" />
@@ -65,7 +65,7 @@
 			</select>
 		</div>
 		<div class="btn-group pull-left">
-			<input type="text" name="filter_search" id="filter-search_" class="input-large" placeholder="<?php echo JText::_('COM_MAPS_FILTER_SEARCH_LABEL'); ?>" value="<?php echo $this->filter->filter_search; ?>" />
+			<input type="text" name="filter_search" id="filter-search_" class="input-large" placeholder="<?php echo JText::_('COM_MAPS_FILTER_MAPS_SEARCH_LABEL'); ?>" value="<?php echo $this->filter->filter_search; ?>" />
 		</div>
 		<div class="btn-group pull-left">
 			<input type="button" class="btn" name="submit_button" id="submit-button_" value="Go" onclick="document.forms.adminForm.task.value='filter';document.forms.adminForm.submit();"/>
@@ -168,7 +168,7 @@
 		</tbody>
 		<tfoot>
 			<tr>
-				<td colspan="10">
+				<td colspan="7">
 					<?php echo $this->page->getListFooter(); ?>
 				</td>
 			</tr>

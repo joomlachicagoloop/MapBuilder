@@ -16,8 +16,8 @@
 			<field name="access" type="accesslevel" default="1" label="COM_MAPS_FIELD_ACCESS_LABEL" description="COM_MAPS_FIELD_ACCESS_DESC" />
 		</fieldset>
 		<fieldset name="metadata">
-			<field name="meta_keywords" type="textarea" cols="30" rows="10" class="" label="COM_MAPS_FIELD_MAPS_DESCRIPTION_LABEL" description="COM_MAPS_FIELD_MAPS_DESCRIPTION_DESC" />
-			<field name="meta_description" type="textarea" cols="30" rows="10" class="" label="COM_MAPS_FIELD_MAPS_DESCRIPTION_LABEL" description="COM_MAPS_FIELD_MAPS_DESCRIPTION_DESC" />
+			<field name="meta_keywords" type="textarea" cols="30" rows="5" class="" label="COM_MAPS_FIELD_META_KEYWORDS_LABEL" description="COM_MAPS_FIELD_META_KEYWORDS_DESC" />
+			<field name="meta_description" type="textarea" cols="30" rows="5" class="" label="COM_MAPS_FIELD_META_DESCRIPTION_LABEL" description="COM_MAPS_FIELD_META_DESCRIPTION_DESC" />
 		</fieldset>
 	</fields>
 	<fields name="params">

@@ -4,7 +4,7 @@
 	$base	= $uri->root();
 	JHtml::_('behavior.keepalive');
 	$document = JFactory::getDocument();
-	$document->addScript("http://maps.google.com/maps/api/js?sensor=false&amp;key={$api_key}");
+	$document->addScript("http://maps.google.com/maps/api/js?sensor=false");
 	$document->addScript("components".DS."com_maps".DS."javascript".DS."markers.js", "text/javascript", true);
 ?>
 

@@ -3,7 +3,6 @@
 	<fields name="params">
 		<fieldset name="component">
 			<field name="default_id" type="menuitem" default="" label="COM_MAPS_CONFIG_DEFAULT_ID_LABEL" description="COM_MAPS_CONFIG_DEFAULT_ID_DESC" />
-			<field name="api_key" type="text" default="" size="90" label="COM_MAPS_CONFIG_API_KEY_LABEL" description="COM_MAPS_CONFIG_API_KEY_DESC" />
 		</fieldset>
 	</fields>
 	<fields>

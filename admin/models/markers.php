@@ -77,7 +77,7 @@ class MapsModelMarkers extends JModelAdmin
 	 */
 	public function getForm($data = array(), $loadData = true)
 	{
-		if($form = $this->loadForm('com_maps.markers', 'markers', array('control'=>'', 'load_data'=>$loadData))){
+		if($form = $this->loadForm('com_maps.markers', 'markers', array('control'=>'jform', 'load_data'=>$loadData))){
 			return $form;
 		}
 		JError::raiseError(0, JText::sprintf('JLIB_FORM_INVALID_FORM_OBJECT', 'markers'));

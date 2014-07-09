@@ -1,9 +1,8 @@
 var GMaps = new Class({
 	initialize: function(){
-		window.console.log();
-		this.lat = $('params_center_lat').value;
-		this.lng = $('params_center_lng').value;
-		this.zoom = $('params_zoom').value;
+		this.lat = $('jform_params_center_lat').value;
+		this.lng = $('jform_params_center_lng').value;
+		this.zoom = $('jform_params_zoom').value;
 		this.origin = new google.maps.LatLng(this.lat, this.lng);
 		this.options = { zoom: parseInt(this.zoom), center: this.origin, mapTypeId: google.maps.MapTypeId.ROADMAP };
 		this.map = new google.maps.Map($("map-preview_"), this.options);
@@ -14,14 +13,13 @@ var GMaps = new Class({
 	},
 
 	mapsDragMarker: function(mapEvent){
-		window.console.log(mapEvent);
-		$('params_center_lat').value = mapEvent.latLng.lat();
-		$('params_center_lng').value = mapEvent.latLng.lng();
+		$('jform_params_center_lat').value = mapEvent.latLng.lat();
+		$('jform_params_center_lng').value = mapEvent.latLng.lng();
 	},
 	
 	mapsChangeZoom: function(){
 		try{
-			$('params_zoom').value = myMaps.map.getZoom();
+			$('jform_params_zoom').value = myMaps.map.getZoom();
 		}catch(e){
 			myMaps.debug(e.message);
 		}

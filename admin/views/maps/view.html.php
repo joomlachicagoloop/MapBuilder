@@ -1,6 +1,6 @@
 <?php
 /**
- * Maps View For All Layouts
+ * Google Maps Map View
  * 
  * @package		Maps
  * @subpackage	Components
@@ -12,7 +12,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 jimport( 'joomla.application.component.view' );
 
-class MapsViewMaps extends JView
+class MapsViewMaps extends JViewLegacy
 {
 	/**
 	 * Maps view display method
@@ -20,29 +20,28 @@ class MapsViewMaps extends JView
 	 **/
 	function display($tpl = null)
 	{
-		$layout	= JRequest::getVar('layout', 'list', 'get');
+		$input = JFactory::getApplication()->input;
+		$layout = $input->get->get('layout', 'list', 'string');
+		$this->setLayout($layout);
 		switch($layout){
 		case "list":
-			JToolBarHelper::title(JText::_('Manage Google Maps'), 'generic.png');
-			JToolBarHelper::addNewX();
-			JToolBarHelper::editListX();
-			JToolBarHelper::deleteList();
+			JToolBarHelper::title(JText::_('COM_MAPS_VIEW_SUBTEXT_LIST_TITLE'), 'generic.png');
+			JToolBarHelper::addNew('maps.add', 'JTOOLBAR_NEW');
+			JToolBarHelper::editList('maps.edit', 'JTOOLBAR_EDIT', true);
+			JToolBarHelper::deleteList(JText::_('COM_MAPS_MSG_DELETE_CONFIRM'), 'maps.delete', 'JTOOLBAR_DELETE', true);
 			JToolBarHelper::preferences('com_maps', '500');
 			// GET DATA FROM THE MODEL
-			$this->filter = $this->get('Filter');
+			$this->filter = $this->get('State');
 			$this->items = $this->get('List');
 			$this->page = $this->get('Pagination');
 			break;
 		default:
-			$component = JComponentHelper::getParams('com_maps');
-			$api_key = $component->get('api_key');
-			$bar = JToolBar::getInstance('toolbar');
-			JToolBarHelper::title(JText::_('Edit Google Maps Details'), 'generic.png');
-			JToolBarHelper::save();
-			JToolBarHelper::apply();
-			JToolBarHelper::cancel();
-			JRequest::setVar('hidemainmenu', 1);
-			$this->data = $this->get('Data');
+			$input->set('hidemainmenu', 1);
+			JToolBarHelper::title(JText::_('COM_MAPS_VIEW_SUBTEXT_EDIT_TITLE'), 'generic.png');
+			JToolBarHelper::apply('maps.apply');
+			JToolBarHelper::save('maps.save');
+			JToolBarHelper::save2new('maps.save2new');
+			JToolBarHelper::cancel('maps.cancel');
 			$this->form = $this->get('Form');
 			break;
 		}

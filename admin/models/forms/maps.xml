@@ -6,7 +6,7 @@
 			<field name="ordering" type="hidden" class="validate-numeric" />
 			<field name="maps_name" type="text" class="inputbox" required="true" label="COM_MAPS_FIELD_MAPS_NAME_LABEL" description="COM_MAPS_FIELD_MAPS_NAME_DESC" />
 			<field name="maps_alias" type="text" class="inputbox" required="true" label="COM_MAPS_FIELD_MAPS_ALIAS_LABEL" description="COM_MAPS_FIELD_MAPS_ALIAS_DESC" />
-			<field name="maps_description" type="textarea" cols="30" rows="10" class="inputbox" label="COM_MAPS_FIELD_MAPS_DESCRIPTION_LABEL" description="COM_MAPS_FIELD_MAPS_DESCRIPTION_DESC" />
+			<field name="maps_description" type="textarea" cols="30" rows="10" class="" label="COM_MAPS_FIELD_MAPS_DESCRIPTION_LABEL" description="COM_MAPS_FIELD_MAPS_DESCRIPTION_DESC" />
 		</fieldset>
 		<fieldset name="options">
 			<field name="published" type="radio" default="1" label="COM_MAPS_FIELD_PUBLISHED_LABEL" description="COM_MAPS_FIELD_PUBLISHED_DESC">
@@ -14,6 +14,10 @@
 				<option value="2">COM_MAPS_OPTION_VALUE_BOOLEAN_FALSE</option>
 			</field>
 			<field name="access" type="accesslevel" default="1" label="COM_MAPS_FIELD_ACCESS_LABEL" description="COM_MAPS_FIELD_ACCESS_DESC" />
+		</fieldset>
+		<fieldset name="metadata">
+			<field name="meta_keywords" type="textarea" cols="30" rows="10" class="" label="COM_MAPS_FIELD_MAPS_DESCRIPTION_LABEL" description="COM_MAPS_FIELD_MAPS_DESCRIPTION_DESC" />
+			<field name="meta_description" type="textarea" cols="30" rows="10" class="" label="COM_MAPS_FIELD_MAPS_DESCRIPTION_LABEL" description="COM_MAPS_FIELD_MAPS_DESCRIPTION_DESC" />
 		</fieldset>
 	</fields>
 	<fields name="params">

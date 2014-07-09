@@ -1,6 +1,8 @@
 <?php
 /**
- * @package		Google Maps
+ * Google Maps Main Controller
+ *
+ * @package		Subtext
  * @subpackage	Components
  * @license		GNU/GPL
  */
@@ -8,31 +10,25 @@
 // NO DIRECT ACCESS
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-// REQUIRE THE BASE CONTROLLER
+// DEFINE DS CONSTANT
+if(!defined('DS')) define( 'DS', DIRECTORY_SEPARATOR );
 
-require_once( JPATH_COMPONENT.DS.'controller.php' );
-
-// REQUIRE SPECIFIC CONTROLLER IF REQUESTED
-if($controller = JRequest::getVar('controller')) {
-	$path = JPATH_COMPONENT.DS.'controllers'.DS.$controller.'.php';
-	if (file_exists($path)) {
-		require_once $path;
-	} else {
-		$controller = '';
-	}
+// PRIVILEGE CHECK
+if(!JFactory::getUser()->authorise('core.manage', 'com_maps')){
+	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
 }
 
 // REQUIRE HELPER FILE
 JLoader::register('MapsHelper', dirname(__FILE__).DS.'helpers'.DS.'maps.php');
 
-// CREATE THE CONTROLLER
-$classname	= 'MapsController'.$controller;
-$controller	= new $classname( );
+// IMPORT CONTROLLER LIBRARY
+jimport('joomla.application.component.controller');
 
-// PERFORM THE REQUEST TASK
-if($controller->execute(JRequest::getVar( 'task' )) === false){
-	$controller->setRedirect("index.php?option=com_maps", $controller->getError(), "error");
-}
+// GET CONTROLLER INSTANCE
+$controller = JControllerLegacy::getInstance('Maps');
 
-// REDIRECT IF SET BY THE CONTROLLER
+// PERFORM THE REQUESTED TASK
+$controller->execute(JFactory::getApplication()->input->get('task'));
+
+// REDIRECT IF NECESSARY
 $controller->redirect();

@@ -1,8 +1,8 @@
 <?php
 /**
- * Google Maps Markers Controller
+ * Google Maps Map Controller
  *
- * @package		Google Maps
+ * @package		Subtext
  * @subpackage	Components
  * @license		GNU/GPL
  */
@@ -11,82 +11,94 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 // PRIVILEGE CHECK
-if(!JFactory::getUser()->authorise('core.manage', 'com_slideshow')){
+if(!JFactory::getUser()->authorise('core.manage', 'com_maps')){
 	return JError::raiseWarning(403, JText::_('JERROR_ALERTNOAUTHOR'));
 }
 
-// REQUIRE THE BASE CONTROLLER
+// IMPORT CONTROLLER LIBRARY
 jimport('joomla.application.component.controllerform');
 
-class MapsControllerMarkers extends JControllerForm
+class MapsControllerMaps extends JControllerForm
 {
 	/**
 	 * constructor (registers additional tasks to methods)
 	 * @return void
 	 */
-	function __construct()
+	public function __construct($config = array())
 	{
-		JRequest::setVar('layout', $layout);
- 		$this->view_item = 'markers';
- 		$this->view_list = 'markers';
+		$this->view_item = 'maps';
+		$this->view_list = 'maps';
 		parent::__construct();
-		// REGISTER EXTRA TASKS
+		// REGISTER CUSTOM TASKS
 		$this->registerTask('orderup', 'reorder');
 		$this->registerTask('orderdown', 'reorder');
 		$this->registerTask('unpublish', 'publish');
 	}
 	/**
-	 * Method for processing selection filter data
+	 * A convenience method for filtering lists.
 	 *
-	 * @access	public
-	 */
-	function filter(){
-		if(!JSession::checkToken('method')){
-			die("SECURITY BREACH");
-		}
-		$model = $this->getModel('Markers');
-		$model->getFilter();
-		$this->setRedirect("index.php?option=com_maps&controller=markers&view=markers");
-	}
-	/**
-	 * Method to delete a marker entity
-	 *
-	 * @access	public
-	 */
-	function delete(){
-		// CHECK FOR FORGERIES
-		if(!JRequest::checkToken('method')){
-			die("SECURITY BREACH");
-		}
-		// CHECK FOR USER AUTHORIZATION
-		$app 	= JFactory::getApplication();
-		$user	= JFactory::getUser();
-		if(!$user->authorise('core.delete', 'com_maps')){
-			$this->setRedirect("index.php?option=com_maps&view=markers", JText::_('JLIB_APPLICATION_ERROR_DELETE_NOT_PERMITTED'), 'error');
-			return false;
-		}
-		$cids = JRequest::getVar('cid', 0, 'request', 'array');
-		$model = $this->getModel('Markers');
-		$table = $model->getTable();
-		foreach($cids as $cid){
-			$table->load($cid);
-			$table->delete();
-		}
-		$this->setRedirect("index.php?option=com_maps&controller=markers&view=markers&layout=list", JText::_('COM_MAPS_MSG_SUCCESS_DELETE_MARKER'));
-	}
-	/**
-	 * Method to toggle the publish state of a marker entity
-	 * 
 	 * @return  void
 	 */
-	 function publish()
-	 {
+	public function filter()
+	{
+		$model = $this->getModel();
+		$model->getState();
+		$this->setRedirect(JRoute::_("index.php?option=com_maps&view=".$this->view_list, false));
+		return true;
+	}
+	/**
+	 * Removes an item.
+	 *
+	 * @return  void
+	 */
+	public function delete()
+	{
+		// CHECK FOR REQUEST FORGERIES
+		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
+
+		// GET ITEMS TO REMOVE FROM THE REQUEST.
+		$input = JFactory::getApplication()->input;
+		$cid = $input->get('cid', array(), 'array');
+
+		if (!is_array($cid) || count($cid) < 1)
+		{
+			JError::raiseWarning(500, JText::_('COM_MAPS_NO_ITEM_SELECTED'));
+		}
+		else
+		{
+			// GET THE MODEL.
+			$model = $this->getModel();
+
+			// MAKE SURE THE ITEM IDS ARE INTEGERS
+			jimport('joomla.utilities.arrayhelper');
+			JArrayHelper::toInteger($cid);
+
+			// REMOVE THE ITEMS.
+			if ($model->delete($cid))
+			{
+				$this->setMessage(JText::plural('COM_MAPS_N_ITEMS_DELETED', count($cid)));
+			}
+			else
+			{
+				$this->setMessage($model->getError());
+			}
+		}
+
+		$this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&view=' . $this->view_list, false));
+	}
+	/**
+	 * Method to publish a list of items
+	 *
+	 * @return  void
+	 */
+	public function publish()
+	{
 		// CHECK FOR REQUEST FORGERIES
 		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
 
 		// GET ITEMS TO PUBLISH FROM THE REQUEST.
 		$input = JFactory::getApplication()->input;
-		$cid = $input->get('cid', array(), '', 'array');
+		$cid = $input->get('cid', array(), 'array');
 		$data = array('publish' => 1, 'unpublish' => 0, 'archive' => 2, 'trash' => -2, 'report' => -3);
 		$task = $this->getTask();
 		$value = JArrayHelper::getValue($data, $task, 0, 'int');
@@ -129,10 +141,10 @@ class MapsControllerMarkers extends JControllerForm
 				$this->setMessage(JText::plural($ntext, count($cid)));
 			}
 		}
-		$extension = $input->get('extension', '', 'cmd');
+		$extension = $input->get('extension', null, 'cmd');
 		$extensionURL = ($extension) ? '&extension=' . $extension : '';
 		$this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&view=' . $this->view_list . $extensionURL, false));
-	 }
+	}
 	/**
 	 * Changes the order of one or more records.
 	 *
@@ -229,9 +241,40 @@ class MapsControllerMarkers extends JControllerForm
 		else
 		{
 			// CHECKIN SUCCEEDED.
-			$message = JText::plural('COM_SLIDESHOW_N_ITEMS_CHECKED_IN', count($ids));
+			$message = JText::plural('COM_MAPS_N_ITEMS_CHECKED_IN', count($ids));
 			$this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&view=' . $this->view_list, false), $message);
 			return true;
 		}
+	}
+	/**
+	 * Method to save the submitted ordering values for records via AJAX.
+	 *
+	 * @return  void
+	 *
+	 * @since   3.0
+	 */
+	public function saveOrderAjax()
+	{
+		// Get the input
+		$pks = $this->input->post->get('cid', array(), 'array');
+		$order = $this->input->post->get('order', array(), 'array');
+
+		// Sanitize the input
+		JArrayHelper::toInteger($pks);
+		JArrayHelper::toInteger($order);
+
+		// Get the model
+		$model = $this->getModel();
+
+		// Save the ordering
+		$return = $model->saveorder($pks, $order);
+
+		if ($return)
+		{
+			echo "1";
+		}
+
+		// Close the application
+		JFactory::getApplication()->close();
 	}
 }

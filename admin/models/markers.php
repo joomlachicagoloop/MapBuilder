@@ -97,7 +97,7 @@ class MapsModelMarkers extends JModelAdmin
 		$query->select("m.*, map.*, map.`attribs` AS `maps`");
 		$query->from("`{$row->getTableName()}` m");
 		$query->join("left", "`#__maps` map USING(`maps_id`)");
-		$query->where(`marker_id` = {$id});
+		$query->where("`marker_id` = {$id}");
 		
 		$db->setQuery($query);
 		$this->_data = $db->loadAssoc();

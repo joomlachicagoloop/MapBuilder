@@ -56,7 +56,6 @@
 			<filename>config.xml</filename>
 			<filename>controller.php</filename>
 			<folder>controllers</folder>
-			<folder>elements</folder>
 			<folder>helpers</folder>
 			<filename>index.html</filename>
 			<folder>javascript</folder>

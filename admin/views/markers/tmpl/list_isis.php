@@ -112,7 +112,7 @@
 		$k = 0;
 		for($i=0; $i < count($this->items); $i++){
 			$row		= $this->items[$i];
-			$checked	= JHtml::_('grid.id', $i, $row->maps_id);
+			$checked	= JHtml::_('grid.id', $i, $row->marker_id);
 			$link		= JRoute::_('index.php?option=com_maps&task=markers.edit&marker_id='. $row->marker_id.'&'.JSession::getFormToken().'=1');
 			$canCreate  = $user->authorise('core.create',     'com_maps');
 			$canEdit    = $user->authorise('core.edit',       'com_maps');

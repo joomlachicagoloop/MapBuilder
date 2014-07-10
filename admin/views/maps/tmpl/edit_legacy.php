@@ -1,11 +1,12 @@
 <?php
 	defined('_JEXEC') or die('Restricted access');
 	$document = JFactory::getDocument();
-	$document->addScript("http://maps.google.com/maps/api/js?sensor=false&amp;key={$api_key}");
-	$document->addScript("components".DS."com_maps".DS."javascript".DS."maps.js", "text/javascript", true);
+	$document->addScript("http://maps.google.com/maps/api/js?sensor=false");
+	$document->addScript("components/com_maps/javascript/maps.js", "text/javascript", true);
 	JHtml::_('behavior.modal');
 	JHtml::_('behavior.tooltip');
 	JHtml::_('behavior.formvalidation');
+	JHtml::_('behavior.keepalive');
 	$uri	= JURI::getInstance();
 	$base	= $uri->root();
 	$style	= "";
@@ -25,43 +26,43 @@
 		var re_slug = /^([\w-]+)$/;
 		var re_blank = /^(\W*)$/;
 		var re_float = /\d+$/;
-		if(sometask != 'cancel'){
-			if(!re_empty.test($('maps_name').value)){
-				$('maps_name').focus();
+		if(sometask != 'maps.cancel'){
+			if(!re_empty.test($('jform_maps_name').value)){
+				$('jform_maps_name').focus();
 				alert("Map Title is a required field");
 				return false;
 			}
-			if(!re_slug.test($('maps_alias').value)){
-				if(re_blank.test($('maps_alias').value)){
-					$('maps_alias').value = $('maps_name').value.replace(/\W/g, '-').toLowerCase();
+			if(!re_slug.test($('jform_maps_alias').value)){
+				if(re_blank.test($('jform_maps_alias').value)){
+					$('jform_maps_alias').value = $('jform_maps_name').value.replace(/\W/g, '-').toLowerCase();
 				}else{
-					$('maps_alias').focus();
+					$('jform_maps_alias').focus();
 					alert('The Alias is required for proper operation. It cannot be left blank. It must contain only letters, numbers, underscores, or dashes');
 					return false;
 				}
 			}
-			if(!re_float.test($('params_map_width').value)){
-				$('params_map_width').focus();
+			if(!re_float.test($('jform_params_map_width').value)){
+				$('jform_params_map_width').focus();
 				alert("Map Width is a required field");
 				return false;
 			}
-			if(!re_float.test($('params_map_height').value)){
-				$('params_map_height').focus();
+			if(!re_float.test($('jform_params_map_height').value)){
+				$('jform_params_map_height').focus();
 				alert("Map Height is a required field");
 				return false;
 			}
-			if(!re_float.test($('params_center_lat').value)){
-				$('params_center_lat').focus();
+			if(!re_float.test($('jform_params_center_lat').value)){
+				$('jform_params_center_lat').focus();
 				alert("Center Latitude is a required field");
 				return false;
 			}
-			if(!re_float.test($('params_center_lng').value)){
-				$('params_center_lng').focus();
+			if(!re_float.test($('jform_params_center_lng').value)){
+				$('jform_params_center_lng').focus();
 				alert("Center Longitude is a required field");
 				return false;
 			}
-			if(!re_float.test($('params_zoom').value)){
-				$('params_zoom').focus();
+			if(!re_float.test($('jform_params_zoom').value)){
+				$('jform_params_zoom').focus();
 				alert("Zoom Level is a required field");
 				return false;
 			}
@@ -72,7 +73,7 @@
 	}
 //]]>
 </script>
-<form action="<?php echo JRoute::_('index.php'); ?>" method="post" name="adminForm" enctype="multipart/form-data">
+<form action="<?php echo JRoute::_('index.php'); ?>" method="post" name="adminForm" id="adminForm" enctype="multipart/form-data">
 	<input type="hidden" name="option" value="com_maps" />
 	<input type="hidden" name="task" value="" />
 	<input type="hidden" name="hidemainmenu" value="0" />

@@ -6,23 +6,6 @@
 	JHtml::_('behavior.tooltip');
 ?>
 
-<script type="text/javascript">
-//<![CDATA[
-	$each($$('span.icon-32-delete'), function(someElement, someIndex){
-		someElement.getParent().onclick = function(){
-			if(document.adminForm.boxchecked.value == 0){
-				alert('Please make a selection from the list to delete');
-				return false;
-			}
-			var confirmation = confirm('Are you sure you want to delete the selected markers? This action cannot be undone!');
-			if(confirmation){
-				submitbutton('remove');
-			}
-			return false;
-		}
-	});
-//]]>
-</script>
 <form action="index.php" method="post" name="adminForm">
 	<input type="hidden" name="option" value="com_maps" />
 	<input type="hidden" name="controller" value="markers" />
@@ -83,8 +66,13 @@
 		$k = 0;
 		for($i=0; $i < count($this->items); $i++){
 			$row		= $this->items[$i];
-			$checked	= JHTML::_('grid.id', $i, $row->marker_id );
-			$link		= JRoute::_( 'index.php?option=com_maps&controller=markers&view=markers&task=edit&cid[]='. $row->marker_id.'&'.JUtility::getToken().'=1');
+			$checked	= JHtml::_('grid.id', $i, $row->marker_id);
+			$link		= JRoute::_('index.php?option=com_maps&task=markers.edit&marker_id='. $row->marker_id.'&'.JSession::getFormToken().'=1');
+			$canCreate  = $user->authorise('core.create',     'com_maps');
+			$canEdit    = $user->authorise('core.edit',       'com_maps');
+			$canCheckin = $user->authorise('core.manage',     'com_checkin') || $row->checked_out == $user_id || $row->checked_out == 0;
+			$canEditOwn = $user->authorise('core.edit.own',   'com_maps');
+			$canChange  = $user->authorise('core.edit.state', 'com_maps') && $canCheckin;
 			?>
 			<tr class="row<? echo $k; ?>">
 				<td>
@@ -95,10 +83,15 @@
 				</td>
 				<td>
 					<?
-					if(JTable::isCheckedOut($user->get('id'), $row->checked_out)){
-						echo JText::_( $row->marker_name);
+					if($row->checked_out){
+						echo JHtml::_('jgrid.checkedout', $i, $row->editor, $row->checked_out_time, 'markers.', $canCheckin);
+						echo "<span class=\"title\">".JText::_( $row->marker_name)."</span>";
 					}else{
-						echo "<a href=\"{$link}\">" . $row->marker_name . "</a>";
+						if($canEdit || $canEditOwn){
+							echo "<a href=\"{$link}\">" . htmlspecialchars($row->marker_name, ENT_QUOTES) . "</a>";
+						}else{
+							echo "<span class=\"title\">".JText::_( $row->marker_name)."</span>";
+						}
 					}
 					?>
 				</td>
@@ -106,11 +99,11 @@
 					<? echo ($row->maps_name) ? $row->maps_name : "none"; ?>
 				</td>
 				<td align="center">
-					<?php echo JHtml::_('jgrid.published', $row->published, $i, '', true, 'cb'); ?>
+					<?php echo JHtml::_('jgrid.published', $row->published, $i, 'markers.', true, 'cb'); ?>
 				</td>
 				<td class="order">
-					<span><? echo $this->page->orderUpIcon( $i, ($i > 0), 'orderup', 'Move Up'); ?></span>
-					<span><? echo $this->page->orderDownIcon( $i, count($this->items), true, 'orderdown', 'Move Down'); ?></span>
+					<span><? echo $this->page->orderUpIcon( $i, ($i > 0), 'markers.orderup', 'Move Up'); ?></span>
+					<span><? echo $this->page->orderDownIcon( $i, count($this->items), true, 'markers.orderdown', 'Move Down'); ?></span>
 					<input type="text" name="order[]" size="5" value="<? echo $row->ordervalue; ?>" class="text_area" style="text-align: center" />
 				</td>
 				<td>

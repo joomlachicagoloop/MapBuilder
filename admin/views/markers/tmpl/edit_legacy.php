@@ -4,7 +4,7 @@
 	$base	= $uri->root();
 	JHtml::_('behavior.keepalive');
 	$document = JFactory::getDocument();
-	$document->addScript("http://maps.google.com/maps/api/js?sensor=false&amp;key={$api_key}");
+	$document->addScript("http://maps.google.com/maps/api/js?sensor=false");
 	$document->addScript("components".DS."com_maps".DS."javascript".DS."markers.js", "text/javascript", true);
 ?>
 
@@ -16,23 +16,23 @@
 		var re_slug = /^([\w-]+)$/;
 		var re_blank = /^(\W*)$/;
 		var re_coord = /\d+$/;
-		if(sometask != 'cancel'){
-			if(!re_empty.test($('marker_name').value)){
-				$('marker_name').focus();
+		if(sometask != 'markers.cancel'){
+			if(!re_empty.test($('jform_marker_name').value)){
+				$('jform_marker_name').focus();
 				alert("Marker Name is a required field");
 				return false;
 			}
-			if(!re_slug.test($('marker_alias').value)){
-				if(re_blank.test($('marker_alias').value)){
-					$('marker_alias').value = $('marker_name').value.replace(/\W/g, '-').toLowerCase();
+			if(!re_slug.test($('jform_marker_alias').value)){
+				if(re_blank.test($('jform_marker_alias').value)){
+					$('jform_marker_alias').value = $('jform_marker_name').value.replace(/\W/g, '-').toLowerCase();
 				}else{
-					$('marker_alias').focus();
+					$('jform_marker_alias').focus();
 					alert('The Alias is required for proper operation. It cannot be left blank. It must contain only letters, numbers, underscores, or dashes');
 					return false;
 				}
 			}
-			if(!re_coord.test($('marker_lat').value)){
-				$('marker_lat').focus();
+			if(!re_coord.test($('jform_marker_lat').value)){
+				$('jform_marker_lat').focus();
 				alert("Latitude must not be blank. Click the map to drop a marker and drag to adjust coordinates.");
 				return false;
 			}

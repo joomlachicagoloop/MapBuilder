@@ -26,7 +26,6 @@ class MapsControllerMarkers extends JControllerForm
 	 */
 	function __construct()
 	{
-		JRequest::setVar('layout', $layout);
  		$this->view_item = 'markers';
  		$this->view_list = 'markers';
 		parent::__construct();

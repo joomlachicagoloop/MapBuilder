@@ -1,8 +1,11 @@
 <?php
 	// NO DIRECT ACCESS
 	defined( '_JEXEC' ) or die( 'Restricted access' );
+	// LOAD THE MOOTOOLS FRAMEWORK
+	JHtmlBehavior::framework();
 	// SET DOCUMENT HEAD FOR PAGE
 	$document = JFactory::getDocument();
+	$document->addScript("//www.google.com/jsapi");
 	$document->addScript("components/com_maps/javascript/maps.js", "text/javascript", true);
 	if(trim($this->map->meta_keywords)){
 		$document->setMetaData('keywords', $this->map->meta_keywords);

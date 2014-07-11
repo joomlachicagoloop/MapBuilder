@@ -12,7 +12,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 jimport('joomla.application.component.controller');
 
-class MapsController extends JController
+class MapsController extends JControllerLegacy
 {
 	/**
 	 * constructor (registers additional tasks to methods)
@@ -23,21 +23,5 @@ class MapsController extends JController
 		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS."tables");
  		jimport('joomla.filesystem.file');
 		parent::__construct();
-	}
-
-	/**
-	 * Method to display the view
-	 *
-	 * @access	public
-	 */
-	function display()
-	{
-		$document		= JFactory::getDocument();
-		$view_type		= $document->getType();
-		$view_name		= JRequest::getCmd('view', $this->getName());
-		$view_layout	= JRequest::getCmd('layout', 'default');
-		$user			= JFactory::getUser();
-		
-		parent::display();
 	}
 }

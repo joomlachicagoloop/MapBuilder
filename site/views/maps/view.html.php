@@ -10,7 +10,7 @@
 
 jimport( 'joomla.application.component.view');
 
-class MapsViewMaps extends JView
+class MapsViewMaps extends JViewLegacy
 {
 	function display($tpl = null)
 	{
@@ -22,7 +22,7 @@ class MapsViewMaps extends JView
 		default:
 			$this->map = $this->get('Map');
 			$params = new JRegistry();
-			$params->loadINI($this->map->attribs);
+			$params->loadString($this->map->attribs);
 			$this->params = $params;
 		}
 		parent::display($tpl);

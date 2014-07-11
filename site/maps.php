@@ -9,7 +9,10 @@
  
 // NO DIRECT ACCESS
 defined( '_JEXEC' ) or die( 'Restricted access' );
- 
+
+// DEFINE DS CONSTANT
+if(!defined('DS')) define( 'DS', DIRECTORY_SEPARATOR );
+
 // REQUIRE THE BASE CONTROLLER
 require_once( JPATH_COMPONENT.DS.'controller.php' );
  

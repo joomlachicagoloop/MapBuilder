@@ -12,7 +12,7 @@ defined('_JEXEC') or die();
 
 jimport( 'joomla.application.component.model' );
 
-class MapsModelMaps extends JModel
+class MapsModelMaps extends JModelLegacy
 {
 	function __construct(){
 		$user	= JFactory::getUser();
@@ -30,20 +30,18 @@ class MapsModelMaps extends JModel
 		$levels = implode(",", array_unique($user->getAuthorisedViewLevels()));
 		$id		= JRequest::getInt('id', 0, 'get');
 		$table	= $this->getTable('Markers');
-		$sql 	= "SELECT `marker_id` ".
-		"FROM `#__maps_marker` ".
-		"WHERE `maps_id` = {$id} AND `published` = 1 AND `access` IN ({$levels}) ".
-		"ORDER BY `ordering`";
+		$sql    = $this->_db->getQuery(true);
+		
+		$sql->select("*");
+		$sql->from($this->_db->quoteName($table->getTableName()));
+		$sql->where("`maps_id` = {$id}");
+		$sql->where("`published` = 1");
+		$sql->where("`access` IN ({$levels})");
+		$sql->order("`ordering`");
 		$this->_db->setQuery($sql);
-		if($result = $this->_db->loadResultArray()){
-			$data = "";
-			foreach($result as $mid){
-				$table->load($mid);
-				$data .= $table->toXML();
-			}
-			return $data;
+		if($result = $this->_db->loadObjectList()){
+			return $result;
 		}else{
-			echo "<error></error>";
 			return false;
 		}
 	}

@@ -40,9 +40,8 @@ class MapsControllerMarkers extends JControllerForm
 	 * @access	public
 	 */
 	function filter(){
-		if(!JSession::checkToken('method')){
-			die("SECURITY BREACH");
-		}
+		// CHECK FOR REQUEST FORGERIES
+		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
 		$model = $this->getModel('Markers');
 		//$model->getState();
 		$this->setRedirect("index.php?option=com_maps&controller=markers&view=markers");
@@ -53,10 +52,8 @@ class MapsControllerMarkers extends JControllerForm
 	 * @access	public
 	 */
 	function delete(){
-		// CHECK FOR FORGERIES
-		if(!JRequest::checkToken('method')){
-			die("SECURITY BREACH");
-		}
+		// CHECK FOR REQUEST FORGERIES
+		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
 		// CHECK FOR USER AUTHORIZATION
 		$app 	= JFactory::getApplication();
 		$user	= JFactory::getUser();

@@ -41,6 +41,8 @@ class MapsControllerMaps extends JControllerForm
 	 */
 	public function filter()
 	{
+		// CHECK FOR REQUEST FORGERIES
+		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
 		$model = $this->getModel();
 		$model->getState();
 		$this->setRedirect(JRoute::_("index.php?option=com_maps&view=".$this->view_list, false));

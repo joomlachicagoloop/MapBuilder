@@ -45,7 +45,7 @@ class MapsControllerMarkers extends JControllerForm
 			die("SECURITY BREACH");
 		}
 		$model = $this->getModel('Markers');
-		$model->getFilter();
+		//$model->getState();
 		$this->setRedirect("index.php?option=com_maps&controller=markers&view=markers");
 	}
 	/**

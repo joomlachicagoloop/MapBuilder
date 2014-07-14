@@ -29,7 +29,7 @@ class TableMaps extends JTable
 	/** @var int */
 	var $access				= null;
 
-	function TableMaps(&$db){
+	public function __construct(&$db){
 		parent::__construct('#__maps', 'maps_id', $db);
 	}
 	

@@ -78,7 +78,6 @@
 	<input type="hidden" name="task" value="" />
 	<input type="hidden" name="hidemainmenu" value="0" />
 	<input type="hidden" name="maps_id" value="<? echo $this->form->getValue('maps_id'); ?>" />
-	<input type="hidden" name="ordering" value="<? echo $this->form->getValue('ordering'); ?>" />
 	<? echo JHTML::_('form.token')."\n"; ?>
 	<div id="editcell">
 		<div class="width-60 fltlft">

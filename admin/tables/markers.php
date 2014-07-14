@@ -45,5 +45,21 @@ class TableMarkers extends JTable
 		}
 		return parent::bind($array, $ignore);
 	}
+	
+	public function check(){
+		// ASSIGN ORDERING IF NECESSARY
+		if(is_null($this->ordering)){
+			$this->ordering = $this->getNextOrder("maps_id = {$this->maps_id}");
+		}
+		return true;
+	}
+	
+	public function store($updateNulls = false){
+		if(!parent::store($updateNulls)){
+			return false;
+		}
+		$this->reorder("maps_id = {$this->maps_id}");
+		return true;
+	}
 }
 ?>

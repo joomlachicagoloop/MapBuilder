@@ -43,5 +43,21 @@ class TableMaps extends JTable
 		}
 		return parent::bind($array, $ignore);
 	}
+	
+	public function check(){
+		// ASSIGN ORDERING IF NECESSARY
+		if(is_null($this->ordering)){
+			$this->ordering = $this->getNextOrder();
+		}
+		return true;
+	}
+	
+	public function store($updateNulls = false){
+		if(!parent::store($updateNulls)){
+			return false;
+		}
+		$this->reorder();
+		return true;
+	}
 }
 ?>

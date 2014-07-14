@@ -50,7 +50,6 @@
 	<input type="hidden" name="task" value="" />
 	<input type="hidden" name="hidemainmenu" value="0" />
 	<input type="hidden" name="marker_id" value="<? echo $this->data->marker_id; ?>" />
-	<input type="hidden" name="ordering" value="<? echo $this->data->ordering; ?>" />
 	<? echo JHTML::_('form.token')."\n"; ?>
 	<div id="editcell">
 		<div class="width-60 fltlft">

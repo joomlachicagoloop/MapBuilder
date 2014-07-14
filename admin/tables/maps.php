@@ -33,7 +33,7 @@ class TableMaps extends JTable
 		parent::__construct('#__maps', 'maps_id', $db);
 	}
 	
-	function bind($array, $ignore=''){
+	public function bind($array, $ignore=''){
 		if(key_exists('params', $array)){
 			if(is_array($array['params'])){
 				$registry = new JRegistry();

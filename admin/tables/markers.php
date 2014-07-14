@@ -35,7 +35,7 @@ class TableMarkers extends JTable
 		parent::__construct('#__maps_marker', 'marker_id', $db);
 	}
 	
-	function bind($array, $ignore=''){
+	public function bind($array, $ignore=''){
 		if(key_exists('params', $array)){
 			if(is_array($array['params'])){
 				$registry = new JRegistry();

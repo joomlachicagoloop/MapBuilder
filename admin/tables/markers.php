@@ -62,4 +62,3 @@ class TableMarkers extends JTable
 		return true;
 	}
 }
-?>

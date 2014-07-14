@@ -60,4 +60,3 @@ class TableMaps extends JTable
 		return true;
 	}
 }
-?>

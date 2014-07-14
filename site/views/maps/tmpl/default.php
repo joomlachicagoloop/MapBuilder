@@ -2,7 +2,7 @@
 	// NO DIRECT ACCESS
 	defined( '_JEXEC' ) or die( 'Restricted access' );
 	// LOAD THE MOOTOOLS FRAMEWORK
-	JHtmlBehavior::framework();
+	JHtml::_('behavior.framework');
 	// SET DOCUMENT HEAD FOR PAGE
 	$document = JFactory::getDocument();
 	$document->addScript("//www.google.com/jsapi");

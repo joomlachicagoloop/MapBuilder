@@ -65,6 +65,39 @@ class com_mapsInstallerScript
 	 * UPDATE
 	 */
 	public function update( $parent ) {
+		if(version_compare($this->release, "1.0", 'le')){
+		    $db     = JFactory::getDbo();
+		    $sql    = $db->getQuery(true);
+		    $ini    = new JRegistry();
+		    
+		    $sql->select("`maps_id`, `attribs`");
+		    $sql->from("`#__maps`");
+		    
+		    $db->setQuery($sql);
+		    foreach($db->loadObjectList() as $record){
+		        $ini->loadString($record->attribs, 'INI');
+		        $value = $ini->toString('JSON');
+		        $db->setQuery("UPDATE `#__maps` SET `attribs` = '{$value}' WHERE `maps_id` = {$record->maps_id}");
+		        $db->query();
+		    }
+		    
+		    $sql->clear();
+		    $sql->select("`marker_id`, `attribs`");
+		    $sql->from("`#__maps_marker`");
+		    
+		    $db->setQuery($sql);
+		    foreach($db->loadObjectList() as $record){
+		        $ini->loadString($record->attribs, 'INI');
+		        $value = $ini->toString('JSON');
+		        $db->setQuery("UPDATE `#__maps_marker` SET `attribs` = '{$value}' WHERE `marker_id` = {$record->marker_id}");
+		        $db->query();
+		    }
+		    
+		    $db->setQuery("ALTER TABLE `#__maps` ENGINE=InnoDB");
+		    if(!$db->query()) return false;
+		    $db->setQuery("ALTER TABLE `#__maps_marker` ENGINE=InnoDB");
+		    if(!$db->query()) return false;
+		}
 		$this->install_status = "updated";
 		return '<p>' . JText::sprintf('COM_MAPS_MSG_SUCCESS_UPDATE', $this->release) . '</p>';
 	}

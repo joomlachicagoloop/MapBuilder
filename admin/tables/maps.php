@@ -38,7 +38,7 @@ class TableMaps extends JTable
 			if(is_array($array['params'])){
 				$registry = new JRegistry();
 				$registry->loadArray($array['params']);
-				$array['attribs'] = $registry->toString('INI');
+				$array['attribs'] = $registry->toString();
 			}
 		}
 		return parent::bind($array, $ignore);

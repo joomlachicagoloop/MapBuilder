@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="component" version="1.7" method="update">
+<extension type="component" version="1.7" method="upgrade">
 	<name>COM_MAPS</name>
 	<creationDate>2010-11-01</creationDate>
 	<author>Alonzo Turner</author>
@@ -7,7 +7,7 @@
 	<authorUrl>http://www.subtextproductions.com</authorUrl>
 	<copyright>Copyright 2007 - 2012 Subtext Productions</copyright>
 	<license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
-	<version>0.5</version>
+	<version>1.0</version>
 	<description><![CDATA[COM_MAPS_COMPONENT_DESCRIPTION]]></description>
 	<scriptfile>install.php</scriptfile>
 	<files folder="site">

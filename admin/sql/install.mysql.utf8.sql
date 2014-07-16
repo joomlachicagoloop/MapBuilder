@@ -15,7 +15,7 @@ CREATE TABLE `#__maps` (
 	`user_id` INT(11) UNSIGNED DEFAULT 0,
 	PRIMARY KEY (`maps_id`),
 	KEY `user_id` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `#__maps_marker`;
 CREATE TABLE `#__maps_marker` (
@@ -34,4 +34,4 @@ CREATE TABLE `#__maps_marker` (
 	`maps_id` INT(11) UNSIGNED DEFAULT NULL,
 	PRIMARY KEY (`marker_id`),
 	KEY `maps_id` (`maps_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;

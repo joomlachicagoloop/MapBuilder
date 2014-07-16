@@ -2,8 +2,9 @@
 /**
  * Google Maps Installer Script
  *
- * @package		Slideshow
+ * @package		Google Maps
  * @subpackage	Components
+ * @license     GNU/GPLv3
  */
 
 // NO DIRECT ACCESS
@@ -125,6 +126,8 @@ class com_mapsInstallerScript
 	 * UNINSTALL
 	 */
 	public function uninstall($parent){
+		if(!isset($this->release)) $this->release = '1.0';
+		echo '<p>' . JText::sprintf('COM_MAPS_MSG_SUCCESS_UNINSTALL', $this->release) . '</p>';
 	}
  
 	/*

@@ -6,15 +6,15 @@
 	$user = JFactory::getUser();
 	$user_id = $user->get('id');
 	$sortFields = array();
-	$sortFields['maps_name'] = JText::_('COM_MAPS_LIST_MAP_NAME_LABEL');
-	$sortFields['published'] = JText::_('COM_MAPS_LIST_PUBLISHED_LABEL');
-	$sortFields['ordering'] = JText::_('COM_MAPS_LIST_ORDERING_LABEL');
-	$sortFields['s.access'] = JText::_('COM_MAPS_LIST_ACCESS_LABEL');
-	$sortFields['maps_id'] = JText::_('COM_MAPS_LIST_ID_LABEL');
+	$sortFields['map_name'] = JText::_('COM_MAPBUILDER_LIST_MAP_NAME_LABEL');
+	$sortFields['published'] = JText::_('COM_MAPBUILDER_LIST_PUBLISHED_LABEL');
+	$sortFields['ordering'] = JText::_('COM_MAPBUILDER_LIST_ORDERING_LABEL');
+	$sortFields['s.access'] = JText::_('COM_MAPBUILDER_LIST_ACCESS_LABEL');
+	$sortFields['map_id'] = JText::_('COM_MAPBUILDER_LIST_ID_LABEL');
 	$saveOrder = $this->filter->filter_order == 'ordering';
 	if ($saveOrder)
 	{
-		$saveOrderingUrl = 'index.php?option=com_maps&task=maps.saveOrderAjax&tmpl=component';
+		$saveOrderingUrl = 'index.php?option=com_mapbuilder&task=maps.saveOrderAjax&tmpl=component';
 		JHtml::_('sortablelist.sortable', 'data-table', 'adminForm', strtolower($this->filter->filter_order_Dir), $saveOrderingUrl);
 	}
 	$this->sidebar = JHtmlSidebar::render();
@@ -52,7 +52,7 @@
                 <?php echo $this->page->getLimitBox(); ?>
             </div>
             <div class="btn-group pull-right hidden-phone">
-                <label for="directionTable" class="element-invisible"><?php echo JText::_('COM_MAPS_LIST_ORDERING_LABEL');?></label>
+                <label for="directionTable" class="element-invisible"><?php echo JText::_('COM_MAPBUILDER_LIST_ORDERING_LABEL');?></label>
                 <select name="directionTable" id="directionTable" class="input-medium" onchange="Joomla.orderTable()">
                     <option value=""><?php echo JText::_('JFIELD_ORDERING_DESC');?></option>
                     <option value="asc" <?php if ($this->filter->filter_order_Dir == 'asc') echo 'selected="selected"'; ?>><?php echo JText::_('JGLOBAL_ORDER_ASCENDING');?></option>
@@ -67,14 +67,14 @@
                 </select>
             </div>
             <div class="btn-group pull-left">
-                <input type="text" name="filter_search" id="filter-search_" class="input-large" placeholder="<?php echo JText::_('COM_MAPS_FILTER_MAPS_SEARCH_LABEL'); ?>" value="<?php echo $this->filter->filter_search; ?>" />
+                <input type="text" name="filter_search" id="filter-search_" class="input-large" placeholder="<?php echo JText::_('COM_MAPBUILDER_FILTER_MAPS_SEARCH_LABEL'); ?>" value="<?php echo $this->filter->filter_search; ?>" />
             </div>
             <div class="btn-group pull-left">
                 <input type="button" class="btn" name="submit_button" id="submit-button_" value="Go" onclick="document.forms.adminForm.task.value='filter';document.forms.adminForm.submit();"/>
                 <input type="button" class="btn" name="reset_button" id="reset-button_" value="Reset" onclick="document.forms.adminForm.filter_search.value='';document.forms.adminForm.task.value='filter';document.forms.adminForm.submit();"/>
             </div>
         </div>
-        <input type="hidden" name="option" value="com_maps" />
+        <input type="hidden" name="option" value="com_mapbuilder" />
         <input type="hidden" name="task" value="maps.filter" />
         <input type="hidden" name="chosen" value="" />
         <input type="hidden" name="boxchecked" value="0" />
@@ -91,19 +91,19 @@
                         <input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(this)" />
                     </th>
                     <th width="5%" class="nowrap">
-                        <?php echo JHtml::_('grid.sort', 'COM_MAPS_LIST_PUBLISHED_LABEL', 'published', $this->filter->filter_order_Dir, $this->filter->filter_order, 'maps.filter'); ?>
+                        <?php echo JHtml::_('grid.sort', 'COM_MAPBUILDER_LIST_PUBLISHED_LABEL', 'published', $this->filter->filter_order_Dir, $this->filter->filter_order, 'maps.filter'); ?>
                     </th>
                     <th class="title" class="nowrap">
-                        <?php echo JHtml::_('grid.sort', 'COM_MAPS_LIST_MAP_NAME_LABEL', 'maps_name', $this->filter->filter_order_Dir, $this->filter->filter_order, 'maps.filter'); ?>
+                        <?php echo JHtml::_('grid.sort', 'COM_MAPBUILDER_LIST_MAP_NAME_LABEL', 'map_name', $this->filter->filter_order_Dir, $this->filter->filter_order, 'maps.filter'); ?>
                     </th>
                     <th class="nowrap">
-                        <?php echo JHtml::_('grid.sort', 'COM_MAPS_LIST_ACCESS_LABEL', 's.access', $this->filter->filter_order_Dir, $this->filter->filter_order, 'maps.filter'); ?>
+                        <?php echo JHtml::_('grid.sort', 'COM_MAPBUILDER_LIST_ACCESS_LABEL', 's.access', $this->filter->filter_order_Dir, $this->filter->filter_order, 'maps.filter'); ?>
                     </th>
                     <th>
-                        <?php echo JText::_('COM_MAPS_LIST_DESCRIPTION_LABEL'); ?>
+                        <?php echo JText::_('COM_MAPBUILDER_LIST_DESCRIPTION_LABEL'); ?>
                     </th>
                     <th width="1%">
-                        <?php echo JHtml::_('grid.sort', 'COM_MAPS_LIST_ID_LABEL', 'maps_id', $this->filter->filter_order_Dir, $this->filter->filter_order, 'maps.filter'); ?>
+                        <?php echo JHtml::_('grid.sort', 'COM_MAPBUILDER_LIST_ID_LABEL', 'map_id', $this->filter->filter_order_Dir, $this->filter->filter_order, 'maps.filter'); ?>
                     </th>
                 </tr>
             </thead>
@@ -112,13 +112,13 @@
             $k = 0;
             for($i=0; $i < count($this->items); $i++){
                 $row		= $this->items[$i];
-                $checked	= JHtml::_('grid.id', $i, $row->maps_id);
-                $link		= JRoute::_('index.php?option=com_maps&task=maps.edit&maps_id='. $row->maps_id.'&'.JSession::getFormToken().'=1');
-                $canCreate  = $user->authorise('core.create',     'com_maps');
-                $canEdit    = $user->authorise('core.edit',       'com_maps');
+                $checked	= JHtml::_('grid.id', $i, $row->map_id);
+                $link		= JRoute::_('index.php?option=com_mapbuilder&task=maps.edit&map_id='. $row->map_id.'&'.JSession::getFormToken().'=1');
+                $canCreate  = $user->authorise('core.create',     'com_mapbuilder');
+                $canEdit    = $user->authorise('core.edit',       'com_mapbuilder');
                 $canCheckin = $user->authorise('core.manage',     'com_checkin') || $row->checked_out == $user_id || $row->checked_out == 0;
-                $canEditOwn = $user->authorise('core.edit.own',   'com_maps');
-                $canChange  = $user->authorise('core.edit.state', 'com_maps') && $canCheckin;
+                $canEditOwn = $user->authorise('core.edit.own',   'com_mapbuilder');
+                $canChange  = $user->authorise('core.edit.state', 'com_mapbuilder') && $canCheckin;
                 ?>
                 <tr class="row<?php echo $k; ?>" sortable-group-id="">
                     <td class="order nowrap center hidden-phone">
@@ -150,12 +150,12 @@
                         <?php
                         if($row->checked_out){
                             echo JHtml::_('jgrid.checkedout', $i, $row->editor, $row->checked_out_time, 'maps.', $canCheckin);
-                            echo "<span class=\"title\">".JText::_( $row->maps_name)."</span>";
+                            echo "<span class=\"title\">".JText::_( $row->map_name)."</span>";
                         }else{
                             if($canEdit || $canEditOwn){
-                                echo "<a href=\"{$link}\">" . htmlspecialchars($row->maps_name, ENT_QUOTES) . "</a>";
+                                echo "<a href=\"{$link}\">" . htmlspecialchars($row->map_name, ENT_QUOTES) . "</a>";
                             }else{
-                                echo "<span class=\"title\">".JText::_( $row->maps_name)."</span>";
+                                echo "<span class=\"title\">".JText::_( $row->map_name)."</span>";
                             }
                         }
                         ?>
@@ -164,10 +164,10 @@
                         <?php echo $row->access; ?>
                     </td>
                     <td>
-                        <?php $words = explode(" ", strip_tags($row->maps_description)); echo implode(" ", array_splice($words, 0, 55)); ?>
+                        <?php $words = explode(" ", strip_tags($row->map_description)); echo implode(" ", array_splice($words, 0, 55)); ?>
                     </td>
                     <td>
-                        <?php echo $row->maps_id; ?>
+                        <?php echo $row->map_id; ?>
                     </td>
                 </tr>
                 <?php

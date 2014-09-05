@@ -5,13 +5,13 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 class TableMaps extends JTable
 {
 	/** @var int Primary Key */
-	var $maps_id			= null;
+	var $map_id			= null;
 	/** @var string SEO Alias */
-	var $maps_alias			= null;
+	var $map_alias			= null;
 	/** @var string Maps Name */
-	var $maps_name			= null;
+	var $map_name			= null;
 	/** @var string Maps Description */
-	var $maps_description	= null;
+	var $map_description	= null;
 	/** @var string Text field for storage of JParameter */
 	var $attribs			= null;
 	/** @var string Meta Description */
@@ -30,7 +30,7 @@ class TableMaps extends JTable
 	var $access				= null;
 
 	public function __construct(&$db){
-		parent::__construct('#__maps', 'maps_id', $db);
+		parent::__construct('#__mapbuilder_maps', 'map_id', $db);
 	}
 	
 	public function bind($array, $ignore=''){

@@ -12,7 +12,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 jimport( 'joomla.application.component.view' );
 
-class MapsViewMarkers extends JViewLegacy
+class MapBuilderViewMarkers extends JViewLegacy
 {
 	/**
 	 * Markers view display method
@@ -25,11 +25,11 @@ class MapsViewMarkers extends JViewLegacy
 		$this->setLayout($layout);
 		switch($layout){
 		case "list":
-		    MapsHelper::addSubmenu('markers');
+		    MapBuilderHelper::addSubmenu('markers');
 			JToolBarHelper::title(JText::_('Manage Map Markers'), 'generic.png');
 			JToolBarHelper::addNew('markers.add', 'JTOOLBAR_NEW');
 			JToolBarHelper::editList('markers.edit', 'JTOOLBAR_EDIT', true);
-			JToolBarHelper::deleteList(JText::_('COM_MAPS_MSG_DELETE_CONFIRM'), 'markers.delete', 'JTOOLBAR_DELETE', true);
+			JToolBarHelper::deleteList(JText::_('COM_MAPBUILDER_MSG_DELETE_CONFIRM'), 'markers.delete', 'JTOOLBAR_DELETE', true);
 			// GET DATA FROM THE MODEL
 			$this->maps		= $this->get('Maps');
 			$this->filter	= $this->get('State');

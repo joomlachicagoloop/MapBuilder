@@ -2,33 +2,33 @@
 <form>
 	<fields>
 		<fieldset name="base">
-			<field name="maps_id" type="hidden" class="validate-numeric" />
+			<field name="map_id" type="hidden" class="validate-numeric" />
 			<field name="ordering" type="hidden" class="validate-numeric" />
-			<field name="maps_name" type="text" class="inputbox" required="true" label="COM_MAPS_FIELD_MAPS_NAME_LABEL" description="COM_MAPS_FIELD_MAPS_NAME_DESC" />
-			<field name="maps_alias" type="text" class="inputbox" required="true" label="COM_MAPS_FIELD_MAPS_ALIAS_LABEL" description="COM_MAPS_FIELD_MAPS_ALIAS_DESC" />
-			<field name="maps_description" type="textarea" cols="30" rows="10" class="" label="COM_MAPS_FIELD_MAPS_DESCRIPTION_LABEL" description="COM_MAPS_FIELD_MAPS_DESCRIPTION_DESC" />
+			<field name="map_name" type="text" class="inputbox" required="true" label="COM_MAPBUILDER_FIELD_MAPS_NAME_LABEL" description="COM_MAPBUILDER_FIELD_MAPS_NAME_DESC" />
+			<field name="map_alias" type="text" class="inputbox" required="true" label="COM_MAPBUILDER_FIELD_MAPS_ALIAS_LABEL" description="COM_MAPBUILDER_FIELD_MAPS_ALIAS_DESC" />
+			<field name="map_description" type="textarea" cols="30" rows="10" class="" label="COM_MAPBUILDER_FIELD_MAPS_DESCRIPTION_LABEL" description="COM_MAPBUILDER_FIELD_MAPS_DESCRIPTION_DESC" />
 		</fieldset>
 		<fieldset name="options">
-			<field name="published" type="radio" class="btn-group radio" default="1" label="COM_MAPS_FIELD_PUBLISHED_LABEL" description="COM_MAPS_FIELD_PUBLISHED_DESC">
-				<option value="1">COM_MAPS_OPTION_VALUE_BOOLEAN_TRUE</option>
-				<option value="2">COM_MAPS_OPTION_VALUE_BOOLEAN_FALSE</option>
+			<field name="published" type="radio" class="btn-group radio" default="1" label="COM_MAPBUILDER_FIELD_PUBLISHED_LABEL" description="COM_MAPBUILDER_FIELD_PUBLISHED_DESC">
+				<option value="1">COM_MAPBUILDER_OPTION_VALUE_BOOLEAN_TRUE</option>
+				<option value="2">COM_MAPBUILDER_OPTION_VALUE_BOOLEAN_FALSE</option>
 			</field>
-			<field name="access" type="accesslevel" default="1" label="COM_MAPS_FIELD_ACCESS_LABEL" description="COM_MAPS_FIELD_ACCESS_DESC" />
+			<field name="access" type="accesslevel" default="1" label="COM_MAPBUILDER_FIELD_ACCESS_LABEL" description="COM_MAPBUILDER_FIELD_ACCESS_DESC" />
 		</fieldset>
 		<fieldset name="metadata">
-			<field name="meta_keywords" type="textarea" cols="30" rows="5" class="" label="COM_MAPS_FIELD_META_KEYWORDS_LABEL" description="COM_MAPS_FIELD_META_KEYWORDS_DESC" />
-			<field name="meta_description" type="textarea" cols="30" rows="5" class="" label="COM_MAPS_FIELD_META_DESCRIPTION_LABEL" description="COM_MAPS_FIELD_META_DESCRIPTION_DESC" />
+			<field name="meta_keywords" type="textarea" cols="30" rows="5" class="" label="COM_MAPBUILDER_FIELD_META_KEYWORDS_LABEL" description="COM_MAPBUILDER_FIELD_META_KEYWORDS_DESC" />
+			<field name="meta_description" type="textarea" cols="30" rows="5" class="" label="COM_MAPBUILDER_FIELD_META_DESCRIPTION_LABEL" description="COM_MAPBUILDER_FIELD_META_DESCRIPTION_DESC" />
 		</fieldset>
 	</fields>
 	<fields name="params">
 		<fieldset name="params">
 			<field name="show_title" type="radio" class="btn-group radio" default="0" label="Show Title" description="Choose whether or not to display the title above the map.">
-				<option value="0">COM_MAPS_OPTION_VALUE_BOOLEAN_FALSE</option>
-				<option value="1">COM_MAPS_OPTION_VALUE_BOOLEAN_TRUE</option>
+				<option value="0">COM_MAPBUILDER_OPTION_VALUE_BOOLEAN_FALSE</option>
+				<option value="1">COM_MAPBUILDER_OPTION_VALUE_BOOLEAN_TRUE</option>
 			</field>
 			<field name="show_description" type="radio" class="btn-group radio" default="0" label="Show Description" description="Choose whether or not to display the description under the map.">
-				<option value="0">COM_MAPS_OPTION_VALUE_BOOLEAN_FALSE</option>
-				<option value="1">COM_MAPS_OPTION_VALUE_BOOLEAN_TRUE</option>
+				<option value="0">COM_MAPBUILDER_OPTION_VALUE_BOOLEAN_FALSE</option>
+				<option value="1">COM_MAPBUILDER_OPTION_VALUE_BOOLEAN_TRUE</option>
 			</field>
 			<field name="map_width" type="text" default="640" required="true" label="Map Width" description="The width of the map." />
 			<field name="map_height" type="text" default="260" required="true" label="Map Height" description="The height of the map." />

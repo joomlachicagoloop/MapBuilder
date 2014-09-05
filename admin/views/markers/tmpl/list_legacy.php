@@ -7,7 +7,7 @@
 ?>
 
 <form action="index.php" method="post" name="adminForm">
-	<input type="hidden" name="option" value="com_maps" />
+	<input type="hidden" name="option" value="com_mapbuilder" />
 	<input type="hidden" name="controller" value="markers" />
 	<input type="hidden" name="view" value="markers" />
 	<input type="hidden" name="task" value="" />
@@ -22,7 +22,7 @@
 			<td width="100%">
 				<? echo JText::_('Filter'); ?>
 				<input type="text" name="filter_search" id="filter-search_" value="<? echo $this->filter->filter_search; ?>" />
-				<?php echo JHtml::_('select.genericlist', $this->maps, "filter_map", "", "maps_id", "maps_name", $this->filter->filter_map, "filter_map"); ?>
+				<?php echo JHtml::_('select.genericlist', $this->maps, "filter_map", "", "map_id", "map_name", $this->filter->filter_map, "filter_map"); ?>
 				<input type="button" name="submit_button" id="submit-button_" value="Go" onclick="document.forms.adminForm.task.value='filter';document.forms.adminForm.submit();"/>
 				<input type="button" name="reset_button" id="reset-button_" value="Reset" onclick="document.forms.adminForm.filter_search.value='';document.forms.adminForm.task.value='filter';document.forms.adminForm.submit();"/>
 			</td>
@@ -41,7 +41,7 @@
 					<? echo JHTML::_('grid.sort', JText::_('Marker Name'), 'marker_name', $this->filter->filter_order_Dir, $this->filter->filter_order, 'filter'); ?>
 				</th>
 				<th width="20%">
-					<? echo JHTML::_('grid.sort', JText::_('Map Name'), 'maps_name', $this->filter->filter_order_Dir, $this->filter->filter_order, 'filter'); ?>
+					<? echo JHTML::_('grid.sort', JText::_('Map Name'), 'map_name', $this->filter->filter_order_Dir, $this->filter->filter_order, 'filter'); ?>
 				</th>
 				<th width="5%" nowrap="nowrap">
 					<? echo JHTML::_('grid.sort', JText::_('Published'), 'm.published', $this->filter->filter_order_Dir, $this->filter->filter_order, 'filter'); ?>
@@ -67,12 +67,12 @@
 		for($i=0; $i < count($this->items); $i++){
 			$row		= $this->items[$i];
 			$checked	= JHtml::_('grid.id', $i, $row->marker_id);
-			$link		= JRoute::_('index.php?option=com_maps&task=markers.edit&marker_id='. $row->marker_id.'&'.JSession::getFormToken().'=1');
-			$canCreate  = $user->authorise('core.create',     'com_maps');
-			$canEdit    = $user->authorise('core.edit',       'com_maps');
+			$link		= JRoute::_('index.php?option=com_mapbuilder&task=markers.edit&marker_id='. $row->marker_id.'&'.JSession::getFormToken().'=1');
+			$canCreate  = $user->authorise('core.create',     'com_mapbuilder');
+			$canEdit    = $user->authorise('core.edit',       'com_mapbuilder');
 			$canCheckin = $user->authorise('core.manage',     'com_checkin') || $row->checked_out == $user_id || $row->checked_out == 0;
-			$canEditOwn = $user->authorise('core.edit.own',   'com_maps');
-			$canChange  = $user->authorise('core.edit.state', 'com_maps') && $canCheckin;
+			$canEditOwn = $user->authorise('core.edit.own',   'com_mapbuilder');
+			$canChange  = $user->authorise('core.edit.state', 'com_mapbuilder') && $canCheckin;
 			?>
 			<tr class="row<? echo $k; ?>">
 				<td>
@@ -96,7 +96,7 @@
 					?>
 				</td>
 				<td>
-					<? echo ($row->maps_name) ? $row->maps_name : "none"; ?>
+					<? echo ($row->map_name) ? $row->map_name : "none"; ?>
 				</td>
 				<td align="center">
 					<?php echo JHtml::_('jgrid.published', $row->published, $i, 'markers.', true, 'cb'); ?>

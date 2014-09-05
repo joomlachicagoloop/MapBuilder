@@ -1,8 +1,8 @@
 <?php
 /**
- * Google Maps Markers Model
+ * MapBuilder Markers Model
  * 
- * @package    Google Maps
+ * @package    MapBuilder
  * @subpackage Component
  * @license    GNU/GPL
  */
@@ -12,7 +12,7 @@ defined('_JEXEC') or die();
  
 jimport( 'joomla.application.component.modeladmin' );
  
-class MapsModelMarkers extends JModelAdmin
+class MapBuilderModelMarkers extends JModelAdmin
 {
     /**
      * Markers data array
@@ -77,7 +77,7 @@ class MapsModelMarkers extends JModelAdmin
 	 */
 	public function getForm($data = array(), $loadData = true)
 	{
-		if($form = $this->loadForm('com_maps.markers', 'markers', array('control'=>'jform', 'load_data'=>$loadData))){
+		if($form = $this->loadForm('com_mapbuilder.markers', 'markers', array('control'=>'jform', 'load_data'=>$loadData))){
 			return $form;
 		}
 		JError::raiseError(0, JText::sprintf('JLIB_FORM_INVALID_FORM_OBJECT', 'markers'));
@@ -96,7 +96,7 @@ class MapsModelMarkers extends JModelAdmin
 		
 		$query->select("m.*, map.*, map.`attribs` AS `maps`");
 		$query->from("`{$row->getTableName()}` m");
-		$query->join("left", "`#__maps` map USING(`maps_id`)");
+		$query->join("left", "`#__mapbuilder_maps` map USING(`map_id`)");
 		$query->where("`marker_id` = {$id}");
 		
 		$db->setQuery($query);
@@ -120,7 +120,7 @@ class MapsModelMarkers extends JModelAdmin
     public function getMaps()
     {
     	$db = $this->getDbo();
-    	$sql = "SELECT -1 AS `maps_id`, 'Select A Map...' AS `maps_name`, -1 AS `ordering` UNION SELECT maps_id, maps_name, `ordering` FROM #__maps ORDER BY `ordering` ASC";
+    	$sql = "SELECT -1 AS `map_id`, 'Select A Map...' AS `map_name`, -1 AS `ordering` UNION SELECT map_id, map_name, `ordering` FROM #__mapbuilder_maps ORDER BY `ordering` ASC";
     	$db->setQuery($sql);
     	$data = $db->loadObjectList();
 
@@ -137,7 +137,7 @@ class MapsModelMarkers extends JModelAdmin
     public function getList()
     {
     	$mainframe	= JFactory::getApplication();
-    	$option		= JRequest::getCmd('option', 'com_maps');
+    	$option		= JRequest::getCmd('option', 'com_mapbuilder');
     	$scope		= $this->getName();
     	$row		= $this->getTable();
     	$filter		= array();
@@ -146,7 +146,7 @@ class MapsModelMarkers extends JModelAdmin
     	}
     	$map = $mainframe->getUserState($option.'.'.$scope.'.filter_map');
     	if($map != -1 && $map){
-    		$filter[] = "m.`maps_id` = {$map}";
+    		$filter[] = "m.`map_id` = {$map}";
     	}
     	if(!$order_dir = $mainframe->getUserState($option.'.'.$scope.'.filter_order_Dir')){
     		$order_dir = "ASC";
@@ -162,7 +162,7 @@ class MapsModelMarkers extends JModelAdmin
 		$sql = "SELECT ".
 		"SQL_CALC_FOUND_ROWS m.*, map.*, m.ordering AS ordervalue, ".
 		"v.`title` AS `access` ".
-		"FROM `{$row->getTableName()}` m LEFT JOIN `#__maps` map USING(`maps_id`) ".
+		"FROM `{$row->getTableName()}` m LEFT JOIN `#__mapbuilder_maps` map USING(`map_id`) ".
 		"LEFT JOIN `#__viewlevels` v ON m.`access` = v.`id`";
 		if(count($filter)){
 			$sql .= " WHERE " . implode(" AND ", $filter);

@@ -1,8 +1,8 @@
 <?php
 /**
- * Google Maps Model
+ * MapBuilder Maps Model
  * 
- * @package    Google Maps
+ * @package    MapBuilder
  * @subpackage Component
  * @license    GNU/GPL
  */
@@ -12,7 +12,7 @@ defined('_JEXEC') or die();
  
 jimport( 'joomla.application.component.modeladmin' );
  
-class MapsModelMaps extends JModelAdmin
+class MapBuilderModelMaps extends JModelAdmin
 {
     /**
      * Database records data
@@ -77,7 +77,7 @@ class MapsModelMaps extends JModelAdmin
 	 */
 	public function getForm($data = array(), $loadData = true)
 	{
-		if($form = $this->loadForm('com_maps.maps', 'maps', array('control'=>'jform', 'load_data'=>$loadData))){
+		if($form = $this->loadForm('com_mapbuilder.maps', 'maps', array('control'=>'jform', 'load_data'=>$loadData))){
 			return $form;
 		}
 		JError::raiseError(0, JText::sprintf('JLIB_FORM_INVALID_FORM_OBJECT', 'maps'));
@@ -121,12 +121,12 @@ class MapsModelMaps extends JModelAdmin
     public function getList()
     {
     	$mainframe	= JFactory::getApplication();
-    	$option		= JRequest::getCmd('option', 'com_maps');
+    	$option		= JRequest::getCmd('option', 'com_mapbuilder');
     	$scope		= $this->getName();
     	$row		= $this->getTable();
     	$filter		= array();
     	if($search = addslashes($mainframe->getUserState($option.'.'.$scope.'.filter_search'))){
-    		$filter[] = "a.`maps_name` LIKE '%{$search}%'";
+    		$filter[] = "a.`map_name` LIKE '%{$search}%'";
     	}
     	if(!$ordering = $mainframe->getUserState($option.'.'.$scope.'.filter_order')){
     		$ordering = "a.`ordering`";
@@ -163,7 +163,7 @@ class MapsModelMaps extends JModelAdmin
 	protected function populateState()
 	{
     	$app = JFactory::getApplication();
-    	$option = JRequest::getCmd('option', 'com_maps');
+    	$option = JRequest::getCmd('option', 'com_mapbuilder');
     	$scope = $this->getName();
     	
   		$this->setState('limit', $app->getUserStateFromRequest($option.'.'.$scope.'.limit', 'limit', $app->getCfg('list_limit'), 'int'));

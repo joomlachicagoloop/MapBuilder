@@ -1,8 +1,8 @@
 <?php
 /**
- * Google Maps Main
+ * MapBuilder Main
  * 
- * @package		Google Maps
+ * @package		MapBuilder
  * @subpackage	Components
  * @license		GNU/GPL
 */
@@ -27,12 +27,12 @@ if($controller = JRequest::getVar('controller')) {
 }
  
 // CREATE THE CONTROLLER
-$classname    = 'MapsController'.$controller;
+$classname    = 'MapBuilderController'.$controller;
 $controller   = new $classname();
  
 // PERFORM THE REQUEST TASK
 if($controller->execute(JRequest::getVar('task')) === false){
-	$controller->setRedirect(JRoute::_("index.php?option=com_maps"), $controller->getError(), "error");
+	$controller->setRedirect(JRoute::_("index.php?option=com_mapbuilder"), $controller->getError(), "error");
 }
  
 // REDIRECT IF SET BY THE CONTROLLER

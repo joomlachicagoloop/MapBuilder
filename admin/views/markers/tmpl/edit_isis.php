@@ -2,7 +2,7 @@
 	defined('_JEXEC') or die('Restricted access');
 	$document = JFactory::getDocument();
 	$document->addScript("http://maps.google.com/maps/api/js?sensor=false");
-	$document->addScript("components".DS."com_maps".DS."javascript".DS."markers.js", "text/javascript", true);
+	$document->addScript("components".DS."com_mapbuilder".DS."javascript".DS."markers.js", "text/javascript", true);
 	JHtml::_('behavior.keepalive');
 	JHtml::_('bootstrap.tooltip');
 	JHtml::_('behavior.formvalidation');
@@ -52,7 +52,7 @@
 //]]>
 </script>
 <form action="index.php" method="post" name="adminForm" id="adminForm" enctype="multipart/form-data">
-	<input type="hidden" name="option" value="com_maps" />
+	<input type="hidden" name="option" value="com_mapbuilder" />
 	<input type="hidden" name="task" value="" />
 	<input type="hidden" name="chosen" value="" />
 	<input type="hidden" name="boxchecked" value="0" />
@@ -62,7 +62,7 @@
 	<div id="editcell">
 		<div class="span9 pull-left">
 			<fieldset class="adminform">
-				<legend><?php echo JText::_('COM_MAPS_FORM_LEGEND_BASIC'); ?></legend>
+				<legend><?php echo JText::_('COM_MAPBUILDER_FORM_LEGEND_BASIC'); ?></legend>
 				<?php foreach($this->form->getFieldset('base') as $field){ ?>
 					<div class="control-group">
 						<?php echo $field->label; ?>
@@ -75,13 +75,13 @@
 				<?php echo $this->form->getInput('marker_description'); ?>
 			</fieldset>
 			<fieldset>
-				<legend><?php echo JText::_('COM_MAPS_FORM_LEGEND_PREVIEW'); ?></legend>
+				<legend><?php echo JText::_('COM_MAPBUILDER_FORM_LEGEND_PREVIEW'); ?></legend>
 				<div id="map-preview_"></div>
 			</fieldset>
 		</div>
 		<div class="span3 pull-left">
 			<fieldset class="adminform">
-				<legend><?php echo JText::_('COM_MAPS_FORM_LEGEND_OPTIONS'); ?></legend>
+				<legend><?php echo JText::_('COM_MAPBUILDER_FORM_LEGEND_OPTIONS'); ?></legend>
 				<?php foreach($this->form->getFieldset('options') as $field){ ?>
 					<div class="control-group">
 						<?php echo $field->label; ?>

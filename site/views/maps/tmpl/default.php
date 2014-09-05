@@ -6,7 +6,7 @@
 	// SET DOCUMENT HEAD FOR PAGE
 	$document = JFactory::getDocument();
 	$document->addScript("//www.google.com/jsapi");
-	$document->addScript("components/com_maps/javascript/maps.js", "text/javascript", true);
+	$document->addScript("components/com_mapbuilder/javascript/maps.js", "text/javascript", true);
 	if(trim($this->map->meta_keywords)){
 		$document->setMetaData('keywords', $this->map->meta_keywords);
 	}
@@ -25,12 +25,12 @@
 	if($this->params->get('show_title')){
 ?>
 
-<h1><? echo $this->map->maps_name; ?></h1>
+<h1><? echo $this->map->map_name; ?></h1>
 
 <?	} ?>
 
-<div class="google-map_ id<? echo $this->map->maps_id; ?> zoom<? echo $this->params->get('zoom'); ?> lat<? echo $this->params->get('center_lat'); ?> lng<? echo $this->params->get('center_lng'); ?>" style="<? echo $style; ?>"></div>
+<div class="google-map_ id<? echo $this->map->map_id; ?> zoom<? echo $this->params->get('zoom'); ?> lat<? echo $this->params->get('center_lat'); ?> lng<? echo $this->params->get('center_lng'); ?>" style="<? echo $style; ?>"></div>
 
 <?	if($this->params->get('show_description')){ ?>
-<p><? echo $this->map->maps_description; ?></p>
+<p><? echo $this->map->map_description; ?></p>
 <?	}

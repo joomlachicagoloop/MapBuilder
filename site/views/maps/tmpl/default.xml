@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="COM_MAPS_LAYOUT_DEFAULT">
-		<message>COM_MAPS_LAYOUT_DEFAULT_MSG</message>
+	<layout title="COM_MAPBUILDER_LAYOUT_DEFAULT">
+		<message>COM_MAPBUILDER_LAYOUT_DEFAULT_MSG</message>
 	</layout>
 	<fields name="request">
 		<fieldset name="request">
-			<field name="id" label="COM_MAPS_REQUEST_ID_LABEL" description="COM_MAPS_REQUEST_ID_DESC" type="sql" query="SELECT `maps_id`, `maps_name` FROM `#__maps` ORDER BY `ordering`" key_field="maps_id" value_field="maps_name" />
+			<field name="id" label="COM_MAPBUILDER_REQUEST_ID_LABEL" description="COM_MAPBUILDER_REQUEST_ID_DESC" type="sql" query="SELECT `map_id`, `map_name` FROM `#__mapbuilder_maps` ORDER BY `ordering`" key_field="map_id" value_field="map_name" />
 		</fieldset>
 	</fields>
 </metadata>

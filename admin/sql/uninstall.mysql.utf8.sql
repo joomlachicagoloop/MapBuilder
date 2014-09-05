@@ -1,2 +1,2 @@
-DROP TABLE IF EXISTS `#__maps`;
-DROP TABLE IF EXISTS `#__maps_marker`;
+DROP TABLE IF EXISTS `#__mapbuilder_maps`;
+DROP TABLE IF EXISTS `#__mapbuilder_markers`;

@@ -12,7 +12,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 jimport( 'joomla.application.component.view' );
 
-class MapsViewMaps extends JViewLegacy
+class MapBuilderViewMaps extends JViewLegacy
 {
 	/**
 	 * Maps view display method
@@ -25,12 +25,12 @@ class MapsViewMaps extends JViewLegacy
 		$this->setLayout($layout);
 		switch($layout){
 		case "list":
-		    MapsHelper::addSubmenu('maps');
-			JToolBarHelper::title(JText::_('COM_MAPS_VIEW_MAPS_LIST_TITLE'), 'generic.png');
+		    MapBuilderHelper::addSubmenu('maps');
+			JToolBarHelper::title(JText::_('COM_MAPBUILDER_VIEW_MAPS_LIST_TITLE'), 'generic.png');
 			JToolBarHelper::addNew('maps.add', 'JTOOLBAR_NEW');
 			JToolBarHelper::editList('maps.edit', 'JTOOLBAR_EDIT', true);
-			JToolBarHelper::deleteList(JText::_('COM_MAPS_MSG_DELETE_CONFIRM'), 'maps.delete', 'JTOOLBAR_DELETE', true);
-			JToolBarHelper::preferences('com_maps', '500');
+			JToolBarHelper::deleteList(JText::_('COM_MAPBUILDER_MSG_DELETE_CONFIRM'), 'maps.delete', 'JTOOLBAR_DELETE', true);
+			JToolBarHelper::preferences('com_mapbuilder', '500');
 			// GET DATA FROM THE MODEL
 			$this->filter = $this->get('State');
 			$this->items = $this->get('List');
@@ -38,7 +38,7 @@ class MapsViewMaps extends JViewLegacy
 			break;
 		default:
 			$input->set('hidemainmenu', 1);
-			JToolBarHelper::title(JText::_('COM_MAPS_VIEW_MAPS_EDIT_TITLE'), 'generic.png');
+			JToolBarHelper::title(JText::_('COM_MAPBUILDER_VIEW_MAPS_EDIT_TITLE'), 'generic.png');
 			JToolBarHelper::apply('maps.apply');
 			JToolBarHelper::save('maps.save');
 			JToolBarHelper::save2new('maps.save2new');

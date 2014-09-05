@@ -1,8 +1,8 @@
 <?php
 /**
- * Google Maps Markers Controller
+ * MapBuilder Markers Controller
  *
- * @package		Google Maps
+ * @package		MapBuilder
  * @subpackage	Components
  * @license		GNU/GPL
  */
@@ -18,7 +18,7 @@ if(!JFactory::getUser()->authorise('core.manage', 'com_slideshow')){
 // REQUIRE THE BASE CONTROLLER
 jimport('joomla.application.component.controllerform');
 
-class MapsControllerMarkers extends JControllerForm
+class MapBuilderControllerMarkers extends JControllerForm
 {
 	/**
 	 * constructor (registers additional tasks to methods)
@@ -44,7 +44,7 @@ class MapsControllerMarkers extends JControllerForm
 		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
 		$model = $this->getModel('Markers');
 		//$model->getState();
-		$this->setRedirect("index.php?option=com_maps&controller=markers&view=markers");
+		$this->setRedirect("index.php?option=com_mapbuilder&controller=markers&view=markers");
 	}
 	/**
 	 * Method to delete a marker entity
@@ -57,8 +57,8 @@ class MapsControllerMarkers extends JControllerForm
 		// CHECK FOR USER AUTHORIZATION
 		$app 	= JFactory::getApplication();
 		$user	= JFactory::getUser();
-		if(!$user->authorise('core.delete', 'com_maps')){
-			$this->setRedirect("index.php?option=com_maps&view=markers", JText::_('JLIB_APPLICATION_ERROR_DELETE_NOT_PERMITTED'), 'error');
+		if(!$user->authorise('core.delete', 'com_mapbuilder')){
+			$this->setRedirect("index.php?option=com_mapbuilder&view=markers", JText::_('JLIB_APPLICATION_ERROR_DELETE_NOT_PERMITTED'), 'error');
 			return false;
 		}
 		$cids = JRequest::getVar('cid', 0, 'request', 'array');
@@ -68,7 +68,7 @@ class MapsControllerMarkers extends JControllerForm
 			$table->load($cid);
 			$table->delete();
 		}
-		$this->setRedirect("index.php?option=com_maps&controller=markers&view=markers&layout=list", JText::_('COM_MAPS_MSG_SUCCESS_DELETE_MARKER'));
+		$this->setRedirect("index.php?option=com_mapbuilder&controller=markers&view=markers&layout=list", JText::_('COM_MAPBUILDER_MSG_SUCCESS_DELETE_MARKER'));
 	}
 	/**
 	 * Method to toggle the publish state of a marker entity
@@ -89,7 +89,7 @@ class MapsControllerMarkers extends JControllerForm
 
 		if (empty($cid))
 		{
-			JError::raiseWarning(500, JText::_('COM_MAPS_NO_ITEM_SELECTED'));
+			JError::raiseWarning(500, JText::_('COM_MAPBUILDER_NO_ITEM_SELECTED'));
 		}
 		else
 		{
@@ -108,19 +108,19 @@ class MapsControllerMarkers extends JControllerForm
 			{
 				if ($value == 1)
 				{
-					$ntext = 'COM_MAPS_N_ITEMS_PUBLISHED';
+					$ntext = 'COM_MAPBUILDER_N_ITEMS_PUBLISHED';
 				}
 				elseif ($value == 0)
 				{
-					$ntext = 'COM_MAPS_N_ITEMS_UNPUBLISHED';
+					$ntext = 'COM_MAPBUILDER_N_ITEMS_UNPUBLISHED';
 				}
 				elseif ($value == 2)
 				{
-					$ntext = 'COM_MAPS_N_ITEMS_ARCHIVED';
+					$ntext = 'COM_MAPBUILDER_N_ITEMS_ARCHIVED';
 				}
 				else
 				{
-					$ntext = 'COM_MAPS_N_ITEMS_TRASHED';
+					$ntext = 'COM_MAPBUILDER_N_ITEMS_TRASHED';
 				}
 				$this->setMessage(JText::plural($ntext, count($cid)));
 			}

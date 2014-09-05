@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="COM_MAPS_LAYOUT_AJAX" hidden="true">
-		<message>COM_MAPS_LAYOUT_AJAX_MSG</message>
+	<layout title="COM_MAPBUILDER_LAYOUT_AJAX" hidden="true">
+		<message>COM_MAPBUILDER_LAYOUT_AJAX_MSG</message>
 	</layout>
 </metadata>

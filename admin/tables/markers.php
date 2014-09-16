@@ -29,10 +29,10 @@ class TableMarkers extends JTable
 	/** @var int */
 	var $access				= null;
 	/** @var int */
-	var $maps_id			= null;
+	var $map_id				= null;
 	
 	public function __construct(&$db){
-		parent::__construct('#__maps_marker', 'marker_id', $db);
+		parent::__construct('#__mapbuilder_markers', 'marker_id', $db);
 	}
 	
 	public function bind($array, $ignore=''){
@@ -49,7 +49,7 @@ class TableMarkers extends JTable
 	public function check(){
 		// ASSIGN ORDERING IF NECESSARY
 		if(is_null($this->ordering)){
-			$this->ordering = $this->getNextOrder("maps_id = {$this->maps_id}");
+			$this->ordering = $this->getNextOrder("map_id = {$this->map_id}");
 		}
 		return true;
 	}
@@ -58,7 +58,7 @@ class TableMarkers extends JTable
 		if(!parent::store($updateNulls)){
 			return false;
 		}
-		$this->reorder("maps_id = {$this->maps_id}");
+		$this->reorder("map_id = {$this->map_id}");
 		return true;
 	}
 }

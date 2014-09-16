@@ -10,7 +10,7 @@
 
 jimport( 'joomla.application.component.view');
 
-class MapsViewMaps extends JViewLegacy
+class MapBuilderViewMaps extends JViewLegacy
 {
 	function display($tpl = null)
 	{

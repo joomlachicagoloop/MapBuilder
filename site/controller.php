@@ -1,8 +1,8 @@
 <?php
 /**
- * Google Maps Controller
+ * MapBuilder Controller
  * 
- * @package		Google Maps
+ * @package		MapBuilder
  * @subpackage 	Components
  * @license		GNU/GPL
  */
@@ -12,16 +12,16 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 jimport('joomla.application.component.controller');
 
-class MapsController extends JControllerLegacy
+class MapBuilderController extends JControllerLegacy
 {
 	/**
 	 * constructor (registers additional tasks to methods)
 	 * @return void
 	 */
-	function __construct()
+	public function __construct($config = array())
 	{
 		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS."tables");
  		jimport('joomla.filesystem.file');
-		parent::__construct();
+		parent::__construct(array('default_view'=>'maps'));
 	}
 }

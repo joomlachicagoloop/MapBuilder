@@ -1,8 +1,8 @@
 <?php
 /**
- * Google Maps Map Controller
+ * MapBuilder Map Controller
  *
- * @package		Subtext
+ * @package		MapBuilder
  * @subpackage	Components
  * @license		GNU/GPL
  */
@@ -11,14 +11,14 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 // PRIVILEGE CHECK
-if(!JFactory::getUser()->authorise('core.manage', 'com_maps')){
+if(!JFactory::getUser()->authorise('core.manage', 'com_mapbuilder')){
 	return JError::raiseWarning(403, JText::_('JERROR_ALERTNOAUTHOR'));
 }
 
 // IMPORT CONTROLLER LIBRARY
 jimport('joomla.application.component.controllerform');
 
-class MapsControllerMaps extends JControllerForm
+class MapBuilderControllerMaps extends JControllerForm
 {
 	/**
 	 * constructor (registers additional tasks to methods)
@@ -45,7 +45,7 @@ class MapsControllerMaps extends JControllerForm
 		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
 		$model = $this->getModel();
 		$model->getState();
-		$this->setRedirect(JRoute::_("index.php?option=com_maps&view=".$this->view_list, false));
+		$this->setRedirect(JRoute::_("index.php?option=com_mapbuilder&view=".$this->view_list, false));
 		return true;
 	}
 	/**
@@ -64,7 +64,7 @@ class MapsControllerMaps extends JControllerForm
 
 		if (!is_array($cid) || count($cid) < 1)
 		{
-			JError::raiseWarning(500, JText::_('COM_MAPS_NO_ITEM_SELECTED'));
+			JError::raiseWarning(500, JText::_('COM_MAPBUILDER_NO_ITEM_SELECTED'));
 		}
 		else
 		{
@@ -78,7 +78,7 @@ class MapsControllerMaps extends JControllerForm
 			// REMOVE THE ITEMS.
 			if ($model->delete($cid))
 			{
-				$this->setMessage(JText::plural('COM_MAPS_N_ITEMS_DELETED', count($cid)));
+				$this->setMessage(JText::plural('COM_MAPBUILDER_N_ITEMS_DELETED', count($cid)));
 			}
 			else
 			{
@@ -107,7 +107,7 @@ class MapsControllerMaps extends JControllerForm
 
 		if (empty($cid))
 		{
-			JError::raiseWarning(500, JText::_('COM_MAPS_NO_ITEM_SELECTED'));
+			JError::raiseWarning(500, JText::_('COM_MAPBUILDER_NO_ITEM_SELECTED'));
 		}
 		else
 		{
@@ -126,19 +126,19 @@ class MapsControllerMaps extends JControllerForm
 			{
 				if ($value == 1)
 				{
-					$ntext = 'COM_MAPS_N_ITEMS_PUBLISHED';
+					$ntext = 'COM_MAPBUILDER_N_ITEMS_PUBLISHED';
 				}
 				elseif ($value == 0)
 				{
-					$ntext = 'COM_MAPS_N_ITEMS_UNPUBLISHED';
+					$ntext = 'COM_MAPBUILDER_N_ITEMS_UNPUBLISHED';
 				}
 				elseif ($value == 2)
 				{
-					$ntext = 'COM_MAPS_N_ITEMS_ARCHIVED';
+					$ntext = 'COM_MAPBUILDER_N_ITEMS_ARCHIVED';
 				}
 				else
 				{
-					$ntext = 'COM_MAPS_N_ITEMS_TRASHED';
+					$ntext = 'COM_MAPBUILDER_N_ITEMS_TRASHED';
 				}
 				$this->setMessage(JText::plural($ntext, count($cid)));
 			}
@@ -243,7 +243,7 @@ class MapsControllerMaps extends JControllerForm
 		else
 		{
 			// CHECKIN SUCCEEDED.
-			$message = JText::plural('COM_MAPS_N_ITEMS_CHECKED_IN', count($ids));
+			$message = JText::plural('COM_MAPBUILDER_N_ITEMS_CHECKED_IN', count($ids));
 			$this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&view=' . $this->view_list, false), $message);
 			return true;
 		}

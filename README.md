@@ -1,5 +1,5 @@
-# Subtext Productions #
-## Google Maps ##
+# Joomla! Chicago Loop #
+## MapBuilder ##
 ### Description ###
 
 A simple component for displaying maps utilizing the Google Maps API.

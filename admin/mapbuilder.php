@@ -1,8 +1,8 @@
 <?php
 /**
- * Google Maps Main Controller
+ * MapBuilder Main Controller
  *
- * @package		Subtext
+ * @package		MapBuilder
  * @subpackage	Components
  * @license		GNU/GPL
  */
@@ -14,18 +14,18 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 if(!defined('DS')) define( 'DS', DIRECTORY_SEPARATOR );
 
 // PRIVILEGE CHECK
-if(!JFactory::getUser()->authorise('core.manage', 'com_maps')){
+if(!JFactory::getUser()->authorise('core.manage', 'com_mapbuilder')){
 	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
 }
 
 // REQUIRE HELPER FILE
-JLoader::register('MapsHelper', dirname(__FILE__).DS.'helpers'.DS.'maps.php');
+JLoader::register('MapBuilderHelper', dirname(__FILE__).DS.'helpers'.DS.'mapbuilder.php');
 
 // IMPORT CONTROLLER LIBRARY
 jimport('joomla.application.component.controller');
 
 // GET CONTROLLER INSTANCE
-$controller = JControllerLegacy::getInstance('Maps');
+$controller = JControllerLegacy::getInstance('MapBuilder');
 
 // PERFORM THE REQUESTED TASK
 $controller->execute(JFactory::getApplication()->input->get('task'));

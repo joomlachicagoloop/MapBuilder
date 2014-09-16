@@ -1,8 +1,8 @@
 <?php
 /**
- * Google Maps View Controller
+ * MapBuilder View Controller
  *
- * @package		Maps
+ * @package		MapBuilder
  * @subpackage	Components
  * @license		GNU/GPL
  */
@@ -11,11 +11,11 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 // PRIVILEGE CHECK
-if(!JFactory::getUser()->authorise('core.manage', 'com_maps')){
+if(!JFactory::getUser()->authorise('core.manage', 'com_mapbuilder')){
 	return JError::raiseWarning(403, JText::_('JERROR_ALERTNOAUTHOR'));
 }
 
-class MapsController extends JControllerLegacy
+class MapBuilderController extends JControllerLegacy
 {
 	/**
 	 * constructor (registers additional tasks to methods)
@@ -23,7 +23,7 @@ class MapsController extends JControllerLegacy
 	 */
 	public function __construct($config = array())
 	{
-		parent::__construct();
+		parent::__construct(array('default_view'=>'maps'));
 	}
 	
 	/**

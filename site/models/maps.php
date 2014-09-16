@@ -1,8 +1,8 @@
 <?php
 /**
- * Google Maps Model
+ * MapBuilder Model
  * 
- * @package		Google Maps
+ * @package		MapBuilder
  * @subpackage	Component
  * @license		GNU/GPL
  */
@@ -12,7 +12,7 @@ defined('_JEXEC') or die();
 
 jimport( 'joomla.application.component.model' );
 
-class MapsModelMaps extends JModelLegacy
+class MapBuilderModelMaps extends JModelLegacy
 {
 	function __construct(){
 		$user	= JFactory::getUser();
@@ -34,7 +34,7 @@ class MapsModelMaps extends JModelLegacy
 		
 		$sql->select("*");
 		$sql->from($this->_db->quoteName($table->getTableName()));
-		$sql->where("`maps_id` = {$id}");
+		$sql->where("`map_id` = {$id}");
 		$sql->where("`published` = 1");
 		$sql->where("`access` IN ({$levels})");
 		$sql->order("`ordering`");

@@ -22,14 +22,14 @@ var Maps = new Class({
 	},
 	
 	loadData: function(someId){
-		new Request.JSON({ url: "/index.php?option=com_maps&format=json&layout=ajax&id=" + someId, method: 'GET', onSuccess: this.parse, onFailure: this.error }).send();
+		new Request.JSON({ url: "/index.php?option=com_mapbuilder&format=json&layout=ajax&id=" + someId, method: 'GET', onSuccess: this.parse, onFailure: this.error }).send();
 	},
 	
 	parseData: function(someAjax){
 	    this.markers = someAjax;
 		var someWindow = this.infoWindow;
 		this.markers.each(function(someRecord){
-			var someMap = this.find(someRecord.maps_id);
+			var someMap = this.find(someRecord.map_id);
 			var coords = new google.maps.LatLng(someRecord.marker_lat, someRecord.marker_lng);
 			var someMarker = new google.maps.Marker({ position: coords, map: someMap, title: someRecord.marker_alias });
 			google.maps.event.addListener(someMarker, "click", function(){

@@ -1,8 +1,8 @@
 <?php
 /**
- * Google Maps Installer Script
+ * MapBuilder Installer Script
  *
- * @package		Google Maps
+ * @package		MapBuilder
  * @subpackage	Components
  * @license     GNU/GPLv3
  */
@@ -10,7 +10,7 @@
 // NO DIRECT ACCESS
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-class com_mapsInstallerScript
+class com_mapbuilderInstallerScript
 {
 	protected $install_status	= null;
 	protected $release			= null;
@@ -30,7 +30,7 @@ class com_mapsInstallerScript
 
 		// ABORT IF THE CURRENT JOOMLA RELEASE IS OLDER
 		if( version_compare( $jversion->getShortVersion(), $this->minimum_joomla_release, 'lt' ) ) {
-			JFactory::getApplication()->enqueueMessage(JText::sprintf('COM_MAPS_MSG_ERROR_JVERSION', $this->minimum_joomla_release), 'error');
+			JFactory::getApplication()->enqueueMessage(JText::sprintf('COM_MAPBUILDER_MSG_ERROR_JVERSION', $this->minimum_joomla_release), 'error');
 			return false;
 		}
  
@@ -39,7 +39,7 @@ class com_mapsInstallerScript
 			$oldRelease = $this->getManifestParam('version');
 			$rel = $oldRelease . ' to ' . $this->release;
 			if ( version_compare( $this->release, $oldRelease, 'le' ) ) {
-				JFactory::getApplication()->enqueueMessage(JText::_('COM_MAPS_MSG_ERROR_SCHEMA'), 'error');
+				JFactory::getApplication()->enqueueMessage(JText::_('COM_MAPBUILDER_MSG_ERROR_SCHEMA'), 'error');
 				return false;
 			}
 		}
@@ -47,11 +47,11 @@ class com_mapsInstallerScript
 		
 		// ABORT IF THE MEDIA DIRECTORY IS NOT WRITEABLE
 		if(!is_writable(JPATH_ROOT."/media")){
-			JFactory::getApplication()->enqueueMessage(JText::_('COM_MAPS_INSTALL_ERROR_PERMISSIONS'), 'error');
+			JFactory::getApplication()->enqueueMessage(JText::_('COM_MAPBUILDER_INSTALL_ERROR_PERMISSIONS'), 'error');
 			return false;
 		}
 
-		return '<p>' . JText::_('COM_MAPS_MSG_SUCCESS_PREFLIGHT') . '</p>';
+		return '<p>' . JText::_('COM_MAPBUILDER_MSG_SUCCESS_PREFLIGHT') . '</p>';
 	}
 
 	/*
@@ -59,7 +59,7 @@ class com_mapsInstallerScript
 	 */
 	public function install($parent){
 		$this->install_status = "installed";
-		return '<p>' . JText::sprintf('COM_MAPS_INSTALL_SUCCESS', $this->release) . '</p>';
+		return '<p>' . JText::sprintf('COM_MAPBUILDER_INSTALL_SUCCESS', $this->release) . '</p>';
 	}
  
 	/*
@@ -71,36 +71,36 @@ class com_mapsInstallerScript
 		    $sql    = $db->getQuery(true);
 		    $ini    = new JRegistry();
 		    
-		    $sql->select("`maps_id`, `attribs`");
-		    $sql->from("`#__maps`");
+		    $sql->select("`map_id`, `attribs`");
+		    $sql->from("`#__mapbuilder_maps`");
 		    
 		    $db->setQuery($sql);
 		    foreach($db->loadObjectList() as $record){
 		        $ini->loadString($record->attribs, 'INI');
 		        $value = $ini->toString('JSON');
-		        $db->setQuery("UPDATE `#__maps` SET `attribs` = '{$value}' WHERE `maps_id` = {$record->maps_id}");
+		        $db->setQuery("UPDATE `#__mapbuilder_maps` SET `attribs` = '{$value}' WHERE `map_id` = {$record->map_id}");
 		        $db->query();
 		    }
 		    
 		    $sql->clear();
 		    $sql->select("`marker_id`, `attribs`");
-		    $sql->from("`#__maps_marker`");
+		    $sql->from("`#__map_marker`");
 		    
 		    $db->setQuery($sql);
 		    foreach($db->loadObjectList() as $record){
 		        $ini->loadString($record->attribs, 'INI');
 		        $value = $ini->toString('JSON');
-		        $db->setQuery("UPDATE `#__maps_marker` SET `attribs` = '{$value}' WHERE `marker_id` = {$record->marker_id}");
+		        $db->setQuery("UPDATE `#__map_marker` SET `attribs` = '{$value}' WHERE `marker_id` = {$record->marker_id}");
 		        $db->query();
 		    }
 		    
-		    $db->setQuery("ALTER TABLE `#__maps` ENGINE=InnoDB");
+		    $db->setQuery("ALTER TABLE `#__mapbuilder_maps` ENGINE=InnoDB");
 		    if(!$db->query()) return false;
-		    $db->setQuery("ALTER TABLE `#__maps_marker` ENGINE=InnoDB");
+		    $db->setQuery("ALTER TABLE `#__map_marker` ENGINE=InnoDB");
 		    if(!$db->query()) return false;
 		}
 		$this->install_status = "updated";
-		return '<p>' . JText::sprintf('COM_MAPS_MSG_SUCCESS_UPDATE', $this->release) . '</p>';
+		return '<p>' . JText::sprintf('COM_MAPBUILDER_MSG_SUCCESS_UPDATE', $this->release) . '</p>';
 	}
  
 	/*
@@ -119,7 +119,7 @@ class com_mapsInstallerScript
 		case "updated":
 			break;
 		}
-		echo '<p>' . JText::_('COM_MAPS_MSG_SUCCESS_POSTFLIGHT') . '</p>';
+		echo '<p>' . JText::_('COM_MAPBUILDER_MSG_SUCCESS_POSTFLIGHT') . '</p>';
 	}
 
 	/*
@@ -127,7 +127,7 @@ class com_mapsInstallerScript
 	 */
 	public function uninstall($parent){
 		if(!isset($this->release)) $this->release = '1.0';
-		echo '<p>' . JText::sprintf('COM_MAPS_MSG_SUCCESS_UNINSTALL', $this->release) . '</p>';
+		echo '<p>' . JText::sprintf('COM_MAPBUILDER_MSG_SUCCESS_UNINSTALL', $this->release) . '</p>';
 	}
  
 	/*
@@ -155,7 +155,7 @@ class com_mapsInstallerScript
 	 */
 	protected function getManifestParam( $name ) {
 		$db = JFactory::getDbo();
-		$db->setQuery('SELECT manifest_cache FROM #__extensions WHERE name = "com_maps"');
+		$db->setQuery('SELECT manifest_cache FROM #__extensions WHERE name = "com_mapbuilder"');
 		$manifest = json_decode( $db->loadResult(), true );
 		return $manifest[ $name ];
 	}
@@ -167,7 +167,7 @@ class com_mapsInstallerScript
 		if ( count($param_array) > 0 ) {
 			// read the existing component value(s)
 			$db = JFactory::getDbo();
-			$db->setQuery('SELECT params FROM #__extensions WHERE name = "com_maps"');
+			$db->setQuery('SELECT params FROM #__extensions WHERE name = "com_mapbuilder"');
 			$params = json_decode( $db->loadResult(), true );
 			// add the new variable(s) to the existing one(s)
 			foreach ( $param_array as $name => $value ) {
@@ -177,7 +177,7 @@ class com_mapsInstallerScript
 			$paramsString = json_encode( $params );
 			$db->setQuery('UPDATE #__extensions SET params = ' .
 				$db->quote( $paramsString ) .
-				' WHERE name = "com_maps"' );
+				' WHERE name = "com_mapbuilder"' );
 				$db->query();
 		}
 	}
@@ -191,7 +191,7 @@ class com_mapsInstallerScript
 		// CREATE THE SQL QUERY
 		$sql->select("params");
 		$sql->from("#__extensions");
-		$sql->where("element = 'com_maps'");
+		$sql->where("element = 'com_mapbuilder'");
 		$dbo->setQuery($sql);
 		// LOAD RESULT AS JREGISTRY OBJECT
 		$params = new JRegistry();
@@ -212,7 +212,7 @@ class com_mapsInstallerScript
 		$sql->clear();
 		$sql->update("#__extensions");
 		$sql->set('params = \''.$json.'\'');
-		$sql->where("element = 'com_maps'");
+		$sql->where("element = 'com_mapbuilder'");
 		$dbo->setQuery($sql);
 		$dbo->query();
 	}

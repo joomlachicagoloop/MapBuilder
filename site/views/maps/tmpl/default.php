@@ -13,7 +13,11 @@
 		break;
 	case 'jquery':
 		// LOAD THE jQUERY FRAMEWORK
-		JHtml::_('bootstrap.framework');
+		if(class_exists('JHtmlBootstrap')){
+		    JHtml::_('bootstrap.framework');
+		}else{
+		    $document->addScript("media/mapbuilder/javascript/jquery.min.js");
+		}
 		$document->addScript("media/mapbuilder/javascript/maps-jquery.js", "text/javascript", true);
 		break;
 	}

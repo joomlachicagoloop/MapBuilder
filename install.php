@@ -82,13 +82,19 @@ class com_mapbuilderInstallerScript
 		switch($this->install_status){
 		case "installed":
 			$params = $this->getComponentParams();
-			$params->set('params.use_javascript', 'jquery');
 			$menu = JMenu::getInstance('site');
 			$item = $menu->getDefault();
 			$params->set('params.default_itemid', $item->id);
+            $params->set('params.js_framework', 'mootools');
+            $this->setComponentParams($params);
 			$this->setComponentParams($params);
 			break;
 		case "updated":
+			$params = $this->getComponentParams();
+			if(!$params->get('params.js_framework')){
+			    $params->set('params.js_framework', 'mootools');
+			    $this->setComponentParams($params);
+			}
 			break;
 		}
 		echo '<p>' . JText::_('COM_MAPBUILDER_MSG_SUCCESS_POSTFLIGHT') . '</p>';

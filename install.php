@@ -66,7 +66,7 @@ class com_mapbuilderInstallerScript
 	 * UPDATE
 	 */
 	public function update( $parent ) {
-		if(version_compare($this->release, "1.0.0", 'le')){
+		if(version_compare($this->release, "1.0.1", 'le')){
 		    if( file_exists(JPATH_ROOT."components/com_mapbuilder/javascript") ){
 		        $this->deleteDir(JPATH_ROOT."components/com_mapbuilder/javascript");
 		    }

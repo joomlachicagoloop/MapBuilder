@@ -7,7 +7,7 @@
 	<authorUrl>http://www.subtextproductions.com</authorUrl>
 	<copyright>Copyright 2007 - 2012 Subtext Productions</copyright>
 	<license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<description><![CDATA[COM_MAPBUILDER_COMPONENT_DESCRIPTION]]></description>
 	<scriptfile>install.php</scriptfile>
 	<files folder="site">

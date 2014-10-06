@@ -67,7 +67,7 @@
         MapBuilderUI.prototype.findMap = function(someId){
             var mapList = $.map(this.maps, function(someMap){
                 var someContainer = someMap.getDiv();
-                if(someContainer.get('data-id') == someId){
+                if($(someContainer).data('id') == someId){
                     return someMap;
                 }else{
                     return false;

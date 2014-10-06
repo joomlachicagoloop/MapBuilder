@@ -4,8 +4,8 @@
 	// SET DOCUMENT HEAD FOR PAGE
 	$document = JFactory::getDocument();
 	$document->addScript("//www.google.com/jsapi");
-	$options = JComponentHelper::getParams();
 	switch($options->get('js_framework')){
+	$options = JComponentHelper::getParams('com_mapbuilder');
 	case 'mootools':
 		// LOAD THE MOOTOOLS FRAMEWORK
 		JHtml::_('behavior.framework');

@@ -7,10 +7,6 @@ var Maps = new Class({
 		this.build = this.buildMap.bind(this);
 		this.error = this.parseError.bind(this);
 		this.find = this.findMap.bind(this);
-		this.latX = /lat(-?\d+\.\d+)/;
-		this.lngX = /lng(-?\d+\.\d+)/;
-		this.zoomX = /zoom(\d{1,2})/;
-		this.idX = /id(\d+)/;
 		if(typeof google != 'undefined'){
 			google.load("maps", "3.1", { other_params: "sensor=false", callback: this.mapsInitialized.bind(this) });
 		}
@@ -18,7 +14,7 @@ var Maps = new Class({
 	
 	mapsInitialized: function(){
 		this.infoWindow = new google.maps.InfoWindow({ content: 'Hello, World!' });
-		$$('div.google-map_').each(this.build);
+		$$('div.mapbuilder').each(this.build);
 	},
 	
 	loadData: function(someId){
@@ -36,36 +32,24 @@ var Maps = new Class({
 				var content = "<h3>" + someRecord.marker_name + "</h3>";
 				content += "<p>" + someRecord.marker_description + "</p>";
 				someWindow.setContent(content);
-				someWindow.setOptions({ maxWidth: 300 });
+				someWindow.setOptions({ maxWidth: 400 });
 				someWindow.open(someMarker.getMap(), someMarker);
 			});
 		}, this);
 	},
 	
 	parseError: function(someAjax){
-	    window.console.log('failure');
-	    window.console.log(someAjax);
+	    if(windown.console){
+	        window.console.log('failure');
+	        window.console.log(someAjax);
+	    }
 	},
 	
 	buildMap: function(container){
-		if(container.className.match(this.latX)){
-			var someLat = RegExp.$1;
-		}else{
-			return false;
-		}
-		if(container.className.match(this.lngX)){
-			var someLng = RegExp.$1;
-		}else{
-			return false;
-		}
-		if(container.className.match(this.zoomX)){
-			var someZoom = parseInt(RegExp.$1);
-		}else{
-			return false;
-		}
-		if(container.className.match(this.idX)){
-			var someId = parseInt(RegExp.$1);
-		}
+	    var someLat = container.get('data-lat');
+	    var someLng = container.get('data-lng');
+	    var someZoom = parseInt(container.get('data-zoom'));
+	    var someId = parseInt(container.get('data-id'));
 		var someOrigin = new google.maps.LatLng(someLat, someLng);
 		var mapOptions = { zoom: someZoom, center: someOrigin, mapTypeId: google.maps.MapTypeId.ROADMAP };
 		var someMap = new google.maps.Map(container, mapOptions);
@@ -76,8 +60,8 @@ var Maps = new Class({
 	findMap: function(someId){
 		var mapList = this.maps.filter(function(someMap){
 			var someContainer = someMap.getDiv();
-			if(someContainer.className.match(this.idX)){
-				return RegExp.$1 == someId;
+			if(someContainer.get('data-id') == someId){
+				return true;
 			}else{
 				return false;
 			}

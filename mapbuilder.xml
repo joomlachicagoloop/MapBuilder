@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="component" version="1.7" method="upgrade">
+<extension type="component" version="2.5" method="upgrade">
 	<name>COM_MAPBUILDER</name>
 	<creationDate>2010-11-01</creationDate>
 	<author>Alonzo Turner</author>
@@ -7,13 +7,12 @@
 	<authorUrl>http://www.subtextproductions.com</authorUrl>
 	<copyright>Copyright 2007 - 2012 Subtext Productions</copyright>
 	<license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
-	<version>1.0</version>
+	<version>1.0.0</version>
 	<description><![CDATA[COM_MAPBUILDER_COMPONENT_DESCRIPTION]]></description>
 	<scriptfile>install.php</scriptfile>
 	<files folder="site">
 		<filename>controller.php</filename>
 		<filename>index.html</filename>
-		<folder>javascript</folder>
 		<folder>language</folder>
 		<filename>mapbuilder.php</filename>
 		<folder>models</folder>
@@ -35,6 +34,9 @@
 			<schemapath type="mysql">sql/updates/mysql</schemapath>
 		</schemas>
 	</update>
+	<media folder="media" destination="mapbuilder">
+	    <folder>javascript</folder>
+	</media>
 	<languages folder="site">
 		<language tag="en-GB">language/en-GB/en-GB.com_mapbuilder.ini</language>
 		<language tag="en-US">language/en-US/en-US.com_mapbuilder.ini</language>

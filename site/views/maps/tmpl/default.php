@@ -1,12 +1,22 @@
 <?php
 	// NO DIRECT ACCESS
 	defined( '_JEXEC' ) or die( 'Restricted access' );
-	// LOAD THE MOOTOOLS FRAMEWORK
-	JHtml::_('behavior.framework');
 	// SET DOCUMENT HEAD FOR PAGE
 	$document = JFactory::getDocument();
 	$document->addScript("//www.google.com/jsapi");
-	$document->addScript("/media/mapbuilder/javascript/maps.js", "text/javascript", true);
+	$options = JComponentHelper::getParams();
+	switch($options->get('js_framework')){
+	case 'mootools':
+		// LOAD THE MOOTOOLS FRAMEWORK
+		JHtml::_('behavior.framework');
+		$document->addScript("media/mapbuilder/javascript/maps.js", "text/javascript", true);
+		break;
+	case 'jquery':
+		// LOAD THE jQUERY FRAMEWORK
+		JHtml::_('bootstrap.framework');
+		$document->addScript("media/mapbuilder/javascript/maps-jquery.js", "text/javascript", true);
+		break;
+	}
 	if(trim($this->map->meta_keywords)){
 		$document->setMetaData('keywords', $this->map->meta_keywords);
 	}

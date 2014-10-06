@@ -3,6 +3,10 @@
 	<fields name="params">
 		<fieldset name="component">
 			<field name="default_id" type="menuitem" default="" label="COM_MAPBUILDER_CONFIG_DEFAULT_ID_LABEL" description="COM_MAPBUILDER_CONFIG_DEFAULT_ID_DESC" />
+			<field name="js_framework" type="radio" class="radio btn-group" default="mootools" label="COM_MAPBUILDER_CONFIG_JS_FRAMEWORK_LABEL" description="COM_MAPBUILDER_CONFIG_JS_FRAMEWORK_DESC">
+				<option value="mootools">MooTools</option>
+				<option value="jquery">jQuery</option>
+			</field>
 		</fieldset>
 	</fields>
 	<fields>

@@ -66,38 +66,10 @@ class com_mapbuilderInstallerScript
 	 * UPDATE
 	 */
 	public function update( $parent ) {
-		if(version_compare($this->release, "1.0", 'le')){
-		    $db     = JFactory::getDbo();
-		    $sql    = $db->getQuery(true);
-		    $ini    = new JRegistry();
-		    
-		    $sql->select("`map_id`, `attribs`");
-		    $sql->from("`#__mapbuilder_maps`");
-		    
-		    $db->setQuery($sql);
-		    foreach($db->loadObjectList() as $record){
-		        $ini->loadString($record->attribs, 'INI');
-		        $value = $ini->toString('JSON');
-		        $db->setQuery("UPDATE `#__mapbuilder_maps` SET `attribs` = '{$value}' WHERE `map_id` = {$record->map_id}");
-		        $db->query();
+		if(version_compare($this->release, "1.0.0", 'le')){
+		    if( file_exists(JPATH_ROOT."components/com_mapbuilder/javascript") ){
+		        $this->deleteDir(JPATH_ROOT."components/com_mapbuilder/javascript");
 		    }
-		    
-		    $sql->clear();
-		    $sql->select("`marker_id`, `attribs`");
-		    $sql->from("`#__map_marker`");
-		    
-		    $db->setQuery($sql);
-		    foreach($db->loadObjectList() as $record){
-		        $ini->loadString($record->attribs, 'INI');
-		        $value = $ini->toString('JSON');
-		        $db->setQuery("UPDATE `#__map_marker` SET `attribs` = '{$value}' WHERE `marker_id` = {$record->marker_id}");
-		        $db->query();
-		    }
-		    
-		    $db->setQuery("ALTER TABLE `#__mapbuilder_maps` ENGINE=InnoDB");
-		    if(!$db->query()) return false;
-		    $db->setQuery("ALTER TABLE `#__map_marker` ENGINE=InnoDB");
-		    if(!$db->query()) return false;
 		}
 		$this->install_status = "updated";
 		return '<p>' . JText::sprintf('COM_MAPBUILDER_MSG_SUCCESS_UPDATE', $this->release) . '</p>';

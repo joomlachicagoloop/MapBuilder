@@ -7,14 +7,11 @@
  * @license		GNU/GPL
  */
 
-
-jimport( 'joomla.application.component.view');
-
-class MapBuilderViewMaps extends JViewLegacy
+class MapBuilderViewMarkers extends JViewLegacy
 {
 	function display($tpl = null)
 	{
-		$layout = JRequest::getVar('layout', 'default', 'method', 'word');
+		$layout = JFactory::getApplication()->input->get('layout', 'default', 'word');
 		switch($layout){
 		case "ajax":
 			$this->markers = $this->get('Markers');

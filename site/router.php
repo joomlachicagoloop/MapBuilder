@@ -12,6 +12,10 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 function MapBuilderBuildRoute(&$query){
 	$segments	= array();
+	if(!empty($segments['view'])){
+		$segments[] = $query['view'];
+		unset($query['view']);
+	}
 	if(!empty($segments['layout'])){
 		$segments[] = $query['layout'];
 		unset($query['layout']);
@@ -29,8 +33,9 @@ function MapBuilderBuildRoute(&$query){
 
 function MapBuilderParseRoute($segments){
 	$query	= array();
-	$query['layout'] = $segments[0];
-	$query['id'] = array_shift(explode(":", $segments[1]));
+	$query['view'] = $segments[0];
+	$query['layout'] = $segments[1];
+	$query['id'] = array_shift(explode(":", $segments[2]));
 
 	return $query;
 }

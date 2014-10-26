@@ -14,7 +14,7 @@ jimport( 'joomla.application.component.modelform' );
 
 class MapBuilderModelMaps extends JModelForm
 {
-	function __construct(){
+	public function __construct(){
 		$user	= JFactory::getUser();
 		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS."tables");
 		parent::__construct();
@@ -25,7 +25,7 @@ class MapBuilderModelMaps extends JModelForm
 	 * Retrieve the default data for all published categories with appropriate user access.
 	 * @return array An array of object based results from the database
 	 */
-	function getMarkers(){
+	public function getMarkers(){
 		$user	= $this->getState('user');
 		$levels = implode(",", array_unique($user->getAuthorisedViewLevels()));
 		$id		= JRequest::getInt('id', 0, 'get');
@@ -49,7 +49,7 @@ class MapBuilderModelMaps extends JModelForm
 	 * Retrieve the maps listing data for the A-Z listing layout.
 	 * @return array An array of object based results from the database
 	 */
-	function getMap(){
+	public function getMap(){
 		$user	= $this->getState('user');
 		$id		= JRequest::getInt('id', 0);
 		$table  = $this->getTable();

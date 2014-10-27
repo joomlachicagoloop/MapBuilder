@@ -49,8 +49,8 @@
 	<input type="hidden" name="view" value="markers" />
 	<input type="hidden" name="task" value="" />
 	<input type="hidden" name="hidemainmenu" value="0" />
-	<input type="hidden" name="marker_id" value="<? echo $this->data->marker_id; ?>" />
-	<? echo JHTML::_('form.token')."\n"; ?>
+	<input type="hidden" name="marker_id" value="<?php echo $this->data->marker_id; ?>" />
+	<?php echo JHTML::_('form.token')."\n"; ?>
 	<div id="editcell">
 		<div class="width-60 fltlft">
 			<fieldset class="adminform">

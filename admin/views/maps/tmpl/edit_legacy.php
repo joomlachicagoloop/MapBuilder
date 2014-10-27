@@ -77,8 +77,8 @@
 	<input type="hidden" name="option" value="com_mapbuilder" />
 	<input type="hidden" name="task" value="" />
 	<input type="hidden" name="hidemainmenu" value="0" />
-	<input type="hidden" name="map_id" value="<? echo $this->form->getValue('map_id'); ?>" />
-	<? echo JHTML::_('form.token')."\n"; ?>
+	<input type="hidden" name="map_id" value="<?php echo $this->form->getValue('map_id'); ?>" />
+	<?php echo JHTML::_('form.token')."\n"; ?>
 	<div id="editcell">
 		<div class="width-60 fltlft">
 			<fieldset class="adminform">

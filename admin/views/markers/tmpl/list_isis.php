@@ -84,7 +84,7 @@
         <input type="hidden" name="hidemainmenu" value="0" />
         <input type="hidden" name="filter_order" value="<?php echo $this->filter->filter_order; ?>" />
         <input type="hidden" name="filter_order_Dir" value="<?php echo $this->filter->filter_order_Dir; ?>" />
-        <? echo JHTML::_('form.token')."\n"; ?>
+        <?php echo JHTML::_('form.token')."\n"; ?>
         <table class="table table-striped" id="data-table">
             <thead>
                 <tr>
@@ -188,7 +188,7 @@
             <tfoot>
                 <tr>
                     <td colspan="8">
-                        <? echo $this->page->getListFooter(); ?>
+                        <?php echo $this->page->getListFooter(); ?>
                     </td>
                 </tr>
             </tfoot>

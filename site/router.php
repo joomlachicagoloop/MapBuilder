@@ -12,21 +12,31 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 function MapBuilderBuildRoute(&$query){
 	$segments	= array();
-	if(!empty($segments['view'])){
+	$link = array();
+	if(!empty($query['view'])){
 		$segments[] = $query['view'];
+		$link[] = "view=".$query['view'];
 		unset($query['view']);
 	}
-	if(!empty($segments['layout'])){
+	if(!empty($query['layout'])){
 		$segments[] = $query['layout'];
+		$link[] = "layout=".$query['layout'];
 		unset($query['layout']);
 	}
-	if(!empty($segments['id'])){
+	if(!empty($query['id'])){
 		$segments[] = $query['id'];
+		$link[] = "id=".$query['id'];
 		unset($query['id']);
 	}
 	if(empty($query['Itemid'])){
 		$params = JComponentHelper::getParams('com_mapbuilder');
 		$query['Itemid'] = $params->get('params.default_id');
+	}else{
+		$menu = JFactory::getApplication()->getMenu();
+		$item = $menu->getItem($query['Itemid']);
+		if($item->link == ("index.php?option=com_mapbuilder&".implode("&", $link))){
+			return array();
+		}
 	}
 	return $segments;
 }
@@ -35,7 +45,8 @@ function MapBuilderParseRoute($segments){
 	$query	= array();
 	$query['view'] = $segments[0];
 	$query['layout'] = $segments[1];
-	$query['id'] = array_shift(explode(":", $segments[2]));
+	$parts = explode(":", $segments[2]);
+	$query['id'] = array_shift($parts);
 
 	return $query;
 }

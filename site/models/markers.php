@@ -10,9 +10,9 @@
 // CHECK TO ENSURE THIS FILE IS INCLUDED IN JOOMLA!
 defined('_JEXEC') or die();
 
-jimport( 'joomla.application.component.modelform' );
+jimport( 'joomla.application.component.modeladmin' );
 
-class MapBuilderModelMarkers extends JModelForm
+class MapBuilderModelMarkers extends JModelAdmin
 {
 	public function __construct(){
 		$user	= JFactory::getUser();
@@ -21,9 +21,13 @@ class MapBuilderModelMarkers extends JModelForm
 		$this->setState('user', $user);
 
 	}
+
 	/**
 	 * Retrieve the default data for all published categories with appropriate user access.
+	 *
 	 * @return array An array of object based results from the database
+	 *
+	 * @since 1.1.0
 	 */
 	public function getMarkers(){
 		$user	= $this->getState('user');
@@ -45,9 +49,13 @@ class MapBuilderModelMarkers extends JModelForm
 			return false;
 		}
 	}
+
 	/**
 	 * Retrieve the maps listing data for the A-Z listing layout.
+	 *
 	 * @return array An array of object based results from the database
+	 *
+	 * @since 1.1.0
 	 */
 	public function getMap(){
 		$user	= $this->getState('user');
@@ -56,12 +64,34 @@ class MapBuilderModelMarkers extends JModelForm
 		$table->load($id);
 		return $table;
 	}
-	
+
+	/**
+	 * Retrieve the populated JForm object.
+	 *
+	 * @throws InvalidArgumentException
+	 *
+	 * @return mixed On success a JForm object, on failure boolean false
+	 *
+	 * @since 1.1.0
+	 */
 	public function getForm($data = array(), $loadData = true){
 		if($form = $this->loadForm('com_mapbuilder.markers', 'markers', array('control'=>'jform', 'load_data'=>$loadData))){
 			return $form;
 		}
 		throw new InvalidArgumentException(JText::sprintf('JLIB_FORM_INVALID_FORM_OBJECT', 'markers'));
-		return null;
+		return false;
+	}
+
+	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return  array    The default data is an empty array.
+	 *
+	 * @since   1.1.0
+	 */
+	protected function loadFormData()
+	{
+		$id = JFactory::getApplication()->input->get('id', 0, 'int');
+		return array( 'map_id' => $id );
 	}
 }

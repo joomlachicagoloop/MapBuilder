@@ -12,7 +12,7 @@
 	<scriptfile>install.php</scriptfile>
 	<files folder="site">
 		<filename>controller.php</filename>
-		<folder>controllers</filename>
+		<folder>controllers</folder>
 		<filename>index.html</filename>
 		<folder>language</folder>
 		<filename>mapbuilder.php</filename>

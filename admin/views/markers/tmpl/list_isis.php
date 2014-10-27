@@ -84,7 +84,7 @@
         <input type="hidden" name="hidemainmenu" value="0" />
         <input type="hidden" name="filter_order" value="<?php echo $this->filter->filter_order; ?>" />
         <input type="hidden" name="filter_order_Dir" value="<?php echo $this->filter->filter_order_Dir; ?>" />
-        <? echo JHTML::_('form.token')."\n"; ?>
+        <?php echo JHTML::_('form.token')."\n"; ?>
         <table class="table table-striped" id="data-table">
             <thead>
                 <tr>
@@ -119,7 +119,7 @@
             $k = 0;
             for($i=0; $i < count($this->items); $i++){
                 $row		= $this->items[$i];
-                $checked	= JHtml::_('grid.id', $i, $row->map_id);
+                $checked	= JHtml::_('grid.id', $i, $row->marker_id);
                 $link		= JRoute::_('index.php?option=com_mapbuilder&task=markers.edit&marker_id='. $row->marker_id.'&'.JSession::getFormToken().'=1');
                 $canCreate  = $user->authorise('core.create',     'com_mapbuilder');
                 $canEdit    = $user->authorise('core.edit',       'com_mapbuilder');
@@ -188,7 +188,7 @@
             <tfoot>
                 <tr>
                     <td colspan="8">
-                        <? echo $this->page->getListFooter(); ?>
+                        <?php echo $this->page->getListFooter(); ?>
                     </td>
                 </tr>
             </tfoot>

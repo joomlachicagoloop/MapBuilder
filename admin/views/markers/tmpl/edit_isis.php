@@ -57,8 +57,8 @@
 	<input type="hidden" name="chosen" value="" />
 	<input type="hidden" name="boxchecked" value="0" />
 	<input type="hidden" name="hidemainmenu" value="0" />
-	<input type="hidden" name="marker_id" value="<? echo $this->form->getValue('marker_id'); ?>" />
-	<? echo JHTML::_('form.token')."\n"; ?>
+	<input type="hidden" name="marker_id" value="<?php echo $this->form->getValue('marker_id'); ?>" />
+	<?php echo JHTML::_('form.token')."\n"; ?>
 	<div id="editcell">
 		<div class="span9 pull-left">
 			<fieldset class="adminform">

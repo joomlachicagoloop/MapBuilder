@@ -35,6 +35,8 @@
 		</schemas>
 	</update>
 	<media folder="media" destination="mapbuilder">
+		<folder>images</folder>
+		<filename>index.html</filename>
 	    <folder>javascript</folder>
 	</media>
 	<languages folder="site">

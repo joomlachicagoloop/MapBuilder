@@ -39,11 +39,11 @@
 	if($this->params->get('show_title')){
 ?>
 
-<h1><? echo $this->map->map_name; ?></h1>
+<h1><?php echo $this->map->map_name; ?></h1>
 
-<?	} ?>
-<div class="mapbuilder" id="map-id-<? echo $this->map->map_id; ?>" data-id="<? echo $this->map->map_id; ?>" data-zoom="<? echo $this->params->get('zoom'); ?>" data-lat="<? echo $this->params->get('center_lat'); ?>" data-lng="<? echo $this->params->get('center_lng'); ?>"></div>
+<?php	} ?>
+<div class="mapbuilder" id="map-id-<?php echo $this->map->map_id; ?>" data-id="<?php echo $this->map->map_id; ?>" data-zoom="<?php echo $this->params->get('zoom'); ?>" data-lat="<?php echo $this->params->get('center_lat'); ?>" data-lng="<?php echo $this->params->get('center_lng'); ?>"></div>
 
-<?	if($this->params->get('show_description')){ ?>
-<p><? echo $this->map->map_description; ?></p>
-<?	}
+<?php	if($this->params->get('show_description')){ ?>
+<p><?php echo $this->map->map_description; ?></p>
+<?php	}

@@ -30,14 +30,22 @@
 		$style .= "height: {$height}px;";
 	}
 	$style .= "}";
-	$style .= " #marker-submit-form.form-horizontal .control-label { width: 100px; }";
-	$style .= " #marker-submit-form.form-horizontal .controls { margin-left: 120px; }";
-	$style .= " #marker-submit-form.form-horizontal .input-append input { width: 168px; }";
+	$style .= " #mapbuilder-submit-form.form-horizontal .control-label { width: 100px; }";
+	$style .= " #mapbuilder-submit-form.form-horizontal .controls { margin-left: 120px; }";
+	$style .= " #mapbuilder-submit-form.form-horizontal .input-append input { width: 168px; }";
 	$document->addStyleDeclaration($style);
 ?>
-<form action="/index.php" method="post" id="marker-submit-form" class="form-horizontal form-validate">
+<form action="/index.php" method="post" id="mapbuilder-submit-form" class="form-horizontal form-validate">
 	<input type="hidden" name="option" value="com_mapbuilder" />
-	<input type="hidden" name="task" value="mapbuilder.addmarker" />
+	<input type="hidden" name="layout" value="submit" />
+	<input type="hidden" name="marker_id" value="" />
+	<input type="hidden" name="map_id" value="<?php echo $this->map->map_id; ?>" />
+	<input type="hidden" name="task" value="markers.save" />
+	<?php
+	foreach($this->form->getFieldset('hidden') as $field){
+		echo $field->renderField();
+	}
+	?>
 	<?php echo JHTML::_('form.token')."\n"; ?>
 	<div class="row-fluid">
 		<div class="span6">
@@ -60,7 +68,8 @@
 			<div class="control-group">
 				<div class="controls">
 					<button type="submit" class="btn btn-info validate">Submit</button>
-					<button class="btn btn-success active">Start Tracking</button>
+					<button class="btn btn-success" id="mapbuilder-tracking">Start Tracking</button>
+					<img id="mapbuilder-spinner" class="hidden" src="/media/mapbuilder/images/spinner.gif" alt="Loading..." title="" />
 				</div>
 			</div>
 		</div>

@@ -104,7 +104,7 @@ class com_mapbuilderInstallerScript
 	 * UNINSTALL
 	 */
 	public function uninstall($parent){
-		if(!isset($this->release)) $this->release = '1.0';
+		if(!isset($this->release)) $this->release = '1.0.2';
 		echo '<p>' . JText::sprintf('COM_MAPBUILDER_MSG_SUCCESS_UNINSTALL', $this->release) . '</p>';
 	}
  

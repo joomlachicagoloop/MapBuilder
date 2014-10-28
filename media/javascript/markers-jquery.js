@@ -17,6 +17,10 @@
 			this.search = $.proxy(this.searchForLocation, this);
 			this.track = $.proxy(this.trackLocation, this);
 			this.autoload = $.proxy(this.mapsInitialized, this);
+			this.submit = $.proxy(this.submitFormViaAjax, this);
+			this.success = $.proxy(this.handleAjaxSuccess, this);
+			this.error = $.proxy(this.handleAjaxError, this);
+			this.counter = 0;
 			if(typeof google != 'undefined'){
 			    google.load("maps", "3.1", { other_params: "sensor=false", callback: this.autoload });
 		    }
@@ -115,6 +119,8 @@
         	var form = $('#mapbuilder-submit-form').get(0);
         	var button = $(evt.delegateTarget);
         	if( button.hasClass( 'active' ) ){
+        	    if( this.timeout ) clearTimeout(this.timeout);
+        	    if( this.watchid ) navigator.geolocation.clearWatch( this.watchid );
         		button.removeClass( 'active' );
         		button.removeClass( 'btn-danger' );
         		button.addClass( 'btn-success' );
@@ -124,12 +130,37 @@
 				if(!document.formvalidator.isValid(form)){
 					return false;
 				}
+				if(!navigator.geolocation){
+				    $('#system-message-container').html('<div class="alert alert-info"><button type="button" class="close" data-dismiss="alert">&times;</button><h4>Sorry</h4>This device does not support geolocation, please search for your current location city & state, zip code, or any nearby landmark.</div>');
+				    return false;
+				}
+				this.watchid = navigator.geolocation.watchPosition( function(pos){
+					$('#jform_marker_lng').val(pos.coords.longitude);
+					$('#jform_marker_lat').val(pos.coords.latitude);
+				});
+				this.submit();
         		button.removeClass('btn-success');
         		button.addClass('btn-danger');
         		button.addClass('active');
         		button.html('Stop Tracking');
         		$( '#mapbuilder-spinner' ).removeClass( 'hidden' );
         	}
+        }
+        
+        MapBuilderUI.prototype.submitFormViaAjax = function(){
+            var formData = $('#mapbuilder-submit-form').serialize();
+            formData += '&tmpl=component';
+            $.ajax("/index.php", { type: "POST", data: formData, success: this.success, error: this.error });
+        }
+        
+        MapBuilderUI.prototype.handleAjaxSuccess = function(msg){
+            this.counter++;
+            $('#system-message-container').html('<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><h4>Success!</h4>You have added '+this.counter+' markers. A new marker will be added every 60 seconds.</div>');
+            this.timeout = setTimeout(this.submit, 60000);
+        }
+        
+        MapBuilderUI.prototype.handleAjaxError = function(xhr, msg, exception){
+        
         }
         
         MapBuilderUI.prototype.geoLocate = function(location){

@@ -1,0 +1,67 @@
+@media (min-width: 768px)
+{
+	#mapbuilder-submit-form .input-append input { width: 168px; }
+}
+
+@media (min-width: 980px)
+{
+	#mapbuilder-submit-form input,
+	  #mapbuilder-submit-form textarea,
+	  #mapbuilder-submit-form select,
+	  #mapbuilder-submit-form .help-inline,
+	  #mapbuilder-submit-form .uneditable-input,
+	  #mapbuilder-submit-form .input-prepend,
+	  #mapbuilder-submit-form .input-append
+	{
+		display: inline-block;
+		*display: inline;
+		/* IE7 inline-block hack */
+		*zoom: 1;
+		margin-bottom: 0;
+		vertical-align: middle;
+	}
+	
+	#mapbuilder-submit-form .hide { display: none; }
+	
+	#mapbuilder-submit-form .control-group
+	{
+		margin-bottom: 20px;
+		*zoom: 1;
+	}
+	
+	#mapbuilder-submit-form .control-group:before,
+	  #mapbuilder-submit-form .control-group:after
+	{
+		display: table;
+		content: "";
+		line-height: 0;
+	}
+	
+	#mapbuilder-submit-form .control-group:after { clear: both; }
+	
+	#mapbuilder-submit-form .control-label
+	{
+		float: left;
+		width: 100px;
+		padding-top: 5px;
+		text-align: right;
+	}
+	
+	#mapbuilder-submit-form .controls
+	{
+		*display: inline-block;
+		*padding-left: 20px;
+		margin-left: 120px;
+		*margin-left: 0;
+	}
+	
+	#mapbuilder-submit-form .controls:first-child { *padding-left: 180px; }
+	#mapbuilder-submit-form .help-block { margin-bottom: 0; }
+	#mapbuilder-submit-form input + .help-block,
+	  #mapbuilder-submit-form select + .help-block,
+	  #mapbuilder-submit-form textarea + .help-block,
+	  #mapbuilder-submit-form .uneditable-input + .help-block,
+	  #mapbuilder-submit-form .input-prepend + .help-block,
+	  #mapbuilder-submit-form .input-append + .help-block { margin-top: 10px; }
+	#mapbuilder-submit-form .form-actions { padding-left: 180px; }
+}

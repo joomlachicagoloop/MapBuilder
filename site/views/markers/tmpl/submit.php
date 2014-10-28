@@ -30,12 +30,10 @@
 		$style .= "height: {$height}px;";
 	}
 	$style .= "}";
-	$style .= " #mapbuilder-submit-form.form-horizontal .control-label { width: 100px; }";
-	$style .= " #mapbuilder-submit-form.form-horizontal .controls { margin-left: 120px; }";
-	$style .= " #mapbuilder-submit-form.form-horizontal .input-append input { width: 168px; }";
 	$document->addStyleDeclaration($style);
+	$document->addStyleSheet("/media/mapbuilder/css/submit-bootstrap-2.css");
 ?>
-<form action="/index.php" method="post" id="mapbuilder-submit-form" class="form-horizontal form-validate">
+<form action="/index.php" method="post" id="mapbuilder-submit-form" class="form-validate">
 	<input type="hidden" name="option" value="com_mapbuilder" />
 	<input type="hidden" name="layout" value="submit" />
 	<input type="hidden" name="marker_id" value="" />

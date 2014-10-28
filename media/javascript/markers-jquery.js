@@ -154,13 +154,38 @@
         }
         
         MapBuilderUI.prototype.handleAjaxSuccess = function(msg){
+        	var matches = msg.match(/<div id="system-message-container">[\s\S]+?<div class="alert (alert-\w+)">([\s\S]+?)<\/p>/g);
+        	var response = matches[0];
+        	var alert = RegExp.$1;
+        	var heading = response.match(/<h4.*?>(.*)<\/h4>/g);
+        	var message = response.match(/<p>(.*)<\/p>/g);
+        	if(alert == 'alert-error'){
+            	$('#system-message-container').html('<div class="alert '+alert+'"><button type="button" class="close" data-dismiss="alert">&times;</button>'+heading[0]+message[0]+'</div>');
+        	    if( this.timeout ) clearTimeout(this.timeout);
+        	    if( this.watchid ) navigator.geolocation.clearWatch( this.watchid );
+        		var button = $('#mapbuilder-tracking');
+        		button.removeClass( 'active' );
+        		button.removeClass( 'btn-danger' );
+        		button.addClass( 'btn-success' );
+        		button.html('Start Tracking');
+        		$( '#mapbuilder-spinner' ).addClass( 'hidden' );
+        		return false;
+        	}
             this.counter++;
-            $('#system-message-container').html('<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><h4>Success!</h4>You have added '+this.counter+' markers. A new marker will be added every 60 seconds.</div>');
+            $('#system-message-container').html('<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>'+heading[0]+'<p>You have added '+this.counter+' markers. A new marker will be added every 60 seconds.</p></div>');
             this.timeout = setTimeout(this.submit, 60000);
         }
         
         MapBuilderUI.prototype.handleAjaxError = function(xhr, msg, exception){
-        
+            $('#system-message-container').html('<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button><h4 class="alert-heading">Error!</h4><p>'+msg+'</p></div>');
+			if( this.timeout ) clearTimeout(this.timeout);
+			if( this.watchid ) navigator.geolocation.clearWatch( this.watchid );
+			var button = $('#mapbuilder-tracking');
+			button.removeClass( 'active' );
+			button.removeClass( 'btn-danger' );
+			button.addClass( 'btn-success' );
+			button.html('Start Tracking');
+			$( '#mapbuilder-spinner' ).addClass( 'hidden' );
         }
         
         MapBuilderUI.prototype.geoLocate = function(location){

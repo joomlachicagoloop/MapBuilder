@@ -41,9 +41,9 @@
 
 <h1><?php echo $this->map->map_name; ?></h1>
 
-<?	} ?>
+<?php	} ?>
 <div class="mapbuilder" id="map-id-<?php echo $this->map->map_id; ?>" data-id="<?php echo $this->map->map_id; ?>" data-zoom="<?php echo $this->params->get('zoom'); ?>" data-lat="<?php echo $this->params->get('center_lat'); ?>" data-lng="<?php echo $this->params->get('center_lng'); ?>"></div>
 
-<?	if($this->params->get('show_description')){ ?>
+<?php	if($this->params->get('show_description')){ ?>
 <p><?php echo $this->map->map_description; ?></p>
-<?	}
+<?php	}

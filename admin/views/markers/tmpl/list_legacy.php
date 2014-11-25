@@ -62,7 +62,7 @@
 			</tr>
 		</thead>
 		<tbody>
-		<?
+		<?php
 		$k = 0;
 		for($i=0; $i < count($this->items); $i++){
 			$row		= $this->items[$i];
@@ -82,7 +82,7 @@
 					<?php echo $checked; ?>
 				</td>
 				<td>
-					<?
+					<?php
 					if($row->checked_out){
 						echo JHtml::_('jgrid.checkedout', $i, $row->editor, $row->checked_out_time, 'markers.', $canCheckin);
 						echo "<span class=\"title\">".JText::_( $row->marker_name)."</span>";
@@ -116,7 +116,7 @@
 					<?php echo $row->marker_id; ?>
 				</td>
 			</tr>
-			<?
+			<?php
 			$k = 1 - $k;
 		}
 		?>

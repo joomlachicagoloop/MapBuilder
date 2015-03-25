@@ -158,12 +158,14 @@ class MapBuilderModelMarkers extends JModelAdmin
     	}else{
     		$ordering = $ordering." ".$order_dir;
     	}
-
+		// added join to users to pick up editor ID 11/25/14
 		$sql = "SELECT ".
 		"SQL_CALC_FOUND_ROWS m.*, map.*, m.ordering AS ordervalue, ".
-		"v.`title` AS `access` ".
+		"v.`title` AS `access`, ".
+                                    "u.`username` AS `editor` ".
 		"FROM `{$row->getTableName()}` m LEFT JOIN `#__mapbuilder_maps` map USING(`map_id`) ".
-		"LEFT JOIN `#__viewlevels` v ON m.`access` = v.`id`";
+		"LEFT JOIN `#__viewlevels` v ON m.`access` = v.`id` ".
+                                    "LEFT JOIN `#__users` u ON m.`access` = v.`id`";
 		if(count($filter)){
 			$sql .= " WHERE " . implode(" AND ", $filter);
 		}

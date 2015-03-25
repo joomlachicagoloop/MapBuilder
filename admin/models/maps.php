@@ -134,11 +134,14 @@ class MapBuilderModelMaps extends JModelAdmin
     	if(!$order_dir = $mainframe->getUserState($option.'.'.$scope.'.filter_order_Dir')){
     		$order_dir = "ASC";
     	}
+		// added join to user table to pick up editor field 11/25/14
 		$sql = "SELECT ".
 		"SQL_CALC_FOUND_ROWS a.*, ".
-		"v.`title` AS `access` ".
+		"v.`title` AS `access`, ".
+                                    "u.`username` AS `editor` ".
 		"FROM `{$row->getTableName()}` a ".
-		"LEFT JOIN `#__viewlevels` v ON a.`access` = v.`id`";
+		"LEFT JOIN `#__viewlevels` v ON a.`access` = v.`id` ".
+                                    "LEFT JOIN `#__users` u ON a.`access` = v.`id`";
 		if(count($filter)){
 			$sql .= " WHERE " . implode(" AND ", $filter);
 		}

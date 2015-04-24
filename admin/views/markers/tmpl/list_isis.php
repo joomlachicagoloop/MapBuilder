@@ -168,7 +168,7 @@
                         ?>
                     </td>
                     <td class="nowrap">
-                        <?php echo $row->marker_name; ?>
+                        <?php echo $row->map_name; ?>
                     </td>
                     <td align="center">
                         <?php echo $row->access; ?>

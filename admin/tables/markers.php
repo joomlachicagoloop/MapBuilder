@@ -58,7 +58,6 @@ class TableMarkers extends JTable
 		if(!parent::store($updateNulls)){
 			return false;
 		}
-		$this->reorder("map_id = {$this->map_id}");
 		return true;
 	}
 }

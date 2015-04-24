@@ -9,7 +9,7 @@
 	$sortFields['marker_name'] = JText::_('COM_MAPBUILDER_LIST_MARKER_NAME_LABEL');
 	$sortFields['map_name'] = JText::_('COM_MAPBUILDER_LIST_MAP_NAME_LABEL');
 	$sortFields['marker.published'] = JText::_('COM_MAPBUILDER_LIST_PUBLISHED_LABEL');
-	$sortFields['marker.ordering'] = JText::_('COM_MAPBUILDER_LIST_ORDERING_LABEL');
+	$sortFields['ordering'] = JText::_('COM_MAPBUILDER_LIST_ORDERING_LABEL');
 	$sortFields['marker.access'] = JText::_('COM_MAPBUILDER_LIST_ACCESS_LABEL');
 	$sortFields['marker_id'] = JText::_('COM_MAPBUILDER_LIST_ID_LABEL');
 	$saveOrder = $this->filter->filter_order == 'marker.ordering';
@@ -119,7 +119,7 @@
             $k = 0;
             for($i=0; $i < count($this->items); $i++){
                 $row		= $this->items[$i];
-                $checked	= JHtml::_('grid.id', $i, $row->map_id);
+                $checked	= JHtml::_('grid.id', $i, $row->marker_id);
                 $link		= JRoute::_('index.php?option=com_mapbuilder&task=markers.edit&marker_id='. $row->marker_id.'&'.JSession::getFormToken().'=1');
                 $canCreate  = $user->authorise('core.create',     'com_mapbuilder');
                 $canEdit    = $user->authorise('core.edit',       'com_mapbuilder');

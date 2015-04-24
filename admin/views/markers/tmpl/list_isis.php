@@ -12,7 +12,7 @@
 	$sortFields['ordering'] = JText::_('COM_MAPBUILDER_LIST_ORDERING_LABEL');
 	$sortFields['marker.access'] = JText::_('COM_MAPBUILDER_LIST_ACCESS_LABEL');
 	$sortFields['marker_id'] = JText::_('COM_MAPBUILDER_LIST_ID_LABEL');
-	$saveOrder = $this->filter->filter_order == 'marker.ordering';
+	$saveOrder = $this->filter->filter_order == 'ordering';
 	if ($saveOrder)
 	{
 		$saveOrderingUrl = 'index.php?option=com_mapbuilder&task=markers.saveOrderAjax&tmpl=component';
@@ -89,7 +89,7 @@
             <thead>
                 <tr>
                     <th width="1%" class="nowrap center hidden-phone">
-                        <?php echo JHtml::_('grid.sort', '<i class="icon-menu-2"></i>', 'marker.ordering', $this->filter->filter_order_Dir, $this->filter->filter_order, null, 'asc', 'JGRID_HEADING_ORDERING'); ?>
+                        <?php echo JHtml::_('grid.sort', '<i class="icon-menu-2"></i>', 'ordering', $this->filter->filter_order_Dir, $this->filter->filter_order, null, 'asc', 'JGRID_HEADING_ORDERING'); ?>
                     </th>
                     <th width="5">
                         <input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(this)" />

@@ -146,30 +146,37 @@ class MapBuilderModelMarkers extends JModelAdmin
     	}
     	$map = $mainframe->getUserState($option.'.'.$scope.'.filter_map');
     	if($map != -1 && $map){
-    		$filter[] = "m.`map_id` = {$map}";
+    		$filter[] = "marker.`map_id` = {$map}";
     	}
     	if(!$order_dir = $mainframe->getUserState($option.'.'.$scope.'.filter_order_Dir')){
     		$order_dir = "ASC";
     	}
     	if(!$ordering = $mainframe->getUserState($option.'.'.$scope.'.filter_order')){
-    		$ordering = "map.`ordering` {$order_dir}, m.`ordering` {$order_dir}";
+    		$ordering = "map.`ordering` {$order_dir}, marker.`ordering` {$order_dir}";
     	}elseif($ordering == "ordering"){
-    		$ordering = "map.`ordering` {$order_dir}, m.`ordering` {$order_dir}";
+    		$ordering = "map.`ordering` {$order_dir}, marker.`ordering` {$order_dir}";
     	}else{
     		$ordering = $ordering." ".$order_dir;
     	}
-		// added join to users to pick up editor ID 11/25/14
-		$sql = "SELECT ".
-		"SQL_CALC_FOUND_ROWS m.*, map.*, m.ordering AS ordervalue, ".
-		"v.`title` AS `access`, ".
-                                    "u.`username` AS `editor` ".
-		"FROM `{$row->getTableName()}` m LEFT JOIN `#__mapbuilder_maps` map USING(`map_id`) ".
-		"LEFT JOIN `#__viewlevels` v ON m.`access` = v.`id` ".
-                                    "LEFT JOIN `#__users` u ON m.`access` = v.`id`";
-		if(count($filter)){
-			$sql .= " WHERE " . implode(" AND ", $filter);
+
+		$sql = $this->_db->getQuery(true);
+		$sql->select( "SQL_CALC_FOUND_ROWS marker.*" );
+		$sql->select( "`map`.`map_name`, map.map_alias" );
+		$sql->select( "`marker`.`ordering` AS `ordering`" );
+		$sql->select( "`map`.`ordering` AS `map_ordering`" );
+		$sql->select( "u.`name` AS `editor`" );
+		$sql->select( "v.`title` AS `access`" );
+		$sql->from( $this->_db->quoteName( $row->getTableName() )." AS `marker`" );
+		$sql->join( "left", "`#__mapbuilder_maps` AS `map` USING(`map_id`)" );
+		$sql->join( "left", "`#__viewlevels` AS `v` ON marker.`access` = v.`id`" );
+    	$sql->join( "left", "`#__users` AS `u` ON marker.`checked_out` = u.`id`");
+		if( count($filter) > 0 ){
+			foreach( $filter as $condition ){
+				$sql->where( $condition );
+			}
 		}
-		$sql .= " ORDER BY {$ordering}";
+		$sql->order( $ordering );
+		
 		$this->_data = $this->_getList($sql, $this->getState('limitstart'), $this->getState('limit'));
 
     	return $this->_data;

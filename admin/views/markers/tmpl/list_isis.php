@@ -9,10 +9,10 @@
 	$sortFields['marker_name'] = JText::_('COM_MAPBUILDER_LIST_MARKER_NAME_LABEL');
 	$sortFields['map_name'] = JText::_('COM_MAPBUILDER_LIST_MAP_NAME_LABEL');
 	$sortFields['marker.published'] = JText::_('COM_MAPBUILDER_LIST_PUBLISHED_LABEL');
-	$sortFields['marker.ordering'] = JText::_('COM_MAPBUILDER_LIST_ORDERING_LABEL');
+	$sortFields['ordering'] = JText::_('COM_MAPBUILDER_LIST_ORDERING_LABEL');
 	$sortFields['marker.access'] = JText::_('COM_MAPBUILDER_LIST_ACCESS_LABEL');
 	$sortFields['marker_id'] = JText::_('COM_MAPBUILDER_LIST_ID_LABEL');
-	$saveOrder = $this->filter->filter_order == 'marker.ordering';
+	$saveOrder = $this->filter->filter_order == 'ordering';
 	if ($saveOrder)
 	{
 		$saveOrderingUrl = 'index.php?option=com_mapbuilder&task=markers.saveOrderAjax&tmpl=component';
@@ -89,7 +89,7 @@
             <thead>
                 <tr>
                     <th width="1%" class="nowrap center hidden-phone">
-                        <?php echo JHtml::_('grid.sort', '<i class="icon-menu-2"></i>', 'marker.ordering', $this->filter->filter_order_Dir, $this->filter->filter_order, null, 'asc', 'JGRID_HEADING_ORDERING'); ?>
+                        <?php echo JHtml::_('grid.sort', '<i class="icon-menu-2"></i>', 'ordering', $this->filter->filter_order_Dir, $this->filter->filter_order, null, 'asc', 'JGRID_HEADING_ORDERING'); ?>
                     </th>
                     <th width="5">
                         <input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(this)" />
@@ -119,7 +119,7 @@
             $k = 0;
             for($i=0; $i < count($this->items); $i++){
                 $row		= $this->items[$i];
-                $checked	= JHtml::_('grid.id', $i, $row->map_id);
+                $checked	= JHtml::_('grid.id', $i, $row->marker_id);
                 $link		= JRoute::_('index.php?option=com_mapbuilder&task=markers.edit&marker_id='. $row->marker_id.'&'.JSession::getFormToken().'=1');
                 $canCreate  = $user->authorise('core.create',     'com_mapbuilder');
                 $canEdit    = $user->authorise('core.edit',       'com_mapbuilder');
@@ -168,7 +168,7 @@
                         ?>
                     </td>
                     <td class="nowrap">
-                        <?php echo $row->marker_name; ?>
+                        <?php echo $row->map_name; ?>
                     </td>
                     <td align="center">
                         <?php echo $row->access; ?>

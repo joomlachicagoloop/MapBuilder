@@ -6,13 +6,15 @@
 	JHtml::_('behavior.keepalive');
 	JHtml::_('bootstrap.tooltip');
 	JHtml::_('behavior.formvalidation');
-	$style	= "";
+	$style	= "#map-preview_ { ";
 	if($width = $this->form->getValue('map_width', 'params', 0)){
-		$style .= "width: {$width}px;";
+		$style .= "width: {$width}px;max-width: 100%;";
 	}
 	if($height = $this->form->getValue('map_height', 'params', 0)){
 		$style .= "height: {$height}px;";
 	}
+	$style .= " }";
+	$document->addStyleDeclaration( $style );
 ?>
 <script type="text/javascript">
 //<![CDATA[
@@ -69,50 +71,51 @@
 	<input type="hidden" name="hidemainmenu" value="0" />
 	<input type="hidden" name="map_id" value="<?php echo $this->form->getValue('map_id'); ?>" />
 	<?php echo JHTML::_('form.token')."\n"; ?>
-	<div id="editcell">
-		<div class="span9 pull-left">
-			<fieldset class="adminform">
-				<legend><?php echo JText::_('COM_MAPBUILDER_FORM_LEGEND_BASIC'); ?></legend>
-				<?php foreach($this->form->getFieldset('base') as $field){ ?>
-					<div class="control-group">
-						<?php echo $field->label; ?>
-						<div class="controls"><?php echo $field->input; ?></div>
-					</div>
-				<?php } ?>
-			</fieldset>
-			<fieldset>
-				<legend><?php echo JText::_('COM_MAPBUILDER_FORM_LEGEND_PREVIEW'); ?></legend>
-				<div id="map-preview_" style="<?php echo $style; ?>"></div>
-			</fieldset>
+	
+	<div class="form-inline form-inline-header">
+	    <?php echo $this->form->renderField('map_name'); ?>
+	    <?php echo $this->form->renderField('map_alias'); ?>
+	</div>
+	
+	<div id="editcell" class="form-horizontal">
+	    <?php echo JHtml::_('bootstrap.startTabSet', 'myTab', array('active' => 'map')); ?>
+        
+        <?php echo JHtml::_('bootstrap.addTab', 'myTab', 'map', JText::_('COM_MAPBUILDER_FORM_LEGEND_SETTINGS', true)); ?>
+        <div class="row-fluid">
+            <div class="span5">
+                <?php echo $this->form->renderField('map_width', 'params'); ?>
+                <?php echo $this->form->renderField('map_height', 'params'); ?>
+                <?php echo $this->form->renderField('center_lat', 'params'); ?>
+                <?php echo $this->form->renderField('center_lng', 'params'); ?>
+                <?php echo $this->form->renderField('zoom', 'params'); ?>
+                <?php echo $this->form->renderField('map_description'); ?>
+            </div>
+            <div class="span7">
+                <div id="map-preview_"></div>
+            </div>
+        </div>
+        <?php echo JHtml::_('bootstrap.endTab'); ?>
+        
+        <?php echo JHtml::_('bootstrap.addTab', 'myTab', 'options', JText::_('COM_MAPBUILDER_FORM_LEGEND_OPTIONS', true)); ?>
+        <div class="row-fluid">
+            <div class="span3">
+                <?php echo $this->form->renderField('show_title', 'params'); ?>
+                <?php echo $this->form->renderField('show_description', 'params'); ?>
+                <?php echo $this->form->renderField('published'); ?>
+                <?php echo $this->form->renderField('access'); ?>
+            </div>
 		</div>
-		<div class="span3 pull-left">
-			<fieldset class="adminform">
-				<legend><?php echo JText::_('COM_MAPBUILDER_FORM_LEGEND_OPTIONS'); ?></legend>
-				<?php foreach($this->form->getFieldset('options') as $field){ ?>
-					<div class="control-group">
-						<?php echo $field->label; ?>
-						<div class="controls"><?php echo $field->input; ?></div>
-					</div>
-				<?php } ?>
-			</fieldset>
-			<fieldset class="adminform">
-				<legend><?php echo JText::_('COM_MAPBUILDER_FORM_LEGEND_PARAMS'); ?></legend>
-				<?php foreach($this->form->getFieldset('params') as $field){ ?>
-					<div class="control-group">
-						<?php echo $field->label; ?>
-						<div class="controls"><?php echo $field->input; ?></div>
-					</div>
-				<?php } ?>
-			</fieldset>
-			<fieldset class="adminform">
-				<legend><?php echo JText::_('COM_MAPBUILDER_FORM_LEGEND_METADATA'); ?></legend>
-				<?php foreach($this->form->getFieldset('metadata') as $field){ ?>
-					<div class="control-group">
-						<?php echo $field->label; ?>
-						<div class="controls"><?php echo $field->input; ?></div>
-					</div>
-				<?php } ?>
-			</fieldset>
-		</div>
+		<?php echo JHtml::_('bootstrap.endTab'); ?>
+	    
+	    <?php echo JHtml::_('bootstrap.addTab', 'myTab', 'basic', JText::_('COM_MAPBUILDER_FORM_LEGEND_METADATA', true)); ?>
+	    <div class="row-fluid">
+            <div class="span9">
+                <?php echo $this->form->renderField('meta_keywords'); ?>
+                <?php echo $this->form->renderField('meta_description'); ?>
+            </div>
+        </div>
+        <?php echo JHtml::_('bootstrap.endTab'); ?>
+
+		<?php echo JHtml::_('bootstrap.endTabSet'); ?>
 	</div>
 </form>

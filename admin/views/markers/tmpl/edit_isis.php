@@ -58,43 +58,55 @@
 	<input type="hidden" name="boxchecked" value="0" />
 	<input type="hidden" name="hidemainmenu" value="0" />
 	<input type="hidden" name="marker_id" value="<?php echo $this->form->getValue('marker_id'); ?>" />
+	<?php echo $this->form->renderField('map_width', 'params'); ?>
+	<?php echo $this->form->renderField('map_height', 'params'); ?>
+	<?php echo $this->form->renderField('center_lat', 'params'); ?>
+	<?php echo $this->form->renderField('center_lng', 'params'); ?>
+	<?php echo $this->form->renderField('zoom', 'params'); ?>
+	
+	
+	
+	
 	<?php echo JHTML::_('form.token')."\n"; ?>
-	<div id="editcell">
-		<div class="span9 pull-left">
-			<fieldset class="adminform">
-				<legend><?php echo JText::_('COM_MAPBUILDER_FORM_LEGEND_BASIC'); ?></legend>
-				<?php foreach($this->form->getFieldset('base') as $field){ ?>
-					<div class="control-group">
-						<?php echo $field->label; ?>
-						<div class="controls"><?php echo $field->input; ?></div>
-					</div>
-				<?php } ?>
-				<div class="clr"></div>
-				<?php echo $this->form->getLabel('marker_description'); ?>
-				<div class="clr"></div>
-				<?php echo $this->form->getInput('marker_description'); ?>
-			</fieldset>
-			<fieldset>
-				<legend><?php echo JText::_('COM_MAPBUILDER_FORM_LEGEND_PREVIEW'); ?></legend>
-				<div id="map-preview_"></div>
-			</fieldset>
+	
+	<div class="form-linline form-inline-header">
+	    <?php echo $this->form->renderField('marker_name'); ?>
+	    <?php echo $this->form->renderField('marker_alias'); ?>
+	</div>
+	<div id="editcell" class="form-horizontal">
+	    <?php echo JHtml::_('bootstrap.startTabSet', 'myTab', array('active' => 'marker')); ?>
+	    
+	    <?php echo JHtml::_('bootstrap.addTab', 'myTab', 'marker', JText::_('COM_MAPBUILDER_FORM_LEGEND_SETTINGS', true)); ?>
+        <div class="row-fluid">
+            <div class="span5">
+                <?php echo $this->form->renderField('map_id'); ?>
+                <?php echo $this->form->renderField('icon_id'); ?>
+                <?php echo $this->form->renderField('icon_color'); ?>
+	            <?php echo $this->form->renderField('marker_lat'); ?>
+	            <?php echo $this->form->renderField('marker_lng'); ?>
+            </div>
+            <div class="span7">
+                <div id="map-preview_"></div>
+            </div>
+        </div>
+		<?php echo JHtml::_('bootstrap.endTab'); ?>
+		
+		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'options', JText::_('COM_MAPBUILDER_FORM_LEGEND_OPTIONS', true)); ?>
+		<div class="row-fluid">
+		    <div class="span5">
+		    </div>
 		</div>
-		<div class="span3 pull-left">
-			<fieldset class="adminform">
-				<legend><?php echo JText::_('COM_MAPBUILDER_FORM_LEGEND_OPTIONS'); ?></legend>
-				<?php foreach($this->form->getFieldset('options') as $field){ ?>
-					<div class="control-group">
-						<?php echo $field->label; ?>
-						<div class="controls"><?php echo $field->input; ?></div>
-					</div>
-				<?php } ?>
-				<?php foreach($this->form->getFieldset('params') as $field){ ?>
-					<div class="control-group">
-						<?php echo $field->label; ?>
-						<div class="controls"><?php echo $field->input; ?></div>
-					</div>
-				<?php } ?>
-			</fieldset>
+		<?php echo JHtml::_('bootstrap.endTab'); ?>
+		
+		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'pagecontent', JText::_('COM_MAPBUILDER_FORM_LEGEND_CONTENT', true)); ?>
+		<div class="row-fluid">
+		    <div class="span12">
+		        <?php echo $this->form->getInput('marker_description'); ?>
+
+		    </div>
 		</div>
+		<?php echo JHtml::_('bootstrap.endTab'); ?>
+		
+		<?php echo JHtml::_('bootstrap.endTabSet'); ?>
 	</div>
 </form>

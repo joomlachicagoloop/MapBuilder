@@ -65,7 +65,7 @@
 			</tr>
 		</thead>
 		<tbody>
-		<?
+		<?php
 		$k = 0;
 		for($i=0; $i < count($this->items); $i++){
 			$row		= $this->items[$i];
@@ -85,7 +85,7 @@
 					<?php echo $checked; ?>
 				</td>
 				<td width="150">
-					<?
+					<?php
 					if($row->checked_out){
 						echo JHtml::_('jgrid.checkedout', $i, $row->editor, $row->checked_out_time, 'maps.', $canCheckin);
 						echo "<span class=\"title\">".JText::_( $row->map_name)."</span>";
@@ -116,7 +116,7 @@
 					<?php echo $row->map_id; ?>
 				</td>
 			</tr>
-			<?
+			<?php
 			$k = 1 - $k;
 		}
 		?>

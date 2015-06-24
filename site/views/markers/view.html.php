@@ -7,9 +7,7 @@
  * @license		GNU/GPL
  */
 
-jimport( 'joomla.application.component.view');
-
-class MapBuilderViewMaps extends JViewLegacy
+class MapBuilderViewMarkers extends JViewLegacy
 {
 	function display($tpl = null)
 	{

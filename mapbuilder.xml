@@ -12,6 +12,7 @@
 	<scriptfile>install.php</scriptfile>
 	<files folder="site">
 		<filename>controller.php</filename>
+		<folder>controllers</folder>
 		<filename>index.html</filename>
 		<folder>language</folder>
 		<filename>mapbuilder.php</filename>
@@ -35,6 +36,9 @@
 		</schemas>
 	</update>
 	<media folder="media" destination="mapbuilder">
+		<folder>css</folder>
+		<folder>images</folder>
+		<filename>index.html</filename>
 	    <folder>javascript</folder>
 	</media>
 	<languages folder="site">

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<form>
+	<fields>
+		<fieldset name="hidden">
+			<field name="map_id" type="hidden" />
+			<field name="marker_id" type="hidden" />
+			<field name="ordering" type="hidden" />
+			<field name="marker_alias" type="hidden" />
+			<field name="published" type="hidden" default="1" />
+		</fieldset>
+		<fieldset name="base">
+			<field name="marker_name" type="text" class="validate-string" required="true" label="COM_MAPBUILDER_FIELD_MARKER_NAME_LABEL" description="COM_MAPBUILDER_FIELD_MAKRER_NAME_DESC" />
+			<field name="marker_description" type="textarea" class="inputbox" cols="15" rows="10" label="COM_MAPBUILDER_FIELD_MARKER_DESCRIPTION_LABEL" description="COM_MAPBUILDER_FIELD_MARKER_DESCRIPTION_DESC" />
+			<field name="marker_lng" type="text" class="validate-float" required="true" label="COM_MAPBUILDER_FIELD_MARKER_LNG_LABEL" description="COM_MAPBUILDER_FIELD_MARKER_LNG_DESC" />
+			<field name="marker_lat" type="text" class="validate-float" required="true" label="COM_MAPBUILDER_FIELD_MARKER_LAT_LABEL" description="COM_MAPBUILDER_FIELD_MARKER_LAT_DESC" />
+		</fieldset>
+		<fieldset name="options">
+			<field name="map_id" type="sql" default="0" label="Map" description="The map on which you want to place the marker." query="SELECT `map_id`, `map_name` FROM `#__mapbuilder_maps` ORDER BY `ordering`" key_field="map_id" value_field="map_name" />
+		</fieldset>
+	</fields>
+</form>

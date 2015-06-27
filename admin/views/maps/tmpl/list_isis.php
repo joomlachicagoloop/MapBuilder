@@ -93,7 +93,7 @@
                     <th width="5%" class="nowrap">
                         <?php echo JHtml::_('grid.sort', 'COM_MAPBUILDER_LIST_PUBLISHED_LABEL', 'published', $this->filter->filter_order_Dir, $this->filter->filter_order, 'maps.filter'); ?>
                     </th>
-                    <th class="title" class="nowrap">
+                    <th class="title nowrap">
                         <?php echo JHtml::_('grid.sort', 'COM_MAPBUILDER_LIST_MAP_NAME_LABEL', 'map_name', $this->filter->filter_order_Dir, $this->filter->filter_order, 'maps.filter'); ?>
                     </th>
                     <th class="nowrap">

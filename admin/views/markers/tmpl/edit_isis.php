@@ -30,7 +30,11 @@
 				});
 				Joomla.submitbutton = function (sometask){
 					var someForm = document.forms.adminForm;
+					var re_blank = /^(\W*)$/;
 					if(sometask != 'markers.cancel'){
+						if(re_blank.test($('#jform_marker_alias').val())){
+							$('#jform_marker_alias').val($('#jform_marker_name').val().replace(/\W/g, '-').toLowerCase());
+						}
 						if(!document.formvalidator.isValid(someForm)){
 							return false;
 						}

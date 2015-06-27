@@ -84,8 +84,6 @@
         <div class="row-fluid">
             <div class="span5">
                 <?php echo $this->form->renderField('map_id'); ?>
-                <?php echo $this->form->renderField('icon_id'); ?>
-                <?php echo $this->form->renderField('icon_color'); ?>
 	            <?php echo $this->form->renderField('marker_lat'); ?>
 	            <?php echo $this->form->renderField('marker_lng'); ?>
             </div>
@@ -95,9 +93,13 @@
         </div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>
 		
-		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'options', JText::_('COM_MAPBUILDER_FORM_LEGEND_OPTIONS', true)); ?>
+		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'options', JText::_('COM_MAPBUILDER_FORM_LEGEND_MARKER', true)); ?>
 		<div class="row-fluid">
 		    <div class="span5">
+                <?php echo $this->form->renderField('published'); ?>
+                <?php echo $this->form->renderField('access'); ?>
+                <?php echo $this->form->renderField('icon_id'); ?>
+                <?php echo $this->form->renderField('icon_color'); ?>
 		    </div>
 		</div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>

@@ -2,11 +2,10 @@
 <form>
 	<fields>
 		<fieldset name="base">
-			<field name="map_id" type="hidden" class="validate-numeric" />
 			<field name="marker_id" type="hidden" class="validate-numeric" />
 			<field name="ordering" type="hidden" class="validate-numeric" />
 			<field name="marker_name" type="text" class="inputbox" required="true" label="COM_MAPBUILDER_FIELD_MARKER_NAME_LABEL" description="COM_MAPBUILDER_FIELD_MAKRER_NAME_DESC" />
-			<field name="marker_alias" type="text" class="inputbox" required="true" label="COM_MAPBUILDER_FIELD_MARKER_ALIAS_LABEL" description="COM_MAPBUILDER_FIELD_MARKER_ALIAS_DESC" />
+			<field name="marker_alias" type="text" class="inputbox" required="true" hint="COM_MAPBUILDER_PLACEHOLDER_ALIAS" label="COM_MAPBUILDER_FIELD_MARKER_ALIAS_LABEL" description="COM_MAPBUILDER_FIELD_MARKER_ALIAS_DESC" />
 			<field name="marker_lng" type="text" class="inputbox" required="true" label="COM_MAPBUILDER_FIELD_MARKER_LNG_LABEL" description="COM_MAPBUILDER_FIELD_MARKER_LNG_DESC" />
 			<field name="marker_lat" type="text" class="inputbox" required="true" label="COM_MAPBUILDER_FIELD_MARKER_LAT_LABEL" description="COM_MAPBUILDER_FIELD_MARKER_LAT_DESC" />
 		</fieldset>

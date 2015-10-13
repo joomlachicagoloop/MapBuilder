@@ -1,6 +1,7 @@
 <?php
 	// NO DIRECT ACCESS
 	defined( '_JEXEC' ) or die( 'Restricted access' );
+	$uri = JURI::getInstance();
 	// SET DOCUMENT HEAD FOR PAGE
 	$document = JFactory::getDocument();
 	$document->addScript("//www.google.com/jsapi");
@@ -42,7 +43,7 @@
 <h1><?php echo $this->map->map_name; ?></h1>
 
 <?php	} ?>
-<div class="mapbuilder" id="map-id-<?php echo $this->map->map_id; ?>" data-id="<?php echo $this->map->map_id; ?>" data-zoom="<?php echo $this->params->get('zoom'); ?>" data-lat="<?php echo $this->params->get('center_lat'); ?>" data-lng="<?php echo $this->params->get('center_lng'); ?>"></div>
+<div class="mapbuilder" id="map-id-<?php echo $this->map->map_id; ?>" data-id="<?php echo $this->map->map_id; ?>" data-uri="<?php echo $uri->root(true); ?>" data-zoom="<?php echo $this->params->get('zoom'); ?>" data-lat="<?php echo $this->params->get('center_lat'); ?>" data-lng="<?php echo $this->params->get('center_lng'); ?>"></div>
 
 <?php	if($this->params->get('show_description')){ ?>
 <p><?php echo $this->map->map_description; ?></p>

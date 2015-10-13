@@ -1,7 +1,7 @@
 <?php
 	defined('_JEXEC') or die('Restricted access');
 	$document = JFactory::getDocument();
-	$document->addScript("http://maps.google.com/maps/api/js?sensor=false");
+	$document->addScript("//maps.google.com/maps/api/js?sensor=false");
 	$document->addScript("components/com_mapbuilder/javascript/markers.js", "text/javascript", true);
 	JHtml::_('behavior.keepalive');
 	JHtml::_('bootstrap.tooltip');

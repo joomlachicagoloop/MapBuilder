@@ -1,3 +1,11 @@
+/**
+ * Mapbuilder Maps.js Javascript file
+ * Version I don't know
+ * @type {Class}
+ */
+
+
+
 var GMaps = new Class({
 	initialize: function(){
 		this.lat = $('jform_params_center_lat').value;

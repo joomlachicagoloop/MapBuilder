@@ -1,3 +1,8 @@
+/**
+ * MapBuilder
+ * This javascript file uses the Prototype framework.
+ */
+ 
 var Maps = new Class({
 	initialize: function(element){
 		this.element = $(element);
